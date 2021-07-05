@@ -1,0 +1,65 @@
+{
+  "name": "@ospin/nexus",
+  "author": "ospin-web-dev",
+  "version": "0.0.0",
+  "description": "OSPIN client sdk for calls to rest-like, JSON serving, HTTP API",
+  "main": "index.js",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": "12.x - 16.x",
+    "npm": ">=6"
+  },
+  "np": {
+    "yarn": false,
+    "contents": "src"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ospin-web-dev/nexus.git"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test-release": "npx semantic-release --dry-run",
+    "test": "jest",
+    "test-with-coverage": "jest --coverage",
+    "lint-diff": "LIST=$(git diff-index --name-only --diff-filter=d HEAD | grep .*\\.[jt]sx\\\\? | grep -v json); if [ \"$LIST\" ]; then eslint $LIST; fi",
+    "lint-diff-and-fix": "LIST=$(git diff-index --name-only --diff-filter=d HEAD | grep .*\\.[jt]sx\\\\? | grep -v json); if [ \"$LIST\" ]; then eslint --fix $LIST; fi"
+  },
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "dependencies": {
+    "aws-amplify": "^4.1.2",
+    "joi": "^17.4.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jest-formatting": "^3.0.0",
+    "faker": "^5.5.3",
+    "jest": "^27.0.1",
+    "semantic-release": "^17.4.3"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/mocks/assetMock.js"
+    }
+  }
+}
