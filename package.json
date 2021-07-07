@@ -1,7 +1,7 @@
 {
   "name": "@ospin/nexus",
   "author": "ospin-web-dev",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "OSPIN client sdk for calls to rest-like, JSON serving, HTTP API",
   "main": "index.js",
   "license": "GPL-3.0-or-later",
