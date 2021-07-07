@@ -47,7 +47,7 @@ With the nexus configured, a user can authenticate as their OSPIN AWS Cognito us
 ```js
 const nexus = require('@ospin/nexus')
 
-nexus.auth.signIn(<username>, <password>) // may require 2FA
+await nexus.auth.signIn(<username>, <password>) // may require 2FA
 ```
 
 #### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
@@ -94,7 +94,7 @@ const {
   data: {}, // JSON safe object
   error: <errObj>, // the error if the request failed
   errorMsg: <string>, // a conveniently parsed error message
-} = nexus.user.list()
+} = await nexus.user.list()
 
 ```
 
@@ -118,14 +118,14 @@ nexus.connect()
 const username = 'Nero Claudius Caesar Augustus Germanicus'
 const password = 'BurnRomeToMakeANewPalace@Good-Plan-&-Ok-Password',
 
-nexus.auth.signIn(username, password)
+await nexus.auth.signIn(username, password)
 
-const {
+await const {
   success: listDevicesWasSuccessful,
   data: devicesList,
   errorMsg: listDevicesErrorMsg,
   error: listDevicesError
-} = nexus.device.list()
+} = await nexus.device.list()
 
 if (listDevicesWasSuccessful) {
   console.log(deviceList)
