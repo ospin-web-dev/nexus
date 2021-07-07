@@ -9,10 +9,6 @@
     "node": "12.x - 16.x",
     "npm": ">=6"
   },
-  "np": {
-    "yarn": false,
-    "contents": "src"
-  },
   "publishConfig": {
     "access": "public"
   },
