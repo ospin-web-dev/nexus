@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const update = require('user/update')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('update', () => {
 
@@ -11,7 +12,7 @@ describe('update', () => {
     const payload = { userName: 'the old man is back again. neo stalinism is here' }
 
     await update(userId, payload)
-    expect(API.patch).toHaveBeenCalledWith('user', `${userId}`, { body: payload })
+    expect(API.patch).toHaveBeenCalledWith('user', `${userId}`, { body: payload, ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.patch success', () => {

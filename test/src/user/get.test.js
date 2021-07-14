@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const get = require('user/get')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('get', () => {
 
@@ -12,7 +13,7 @@ describe('get', () => {
     const userId = uuidv4()
 
     await get(userId)
-    expect(API.get).toHaveBeenCalledWith('user', userId)
+    expect(API.get).toHaveBeenCalledWith('user', userId, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.get success', () => {

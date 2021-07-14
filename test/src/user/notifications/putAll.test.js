@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const putAll = require('user/notifications/putAll')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('putAll user notifications', () => {
 
@@ -18,7 +19,7 @@ describe('putAll user notifications', () => {
     }
 
     putAll(body)
-    expect(API.put).toHaveBeenCalledWith('user', 'notifications', { body })
+    expect(API.put).toHaveBeenCalledWith('user', 'notifications', { body, ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.put success', () => {

@@ -1,11 +1,6 @@
 /* eslint-disable max-classes-per-file */
 const serializeAxiosResponse = require('utils/serializeAxiosResponse')
 
-
-const EXPECTED_REQUEST_OPTS = {
-  response: true,
-}
-
 describe('serializeAxiosResponse', () => {
 
   it('returns a function that, when invoked, calls the function with the passed args', async () => {
@@ -15,7 +10,7 @@ describe('serializeAxiosResponse', () => {
     const args = [ 'a', 'b' ]
     res(...args)
 
-    expect(fn).toHaveBeenCalledWith(...args, EXPECTED_REQUEST_OPTS)
+    expect(fn).toHaveBeenCalledWith(...args)
   })
 
   it('awaits async functions', async () => {
@@ -34,7 +29,7 @@ describe('serializeAxiosResponse', () => {
     it('should by default set requestOpts to have "response: true"', async () => {
       wrappedMock(expectedRessource, expectedPath)
 
-      expect(endpointMock).toHaveBeenCalledWith(expectedRessource, expectedPath, { response: true })
+      expect(endpointMock).toHaveBeenCalledWith(expectedRessource, expectedPath)
 
     })
 
@@ -45,7 +40,7 @@ describe('serializeAxiosResponse', () => {
       expect(endpointMock).toHaveBeenCalledWith(
         expectedRessource,
         expectedPath,
-        { ...additionalRequestOpts, response: true },
+        { ...additionalRequestOpts },
       )
     })
 
@@ -56,11 +51,9 @@ describe('serializeAxiosResponse', () => {
       expect(endpointMock).toHaveBeenCalledWith(
         expectedRessource,
         expectedPath,
-        { response: true },
       )
     })
   })
-
 
   describe('when the async function returns successfully', () => {
     it('should respond with the status code of the response', async () => {

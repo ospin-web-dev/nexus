@@ -1,6 +1,7 @@
 const { API } = require('aws-amplify')
 
 const get = require('device/certificate/get')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('get', () => {
 
@@ -12,7 +13,7 @@ describe('get', () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await get(deviceId)
-    expect(API.get).toHaveBeenCalledWith('device', `${deviceId}/certificate`)
+    expect(API.get).toHaveBeenCalledWith('device', `${deviceId}/certificate`, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.get success', () => {
