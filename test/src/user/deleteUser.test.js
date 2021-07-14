@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const deleteUser = require('user/delete')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('delete', () => {
 
@@ -12,7 +13,7 @@ describe('delete', () => {
     const userId = uuidv4()
 
     await deleteUser(userId)
-    expect(API.del).toHaveBeenCalledWith('user', userId)
+    expect(API.del).toHaveBeenCalledWith('user', userId, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.del success', () => {

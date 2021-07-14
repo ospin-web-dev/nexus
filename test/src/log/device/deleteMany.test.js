@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const deleteMany = require('log/device/deleteMany')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('deleteMany', () => {
 
@@ -12,7 +13,7 @@ describe('deleteMany', () => {
     const deviceId = uuidv4()
 
     await deleteMany(deviceId)
-    expect(API.del).toHaveBeenCalledWith('log', `devices/${deviceId}`)
+    expect(API.del).toHaveBeenCalledWith('log', `devices/${deviceId}`, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.del success', () => {

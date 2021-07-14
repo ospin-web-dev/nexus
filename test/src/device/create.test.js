@@ -2,6 +2,7 @@ const { API } = require('aws-amplify')
 const uuidv4 = require('uuid').v4
 
 const create = require('device/create')
+const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('create device', () => {
 
@@ -17,7 +18,7 @@ describe('create device', () => {
     }
 
     create(body)
-    expect(API.post).toHaveBeenCalledWith('device', '', { body })
+    expect(API.post).toHaveBeenCalledWith('device', '', { body, ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.post success', () => {

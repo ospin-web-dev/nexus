@@ -29,24 +29,24 @@ const serializeResponse = res => ({
   ...res,
 })
 
-const OVERRIDE_REQUEST_OPTS = {
-  response: true,
-}
-
+/* This can wrap requests from the 'aws-amplify' packages `Auth`and
+ * `API` modules.
+ *
+ * `Auth` response take a different shape than the amplify API
+ * module. Most notably, Auth's requests don't accept request options,
+ * and do not return an object that matches `{ data, status }`. For
+ * this reason,`serializeAxiosResponse` returns `...rest` as the
+ * response `data` when it can find no response data in a successful
+ * request (which is the case with `Auth` endpoint responses). */
 module.exports = fn => (
-  async (apiName, path, requestOpts = {}) => {
+  async (...args) => {
     try {
-      const mergedRequestsOpts = {
-        ...requestOpts,
-        ...OVERRIDE_REQUEST_OPTS,
-      }
-
-      const { status, data } = await fn(apiName, path, mergedRequestsOpts)
+      const { status, data, ...rest } = await fn(...args)
 
       return serializeResponse({
         success: true,
         status,
-        data,
+        data: data || rest,
       })
 
     } catch (e) {

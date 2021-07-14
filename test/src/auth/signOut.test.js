@@ -14,16 +14,21 @@ describe('signOut', () => {
   })
 
   describe('on Auth.signOut success', () => {
+    const CANNED_RESPONSE = {
+      jeff: 'goldblum',
+      my: 'hero',
+    }
+
     beforeAll(() => {
-      jest.spyOn(Auth, 'signOut').mockImplementation(() => ({ status: 200 }))
+      jest.spyOn(Auth, 'signOut').mockImplementation(() => ({ status: 200, ...CANNED_RESPONSE }))
     })
 
-    it('returns the serialized result', async () => {
+    it('returns the serialized result, with non-status properties in data', async () => {
       const resp = await signOut()
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
-        data: undefined,
+        data: CANNED_RESPONSE,
         error: null,
         errorMsg: null,
         status: 200,
