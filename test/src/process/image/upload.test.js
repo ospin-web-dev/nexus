@@ -1,6 +1,6 @@
 const faker = require('faker')
 const upload = require('process/image/upload')
-const { API } = require('aws-amplify');
+const { API } = require('aws-amplify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('upload', () => {
@@ -10,7 +10,7 @@ describe('upload', () => {
   const processId = faker.datatype.uuid()
   const functionalityId = faker.datatype.uuid()
   const body = {
-    imageData: "aHellLotOfCharacters",
+    imageData: 'aHellLotOfCharacters',
     fileType: 'jpeg',
   }
 
