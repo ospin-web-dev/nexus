@@ -1,9 +1,9 @@
 const faker = require('faker')
-const upload = require('process/image/upload')
+const create = require('process/functionality/image/create')
 const { API } = require('aws-amplify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
-describe('upload', () => {
+describe('create Process Functionality Image', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
@@ -17,11 +17,11 @@ describe('upload', () => {
   it('calls amplifys API.post with the expected args', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
-    upload(processId, functionalityId, body)
+    create(processId, functionalityId, body)
 
     expect(API.post).toHaveBeenCalledWith(
       'process',
-      `${processId}/functionalities/${functionalityId}`,
+      `${processId}/functionality/${functionalityId}`,
       { body, ...DEFAULT_REQ_OPTS },
 
     )
@@ -33,7 +33,7 @@ describe('upload', () => {
     })
 
     it('should respond with the data ,the status code and success=true', async () => {
-      const resp = await upload({})
+      const resp = await create({})
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
@@ -50,7 +50,7 @@ describe('upload', () => {
       })
 
       it('should repond with the error message,the status code and success=false', async () => {
-        const resp = await upload({})
+        const resp = await create({})
 
         expect(resp).toStrictEqual(expect.objectContaining({
           success: false,

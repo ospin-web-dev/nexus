@@ -1,5 +1,5 @@
-const image = require('./image')
+const functionality = require('./functionality')
 
 module.exports = {
-  image,
+  functionality,
 }
