@@ -4,6 +4,7 @@ const Auth = require('./src/auth')
 const User = require('./src/user')
 const Device = require('./src/device')
 const Log = require('./src/log')
+const Process = require('./src/process')
 const { createConfig } = require('./src/amplify/configGenerator')
 
 const DEFAULT_CONNECTION_OPTS = {
@@ -27,6 +28,7 @@ module.exports = {
   user: User,
   device: Device,
   log: Log,
+  process: Process,
   connect,
   createConfig,
 }
