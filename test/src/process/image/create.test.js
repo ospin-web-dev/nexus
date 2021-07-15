@@ -7,6 +7,10 @@ describe('create Process Functionality Image', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
+  beforeEach(() => {
+    jest.spyOn(API, 'post').mockImplementation(args => args)
+  })
+
   const processId = faker.datatype.uuid()
   const functionalityId = faker.datatype.uuid()
   const body = {
@@ -15,7 +19,6 @@ describe('create Process Functionality Image', () => {
   }
 
   it('calls amplifys API.post with the expected args', async () => {
-    jest.spyOn(API, 'post').mockImplementation(args => args)
 
     create(processId, functionalityId, body)
 
@@ -28,6 +31,7 @@ describe('create Process Functionality Image', () => {
   })
 
   describe('on success', () => {
+
     beforeEach(() => {
       jest.spyOn(API, 'post').mockImplementation(() => ({ data: 'success!', status: 200 }))
     })
@@ -45,11 +49,13 @@ describe('create Process Functionality Image', () => {
     })
 
     describe('on failure', () => {
+
       beforeEach(() => {
         jest.spyOn(API, 'post').mockImplementation(() => { throw new Error() })
       })
 
       it('should repond with the error message,the status code and success=false', async () => {
+
         const resp = await create({})
 
         expect(resp).toStrictEqual(expect.objectContaining({
@@ -61,7 +67,5 @@ describe('create Process Functionality Image', () => {
         }))
       })
     })
-
   })
-
 })
