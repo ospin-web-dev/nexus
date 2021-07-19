@@ -78,9 +78,13 @@ nexus
 │    ├── create(<deviceParamsObj>)
 │    └── certificate
 │         └── get(<deviceId>)
-└── log
-     └── device
-          └── deleteMany(<deviceId>)
+├── log
+|    └── device
+|         └── deleteMany(<deviceId>)
+└── process
+     └── functionality
+          └── image
+               └── create
 ```
 
 

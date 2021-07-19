@@ -25,6 +25,7 @@ describe('nexus', () => {
     'user',
     'device',
     'log',
+    'process',
   ])
 
   it('this test gets updated when a new fn or module is added', () => {
