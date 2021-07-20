@@ -12,7 +12,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  */
 module.exports = serializeAxiosResponse(
   (processId, functionalityId, body) => Amplify.API.post(
-    'process', `${processId}/functionality/${functionalityId}`,
+    'process', `${processId}/functionality/${functionalityId}/images`,
     { body, ...DEFAULT_REQ_OPTS },
   ),
 )
