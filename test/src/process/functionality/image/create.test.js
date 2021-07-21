@@ -14,8 +14,7 @@ describe('create Process Functionality Image', () => {
   const processId = faker.datatype.uuid()
   const functionalityId = faker.datatype.uuid()
   const body = {
-    imageData: 'aHellLotOfCharacters',
-    fileType: 'jpeg',
+    imageDataUri: 'data:image/jpeg;base64,THENUMBERSWHATDOTHEYMEAN',
   }
 
   it('calls amplifys API.post with the expected args', async () => {
