@@ -27,7 +27,7 @@ describe('create Process Functionality Image', () => {
 
     expect(API.post).toHaveBeenCalledWith(
       'process',
-      `${processId}/functionality/${functionalityId}/images`,
+      `${processId}/functionalities/${functionalityId}/images`,
       { body, ...DEFAULT_REQ_OPTS },
 
     )
