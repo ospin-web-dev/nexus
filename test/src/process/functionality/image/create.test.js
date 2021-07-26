@@ -13,9 +13,12 @@ describe('create Process Functionality Image', () => {
 
   const processId = faker.datatype.uuid()
   const functionalityId = faker.datatype.uuid()
+  const deviceId = faker.datatype.uuid()
+  const imageCreatedAt = Date.now(faker.date.recent())
   const body = {
-    imageData: 'aHellLotOfCharacters',
-    fileType: 'jpeg',
+    imageDataUri: 'data:image/jpeg;base64,THENUMBERSWHATDOTHEYMEAN',
+    deviceId,
+    imageCreatedAt,
   }
 
   it('calls amplifys API.post with the expected args', async () => {
@@ -24,7 +27,7 @@ describe('create Process Functionality Image', () => {
 
     expect(API.post).toHaveBeenCalledWith(
       'process',
-      `${processId}/functionality/${functionalityId}`,
+      `${processId}/functionalities/${functionalityId}/images`,
       { body, ...DEFAULT_REQ_OPTS },
 
     )
