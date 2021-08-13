@@ -52,8 +52,17 @@ nexus.auth.signIn(<username>, <password>) // may require 2FA
 
 #### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
 
-> Coming soon!
 
+
+```js
+const nexus = require('@ospin/nexus')
+
+const DeviceAPI = nexus.authorizedDeviceApi({
+  deviceId: <deviceId>,
+  pathToCert: <pathToCert>
+})
+
+```
 ---
 
 ## <a name="API-documentation">API Documentation</a>
