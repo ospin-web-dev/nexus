@@ -5,10 +5,10 @@ const RegexUtils = require('../utils/RegexUtils')
 /**
  *
  *
- * @class DeviceApi
+ * @class DeviceAPI
  * @abstract
  */
-class DeviceApi {
+class DeviceAPI {
 
   static setIdentity(deviceId) {
     if (!deviceId) {
@@ -53,7 +53,7 @@ class DeviceApi {
 
 }
 
-module.exports = DeviceApi
+module.exports = DeviceAPI
 
 // remove constructor
 // capital d on classes

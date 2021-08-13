@@ -2,18 +2,20 @@ const faker = require('faker')
 const crypto = require('crypto')
 const { API } = require('aws-amplify')
 
-const AuthorizedDeviceApi = require('../../../../src/DeviceApi/AuthorizedDeviceApi/authorizedDeviceApi')
-const DeviceApi = require('../../../../src/DeviceApi/DeviceApi')
-const { DEFAULT_REQ_OPTS } = require('../../../../src/utils/defaultReqOpts')
+const AuthorizedDeviceAPI = require('../../../src/DeviceAPI/AuthorizedDeviceAPI')
+const DeviceAPI = require('../../../src/DeviceAPI/DeviceAPI')
+const { DEFAULT_REQ_OPTS } = require('../../../src/utils/defaultReqOpts')
 
-describe('the AuthorizedDeviceApi', () => {
+describe('the AuthorizedDeviceAPI', () => {
+
+  const pathToCert = 'test/src/DeviceAPI/fakeDevice_cert.crt'
 
   afterEach(() => { jest.restoreAllMocks() })
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('should inherit from the deviceAPI', () => {
-    expect(AuthorizedDeviceApi.DEVICE_API_PREFIX).toBe(DeviceApi.DEVICE_API_PREFIX)
+  it('should inherit from the DeviceAPI', () => {
+    expect(AuthorizedDeviceAPI.DEVICE_API_PREFIX).toBe(DeviceAPI.DEVICE_API_PREFIX)
   })
 
   describe('setCredentials', () => {
@@ -21,7 +23,7 @@ describe('the AuthorizedDeviceApi', () => {
       describe('without a path to the certifcate', () => {
         it('should fail and display the approriate error message', () => {
           expect(() => {
-            AuthorizedDeviceApi.setCredentials({
+            AuthorizedDeviceAPI.setCredentials({
               deviceId: faker.datatype.uuid(),
             })
           }).toThrow('No Certificate specified')
@@ -31,7 +33,9 @@ describe('the AuthorizedDeviceApi', () => {
       describe('without a device id', () => {
         it('should fail and display the approriate error message', () => {
           expect(() => {
-            AuthorizedDeviceApi.setCredentials({ pathToCert: 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt' })
+            AuthorizedDeviceAPI.setCredentials({
+              pathToCert,
+            })
           }).toThrow('No Device ID specified')
         })
       })
@@ -40,22 +44,23 @@ describe('the AuthorizedDeviceApi', () => {
         it('should fail and display the approriate error message', () => {
           const notADeviceId = 'CUBE4THECUBENING'
           expect(() => {
-            AuthorizedDeviceApi.setCredentials({
+            AuthorizedDeviceAPI.setCredentials({
               deviceId: notADeviceId,
-              pathToCert: 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt' })
+              pathToCert,
+            })
           }).toThrow(`${notADeviceId} is not a valid UUIDv4`)
         })
       })
 
       describe('with an inaccesible file', () => {
         it('should fail and display the approriate error message', () => {
-          const pathToCert = '/rööt/cert.crt'
+          const fakePathToCert = '/rööt/cert.crt'
           expect(() => {
-            AuthorizedDeviceApi.setCredentials({
+            AuthorizedDeviceAPI.setCredentials({
               deviceId: faker.datatype.uuid(),
-              pathToCert,
+              pathToCert: fakePathToCert,
             })
-          }).toThrow(`No Certificate could be found at ${pathToCert}`)
+          }).toThrow(`No Certificate could be found at ${fakePathToCert}`)
         })
       })
 
@@ -67,9 +72,9 @@ describe('the AuthorizedDeviceApi', () => {
             .mockImplementationOnce(() => crypto.createHash('md5'))
 
           expect(() => {
-            AuthorizedDeviceApi.setCredentials({
+            AuthorizedDeviceAPI.setCredentials({
               deviceId,
-              pathToCert: 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt',
+              pathToCert,
             })
           }).toThrow('Invalid Hash Length')
         })
@@ -81,41 +86,37 @@ describe('the AuthorizedDeviceApi', () => {
       it('should set the device id', () => {
         const deviceId = faker.datatype.uuid()
 
-        AuthorizedDeviceApi.setCredentials({
-          deviceId,
-          pathToCert: 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt',
-        })
-
-        expect(AuthorizedDeviceApi.deviceId).toBe(deviceId)
-      })
-
-      it('should set the Authorization', () => {
-        const deviceId = faker.datatype.uuid()
-        const pathToCert = 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt'
-        const Authorization = AuthorizedDeviceApi._createHashFromCertificateFile(pathToCert)
-        AuthorizedDeviceApi.setCredentials({
+        AuthorizedDeviceAPI.setCredentials({
           deviceId,
           pathToCert,
         })
 
-        expect(AuthorizedDeviceApi.Authorization).toBe(Authorization)
+        expect(AuthorizedDeviceAPI.deviceId).toBe(deviceId)
+      })
+
+      it('should set the Authorization', () => {
+        const deviceId = faker.datatype.uuid()
+        const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
+        AuthorizedDeviceAPI.setCredentials({
+          deviceId,
+          pathToCert,
+        })
+
+        expect(AuthorizedDeviceAPI.Authorization).toBe(Authorization)
       })
     })
-
-
 
   })
 
   describe('authorizationHeaders', () => {
     it('sould return an object with {headers: Authorization} format', () => {
       const deviceId = faker.datatype.uuid()
-      const pathToCert = 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt'
-      const Authorization = AuthorizedDeviceApi._createHashFromCertificateFile(pathToCert)
-      AuthorizedDeviceApi.setCredentials({
+      const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
+      AuthorizedDeviceAPI.setCredentials({
         deviceId,
         pathToCert,
       })
-      const requestObject = AuthorizedDeviceApi.authorizationHeaders
+      const requestObject = AuthorizedDeviceAPI.authorizationHeaders
       expect(requestObject).toStrictEqual({
         headers: {
           Authorization,
@@ -128,11 +129,10 @@ describe('the AuthorizedDeviceApi', () => {
 
     const deviceId = faker.datatype.uuid()
     const fakeResource = faker.random.word()
-    const pathToCert = 'test/src/DeviceApi/AuthorizedDeviceApi/fakeDevice_cert.crt'
-    const Authorization = AuthorizedDeviceApi._createHashFromCertificateFile(pathToCert)
+    const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
 
     beforeEach(() => {
-      AuthorizedDeviceApi.setCredentials({
+      AuthorizedDeviceAPI.setCredentials({
         deviceId,
         pathToCert,
       })
@@ -141,9 +141,9 @@ describe('the AuthorizedDeviceApi', () => {
     describe('get', () => {
 
       it('should call on the parent method', async () => {
-        const APISpy = jest.spyOn(DeviceApi, 'get').mockImplementation()
+        const APISpy = jest.spyOn(DeviceAPI, 'get').mockImplementation()
 
-        await AuthorizedDeviceApi.get(fakeResource)
+        await AuthorizedDeviceAPI.get(fakeResource)
 
         expect(APISpy).toHaveBeenCalledWith(
           fakeResource,
@@ -156,10 +156,10 @@ describe('the AuthorizedDeviceApi', () => {
       it('should call the API.get method with passed trough opts', async () => {
         const APISpy = jest.spyOn(API, 'get').mockImplementation()
 
-        await AuthorizedDeviceApi.get(fakeResource)
+        await AuthorizedDeviceAPI.get(fakeResource)
 
         expect(APISpy).toHaveBeenCalledWith(
-          DeviceApi.DEVICE_API_PREFIX,
+          DeviceAPI.DEVICE_API_PREFIX,
           `/${deviceId}/${fakeResource}`,
           { headers: {
             Authorization,
@@ -175,14 +175,14 @@ describe('the AuthorizedDeviceApi', () => {
       }
 
       it('should call on the parent method', async () => {
-        const APISpy = jest.spyOn(DeviceApi, 'post').mockImplementation()
+        const APISpy = jest.spyOn(DeviceAPI, 'post').mockImplementation()
 
-        await AuthorizedDeviceApi.post(fakeResource, fakeBody)
+        await AuthorizedDeviceAPI.post(fakeResource, fakeBody)
 
         expect(APISpy).toHaveBeenCalledWith(
           fakeResource,
           fakeBody,
-          { headers: { Authorization }
+          { headers: { Authorization },
           },
         )
       })
@@ -190,21 +190,17 @@ describe('the AuthorizedDeviceApi', () => {
       it('should call the API.get method with passed trough opts', async () => {
         const APISpy = jest.spyOn(API, 'post').mockImplementation()
 
-        await AuthorizedDeviceApi.post(fakeResource, fakeBody)
+        await AuthorizedDeviceAPI.post(fakeResource, fakeBody)
 
         expect(APISpy).toHaveBeenCalledWith(
-          DeviceApi.DEVICE_API_PREFIX,
+          DeviceAPI.DEVICE_API_PREFIX,
           `/${deviceId}/${fakeResource}`,
           { headers: { Authorization },
             body: fakeBody,
-            ...DEFAULT_REQ_OPTS
+            ...DEFAULT_REQ_OPTS,
           },
         )
       })
     })
   })
-
-
-
-
 })

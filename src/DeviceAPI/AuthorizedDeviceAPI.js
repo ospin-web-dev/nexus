@@ -2,15 +2,15 @@ const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 
-const DeviceApi = require('../DeviceApi')
+const DeviceAPI = require('./DeviceAPI')
 
 /**
-* Creates an instance of AuthorizedDeviceApi
+* Creates an instance of AuthorizedDeviceAPI
 * @param {*} deviceId
 * @param {*} pathToCertificate
-* @memberof AuthorizedDeviceApi
+* @memberof AuthorizedDeviceAPI
 */
-class AuthorizedDeviceApi extends DeviceApi {
+class AuthorizedDeviceAPI extends DeviceAPI {
 
   static get HASHLENGTH() {
     return 44
@@ -22,7 +22,7 @@ class AuthorizedDeviceApi extends DeviceApi {
     return hash
   }
 
-  static _validateCredentials(deviceId, pathToCert) {
+  static _validateCertificate(pathToCert) {
 
     if (!pathToCert) {
       throw Error('No Certificate specified')
@@ -35,14 +35,22 @@ class AuthorizedDeviceApi extends DeviceApi {
   }
 
   static setCredentials({ deviceId, pathToCert }) {
-    AuthorizedDeviceApi._validateCredentials(deviceId, pathToCert)
+    AuthorizedDeviceAPI._validateCertificate(pathToCert)
 
     this.setIdentity(deviceId)
     const Authorization = this._createHashFromCertificateFile(pathToCert)
-    if (Authorization.length !== AuthorizedDeviceApi.HASHLENGTH) {
+    if (Authorization.length !== AuthorizedDeviceAPI.HASHLENGTH) {
       throw Error('Invalid Hash Length')
     }
     this.Authorization = Authorization
+  }
+
+  static async verifyAuthentication() {
+    const { res } = this.get('verifyAuthentication')
+    if (res.statusCode !== 200) {
+      return false
+    }
+    return true
   }
 
   static get authorizationHeaders() {
@@ -70,4 +78,4 @@ class AuthorizedDeviceApi extends DeviceApi {
 
 }
 
-module.exports = AuthorizedDeviceApi
+module.exports = AuthorizedDeviceAPI

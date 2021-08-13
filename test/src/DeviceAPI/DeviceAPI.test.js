@@ -1,7 +1,7 @@
 const faker = require('faker')
 const { API } = require('aws-amplify')
 
-const { DeviceApi } = require('../../../src/DeviceApi')
+const DeviceAPI = require('../../../src/DeviceAPI/DeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('../../../src/utils/defaultReqOpts')
 
 describe('the DeviceAPI class', () => {
@@ -15,9 +15,9 @@ describe('the DeviceAPI class', () => {
     describe('with a valid ID', () => {
       it('should save the ID', () => {
         const deviceId = faker.datatype.uuid()
-        DeviceApi.setIdentity(deviceId)
+        DeviceAPI.setIdentity(deviceId)
 
-        expect(DeviceApi.deviceId).toBe(deviceId)
+        expect(DeviceAPI.deviceId).toBe(deviceId)
       })
     })
 
@@ -25,7 +25,7 @@ describe('the DeviceAPI class', () => {
       it('should throw an error', () => {
         const invalidDeviceID = faker.random.word()
         expect(() => {
-          DeviceApi.setIdentity(invalidDeviceID)
+          DeviceAPI.setIdentity(invalidDeviceID)
         }).toThrow(`${invalidDeviceID} is not a valid UUIDv4`)
       })
     })
@@ -33,7 +33,7 @@ describe('the DeviceAPI class', () => {
     describe('without an Id', () => {
       it('should throw an error', () => {
         expect(() => {
-          DeviceApi.setIdentity()
+          DeviceAPI.setIdentity()
         }).toThrow('No Device ID specified')
       })
     })
@@ -42,17 +42,16 @@ describe('the DeviceAPI class', () => {
   describe('the .deviceId', () => {
 
     it('should throw without a set device id', () => {
-      DeviceApi._deviceId = undefined
-      expect(() => { DeviceApi.deviceId }).toThrow('No Device ID specified')
+      DeviceAPI._deviceId = undefined
+      expect(() => { DeviceAPI.deviceId }).toThrow('No Device ID specified') //eslint-disable-line
     })
 
     it('should return the deviceId', () => {
       const deviceId = faker.datatype.uuid()
-      DeviceApi.setIdentity(deviceId)
+      DeviceAPI.setIdentity(deviceId)
 
-      expect(DeviceApi.deviceId).toBe(deviceId)
+      expect(DeviceAPI.deviceId).toBe(deviceId)
     })
-
 
   })
 
@@ -60,18 +59,18 @@ describe('the DeviceAPI class', () => {
     const deviceId = faker.datatype.uuid()
 
     beforeEach(() => {
-      DeviceApi.setIdentity(deviceId)
+      DeviceAPI.setIdentity(deviceId)
     })
 
     describe('the get method', () => {
       it('should call to API.get with the API-prefix, the path and default opts', async () => {
-        const APISpy = jest.spyOn(API,'get').mockImplementation()
+        const APISpy = jest.spyOn(API, 'get').mockImplementation()
         const fakeResource = faker.random.word()
 
-        await DeviceApi.get(fakeResource)
+        await DeviceAPI.get(fakeResource)
 
         expect(APISpy).toHaveBeenCalledWith(
-          DeviceApi.DEVICE_API_PREFIX,
+          DeviceAPI.DEVICE_API_PREFIX,
           `/${deviceId}/${fakeResource}`,
           DEFAULT_REQ_OPTS,
         )
@@ -84,10 +83,10 @@ describe('the DeviceAPI class', () => {
         const fakeResource = faker.random.word()
         const fakeBody = { message: 'this is a test' }
 
-        await DeviceApi.post(fakeResource,fakeBody)
+        await DeviceAPI.post(fakeResource, fakeBody)
 
         expect(APISpy).toHaveBeenCalledWith(
-          DeviceApi.DEVICE_API_PREFIX,
+          DeviceAPI.DEVICE_API_PREFIX,
           `/${deviceId}/${fakeResource}`,
           { body: fakeBody,
             ...DEFAULT_REQ_OPTS },
