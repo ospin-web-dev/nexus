@@ -32,7 +32,6 @@ class DeviceAPI {
   }
 
   static _prefixResource(path) {
-    console.log(DeviceAPI);
     return `devices/${DeviceAPI.deviceId}/${path}`
   }
 
@@ -55,4 +54,3 @@ class DeviceAPI {
 }
 
 module.exports = DeviceAPI
-

@@ -71,7 +71,7 @@ describe('the DeviceAPI class', () => {
 
         expect(APISpy).toHaveBeenCalledWith(
           DeviceAPI.DEVICE_API_PREFIX,
-          `/${deviceId}/${fakeResource}`,
+          `devices/${deviceId}/${fakeResource}`,
           DEFAULT_REQ_OPTS,
         )
       })
@@ -87,7 +87,7 @@ describe('the DeviceAPI class', () => {
 
         expect(APISpy).toHaveBeenCalledWith(
           DeviceAPI.DEVICE_API_PREFIX,
-          `/${deviceId}/${fakeResource}`,
+          `devices/${deviceId}/${fakeResource}`,
           { body: fakeBody,
             ...DEFAULT_REQ_OPTS },
         )

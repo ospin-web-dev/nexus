@@ -24,18 +24,6 @@ const connect = customConnectionOpts => {
   return { result, config }
 }
 
-connect()
-
-deviceAPI.authentication.setCredentials({ deviceId: '131c3c27-bdf3-4a45-93d4-449b4578b3ee', pathToCert: './cert.key.pem' })
-
-async function validate(params) {
-  const res = await deviceAPI.authentication.validateAuthorization()
-  console.log(res);
-}
-
-validate()
-
-
 module.exports = {
   auth: Auth,
   user: User,

@@ -17,10 +17,8 @@ class AuthorizedDeviceAPI extends DeviceAPI {
   }
 
   static _createHashFromCertificateFile(pathToCertificate) {
-    console.warn(path.resolve(pathToCertificate));
-    const certificate = fs.readFileSync(path.resolve(pathToCertificate))
+    const certificate = fs.readFileSync(path.resolve(pathToCertificate), { encoding: 'utf-8' }).trim()
     const hash = crypto.createHash('sha256').update(certificate).digest('base64')
-    console.log(hash);
     return hash
   }
 

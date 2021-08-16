@@ -134,7 +134,7 @@ describe('the AuthorizedDeviceAPI', () => {
 
         expect(APISpy).toHaveBeenCalledWith(
           DeviceAPI.DEVICE_API_PREFIX,
-          `/${deviceId}/${fakeResource}`,
+          `devices/${deviceId}/${fakeResource}`,
           { headers: {
             Authorization,
           },
@@ -168,7 +168,7 @@ describe('the AuthorizedDeviceAPI', () => {
 
         expect(APISpy).toHaveBeenCalledWith(
           DeviceAPI.DEVICE_API_PREFIX,
-          `/${deviceId}/${fakeResource}`,
+          `devices/${deviceId}/${fakeResource}`,
           { headers: { Authorization },
             body: fakeBody,
             ...DEFAULT_REQ_OPTS,
