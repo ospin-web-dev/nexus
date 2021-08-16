@@ -3,7 +3,7 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 const RegexUtils = require('../utils/RegexUtils')
 
 /**
- *
+ * Stores the identity of the device invoking functions througout the device-api service
  *
  * @class DeviceAPI
  * @abstract

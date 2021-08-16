@@ -5,9 +5,8 @@ const path = require('path')
 const DeviceAPI = require('./DeviceAPI')
 
 /**
-* Creates an instance of AuthorizedDeviceAPI
-* @param {*} deviceId
-* @param {*} pathToCertificate
+* Stores information required for the secure authentication of the device
+* @param {Object}  {deviceId: **** ,pathToCertificate: ****}
 * @memberof AuthorizedDeviceAPI
 */
 class AuthorizedDeviceAPI extends DeviceAPI {
