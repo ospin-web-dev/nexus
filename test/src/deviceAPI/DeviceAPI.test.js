@@ -1,7 +1,7 @@
 const faker = require('faker')
 const { API } = require('aws-amplify')
 
-const DeviceAPI = require('../../../src/DeviceAPI/DeviceAPI')
+const DeviceAPI = require('../../../src/deviceAPI/DeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('../../../src/utils/defaultReqOpts')
 
 describe('the DeviceAPI class', () => {

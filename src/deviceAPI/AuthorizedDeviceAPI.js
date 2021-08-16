@@ -17,8 +17,10 @@ class AuthorizedDeviceAPI extends DeviceAPI {
   }
 
   static _createHashFromCertificateFile(pathToCertificate) {
+    console.warn(path.resolve(pathToCertificate));
     const certificate = fs.readFileSync(path.resolve(pathToCertificate))
     const hash = crypto.createHash('sha256').update(certificate).digest('base64')
+    console.log(hash);
     return hash
   }
 
@@ -37,42 +39,34 @@ class AuthorizedDeviceAPI extends DeviceAPI {
   static setCredentials({ deviceId, pathToCert }) {
     AuthorizedDeviceAPI._validateCertificate(pathToCert)
 
-    this.setIdentity(deviceId)
-    const Authorization = this._createHashFromCertificateFile(pathToCert)
+    super.setIdentity(deviceId)
+    const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
     if (Authorization.length !== AuthorizedDeviceAPI.HASHLENGTH) {
       throw Error('Invalid Hash Length')
     }
-    this.Authorization = Authorization
-  }
-
-  static async verifyAuthentication() {
-    const { res } = this.get('verifyAuthentication')
-    if (res.statusCode !== 200) {
-      return false
-    }
-    return true
+    AuthorizedDeviceAPI.Authorization = Authorization
   }
 
   static get authorizationHeaders() {
     return {
       headers: {
-        Authorization: this.Authorization,
+        Authorization: AuthorizedDeviceAPI.Authorization,
       },
     }
   }
 
   static async get(resourcePath, opts) {
-    super.get(
+    return super.get(
       resourcePath,
-      { ...this.authorizationHeaders, ...opts },
+      { ...AuthorizedDeviceAPI.authorizationHeaders, ...opts },
     )
   }
 
-  static async post(ressourcePath, body, opts) {
-    super.post(
-      ressourcePath,
+  static async post(resourcePath, body, opts) {
+    return super.post(
+      resourcePath,
       body,
-      { ...this.authorizationHeaders, ...opts },
+      { ...AuthorizedDeviceAPI.authorizationHeaders, ...opts },
     )
   }
 

@@ -2,13 +2,22 @@ const faker = require('faker')
 const crypto = require('crypto')
 const { API } = require('aws-amplify')
 
-const AuthorizedDeviceAPI = require('../../../src/DeviceAPI/AuthorizedDeviceAPI')
-const DeviceAPI = require('../../../src/DeviceAPI/DeviceAPI')
+const AuthorizedDeviceAPI = require('../../../src/deviceAPI/AuthorizedDeviceAPI')
+const DeviceAPI = require('../../../src/deviceAPI/DeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('../../../src/utils/defaultReqOpts')
 
 describe('the AuthorizedDeviceAPI', () => {
 
-  const pathToCert = 'test/src/DeviceAPI/fakeDevice_cert.crt'
+  const pathToCert = 'test/seedData/fakeDevice_cert.crt'
+  const deviceId = faker.datatype.uuid()
+  const fakeResource = faker.random.word()
+  const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
+
+  function setUpAuthorizedDeviceApi(opts = {}) {
+    const credentials = { pathToCert, deviceId, ...opts }
+    AuthorizedDeviceAPI.setCredentials(credentials)
+    return deviceId
+  }
 
   afterEach(() => { jest.restoreAllMocks() })
 
@@ -23,9 +32,8 @@ describe('the AuthorizedDeviceAPI', () => {
       describe('without a path to the certifcate', () => {
         it('should fail and display the approriate error message', () => {
           expect(() => {
-            AuthorizedDeviceAPI.setCredentials({
-              deviceId: faker.datatype.uuid(),
-            })
+            setUpAuthorizedDeviceApi({ pathToCert: undefined })
+
           }).toThrow('No Certificate specified')
         })
       })
@@ -33,9 +41,7 @@ describe('the AuthorizedDeviceAPI', () => {
       describe('without a device id', () => {
         it('should fail and display the approriate error message', () => {
           expect(() => {
-            AuthorizedDeviceAPI.setCredentials({
-              pathToCert,
-            })
+            setUpAuthorizedDeviceApi({ deviceId: undefined })
           }).toThrow('No Device ID specified')
         })
       })
@@ -44,10 +50,7 @@ describe('the AuthorizedDeviceAPI', () => {
         it('should fail and display the approriate error message', () => {
           const notADeviceId = 'CUBE4THECUBENING'
           expect(() => {
-            AuthorizedDeviceAPI.setCredentials({
-              deviceId: notADeviceId,
-              pathToCert,
-            })
+            setUpAuthorizedDeviceApi({ deviceId: notADeviceId })
           }).toThrow(`${notADeviceId} is not a valid UUIDv4`)
         })
       })
@@ -56,9 +59,7 @@ describe('the AuthorizedDeviceAPI', () => {
         it('should fail and display the approriate error message', () => {
           const fakePathToCert = '/rööt/cert.crt'
           expect(() => {
-            AuthorizedDeviceAPI.setCredentials({
-              deviceId: faker.datatype.uuid(),
-              pathToCert: fakePathToCert,
+            setUpAuthorizedDeviceApi({ pathToCert: fakePathToCert,
             })
           }).toThrow(`No Certificate could be found at ${fakePathToCert}`)
         })
@@ -67,16 +68,10 @@ describe('the AuthorizedDeviceAPI', () => {
       describe('with a incompatible hashing algorithm', () => {
 
         it('should throw an error', () => {
-          const deviceId = faker.datatype.uuid()
           jest.spyOn(crypto, 'createHash')
             .mockImplementationOnce(() => crypto.createHash('md5'))
 
-          expect(() => {
-            AuthorizedDeviceAPI.setCredentials({
-              deviceId,
-              pathToCert,
-            })
-          }).toThrow('Invalid Hash Length')
+          expect(() => { setUpAuthorizedDeviceApi() }).toThrow('Invalid Hash Length')
         })
       })
 
@@ -84,23 +79,13 @@ describe('the AuthorizedDeviceAPI', () => {
 
     describe('with valid credentials', () => {
       it('should set the device id', () => {
-        const deviceId = faker.datatype.uuid()
-
-        AuthorizedDeviceAPI.setCredentials({
-          deviceId,
-          pathToCert,
-        })
+        setUpAuthorizedDeviceApi()
 
         expect(AuthorizedDeviceAPI.deviceId).toBe(deviceId)
       })
 
       it('should set the Authorization', () => {
-        const deviceId = faker.datatype.uuid()
-        const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
-        AuthorizedDeviceAPI.setCredentials({
-          deviceId,
-          pathToCert,
-        })
+        setUpAuthorizedDeviceApi()
 
         expect(AuthorizedDeviceAPI.Authorization).toBe(Authorization)
       })
@@ -110,12 +95,8 @@ describe('the AuthorizedDeviceAPI', () => {
 
   describe('authorizationHeaders', () => {
     it('sould return an object with {headers: Authorization} format', () => {
-      const deviceId = faker.datatype.uuid()
-      const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
-      AuthorizedDeviceAPI.setCredentials({
-        deviceId,
-        pathToCert,
-      })
+      setUpAuthorizedDeviceApi()
+
       const requestObject = AuthorizedDeviceAPI.authorizationHeaders
       expect(requestObject).toStrictEqual({
         headers: {
@@ -127,20 +108,13 @@ describe('the AuthorizedDeviceAPI', () => {
 
   describe('its HTTP methods', () => {
 
-    const deviceId = faker.datatype.uuid()
-    const fakeResource = faker.random.word()
-    const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
-
     beforeEach(() => {
-      AuthorizedDeviceAPI.setCredentials({
-        deviceId,
-        pathToCert,
-      })
+      setUpAuthorizedDeviceApi()
     })
 
     describe('get', () => {
 
-      it('should call on the parent method', async () => {
+      it('should call on the parent method with the Authorization header', async () => {
         const APISpy = jest.spyOn(DeviceAPI, 'get').mockImplementation()
 
         await AuthorizedDeviceAPI.get(fakeResource)

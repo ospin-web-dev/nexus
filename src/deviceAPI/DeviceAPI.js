@@ -17,14 +17,14 @@ class DeviceAPI {
     if (!deviceId.match(RegexUtils.UUIDV4_REGEX_STRING)) {
       throw Error(`${deviceId} is not a valid UUIDv4`)
     }
-    this._deviceId = deviceId
+    DeviceAPI._deviceId = deviceId
   }
 
   static get deviceId () {
-    if (this._deviceId === undefined) {
+    if (DeviceAPI._deviceId === undefined) {
       throw Error('No Device ID specified')
     }
-    return this._deviceId
+    return DeviceAPI._deviceId
   }
 
   static get DEVICE_API_PREFIX() {
@@ -32,22 +32,23 @@ class DeviceAPI {
   }
 
   static _prefixResource(path) {
-    return `/${this.deviceId}/${path}`
+    console.log(DeviceAPI);
+    return `devices/${DeviceAPI.deviceId}/${path}`
   }
 
   static async get(path, opts) {
-    API.get(
-      this.DEVICE_API_PREFIX,
-      this._prefixResource(path),
+    return API.get(
+      DeviceAPI.DEVICE_API_PREFIX,
+      DeviceAPI._prefixResource(path),
       { ...DEFAULT_REQ_OPTS, ...opts },
     )
   }
 
   static async post(path, body, opts) {
-    API.post(
-      this.DEVICE_API_PREFIX,
-      this._prefixResource(path),
-      { body, ...DEFAULT_REQ_OPTS, ...opts },
+    return API.post(
+      DeviceAPI.DEVICE_API_PREFIX,
+      DeviceAPI._prefixResource(path),
+      { ...DEFAULT_REQ_OPTS, body, ...opts },
     )
   }
 
@@ -55,6 +56,3 @@ class DeviceAPI {
 
 module.exports = DeviceAPI
 
-// remove constructor
-// capital d on classes
-// Add id validation regex
