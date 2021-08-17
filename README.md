@@ -52,8 +52,19 @@ nexus.auth.signIn(<username>, <password>) // may require 2FA
 
 #### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
 
-> Coming soon!
 
+
+```js
+const nexus = require('@ospin/nexus')
+
+nexus.device-api.setCredentails({
+  deviceId: <deviceId>,
+  pathToCert: <pathToCert>
+})
+
+nexus.device-api.validateAuthorization()
+
+```
 ---
 
 ## <a name="API-documentation">API Documentation</a>
@@ -81,10 +92,15 @@ nexus
 ├── log
 |    └── device
 |         └── deleteMany(<deviceId>)
-└── process
-     └── functionality
-          └── image
-               └── create
+├── process
+|    └── functionality
+|         └── image
+|              └── create
+├── device-api
+    └── authentication
+          ├── setCredentials
+          └── validateAuthorization
+
 ```
 
 

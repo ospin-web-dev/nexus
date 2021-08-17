@@ -51,6 +51,11 @@ describe('createConfig', () => {
               name: 'uiconfig',
               region: AWS_REGION,
             },
+            {
+              endpoint: `https://api-${ENV}.ospin-services.com/device-api/`,
+              name: 'device-api',
+              region: AWS_REGION,
+            },
           ],
         },
         stage: ENV,
