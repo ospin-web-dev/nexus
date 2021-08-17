@@ -26,9 +26,7 @@ class AuthorizedDeviceAPI extends DeviceAPI {
     if (!pathToCert) {
       throw Error('No Certificate specified')
     }
-    try {
-      fs.readFileSync(path.resolve(pathToCert))
-    } catch (error) {
+    if (!fs.existsSync(path.resolve(pathToCert))) {
       throw Error(`No Certificate could be found at ${pathToCert}`)
     }
   }
