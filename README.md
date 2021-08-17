@@ -97,13 +97,10 @@ nexus
 |         └── image
 |              └── create
 ├── device-api
-    ├── authentication
-    |     ├── setCredentials
-    |     └── validateAuthorization
-    └── process
-         └── functionality
-              └── image
-                   └── create
+    └── authentication
+          ├── setCredentials
+          └── validateAuthorization
+
 ```
 
 
