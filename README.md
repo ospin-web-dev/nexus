@@ -57,12 +57,12 @@ nexus.auth.signIn(<username>, <password>) // may require 2FA
 ```js
 const nexus = require('@ospin/nexus')
 
-nexus.device-api.setCredentails({
+nexus.deviceAPI.setCredentails({
   deviceId: <deviceId>,
   pathToCert: <pathToCert>
 })
 
-nexus.device-api.validateAuthorization()
+nexus.deviceAPI.validateAuthorization()
 
 ```
 ---
@@ -96,8 +96,8 @@ nexus
 |    └── functionality
 |         └── image
 |              └── create
-├── device-api
-    └── authentication
+└── deviceAPI
+     └── authentication
           ├── setCredentials
           └── validateAuthorization
 
