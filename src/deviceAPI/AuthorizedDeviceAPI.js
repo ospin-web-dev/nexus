@@ -21,7 +21,7 @@ class AuthorizedDeviceAPI extends DeviceAPI {
     return hash
   }
 
-  static _validateCertificate(pathToCert) {
+  static _assertCertificate(pathToCert) {
 
     if (!pathToCert) {
       throw Error('No Certificate specified')
@@ -32,7 +32,7 @@ class AuthorizedDeviceAPI extends DeviceAPI {
   }
 
   static setCredentials({ deviceId, pathToCert }) {
-    AuthorizedDeviceAPI._validateCertificate(pathToCert)
+    AuthorizedDeviceAPI._assertCertificate(pathToCert)
 
     super.setIdentity(deviceId)
     const Authorization = AuthorizedDeviceAPI._createHashFromCertificateFile(pathToCert)
