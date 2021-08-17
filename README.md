@@ -172,7 +172,7 @@ All PRs to the `main` branch should indicate the semantic version change via the
 Available types:
  - feat: A new feature
  - fix: A bug fix
- - docs: Documentation only changes
+ - docs: Documentation only changes (unclear if this bumps version)
  - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
  - refactor: A code change that neither fixes a bug nor adds a feature
  - perf: A code change that improves performance
