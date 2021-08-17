@@ -52,8 +52,7 @@ nexus.auth.signIn(<username>, <password>) // may require 2FA
 
 #### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
 
-
-
+With the nexus configured, a device can authenticate using its certificate:
 ```js
 const nexus = require('@ospin/nexus')
 
