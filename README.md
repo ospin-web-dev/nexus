@@ -62,6 +62,7 @@ nexus.deviceAPI.setCredentails({
 })
 
 nexus.deviceAPI.validateAuthorization()
+// -> { sucess, status, data, errorMsg }
 
 ```
 ---
@@ -153,7 +154,7 @@ if (listDevicesWasSuccessful) {
   // kindly find out why...
   console.error(errorMsg)
 
-  // ..or be an unforgiving, unyielding tyrant
+  // ..or live up to the username and be an unforgiving and unyielding tyrant
   throw listDevicesError
   // -> 💣
 }
@@ -185,4 +186,3 @@ Available types:
 
 ## <a name="Upcoming">Upcoming</a>
 - endpoint for posting process functionality images
-- authentication for devices
