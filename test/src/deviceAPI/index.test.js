@@ -5,6 +5,7 @@ describe('nexus DeviceAPI', () => {
 
   const EXPECTED_MODULES = {
     authentication: [ 'validateAuthorization', 'setCredentials' ],
+    process: [],
   }
 
   it('this test gets updated when a new fn or module is added', () => {

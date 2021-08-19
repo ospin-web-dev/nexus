@@ -97,9 +97,14 @@ nexus
 |         └── image
 |              └── create
 └── deviceAPI
-     └── authentication
-          ├── setCredentials
-          └── validateAuthorization
+     ├── authentication
+     |    ├── setCredentials
+     |    └── validateAuthorization
+     └── process
+          └── functionality
+               └── image
+                    ├── createFromUri
+                    └── createFromFile
 
 ```
 
