@@ -1,3 +1,4 @@
+const util = require('util')
 const { Amplify } = require('aws-amplify')
 
 const configGenerator = require('../src/amplify/configGenerator')
@@ -15,31 +16,100 @@ describe('nexus', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const EXPECTED_FUNCTIONS = new Set([
-    'connect',
-    'createConfig',
-  ])
+  const MODULE_STRUCTURE = {
+    connect: 'function',
+    createConfig: 'function',
+    auth: {
+      getCurrentSession: 'function',
+      signIn: 'function',
+      signOut: 'function',
+    },
+    device: {
+      certificate: {
+        get: 'function',
+      },
+      create: 'function',
+      list: 'function',
+    },
+    deviceAPI: {
+      authentication: {
+        validateAuthorization: 'function',
+        setCredentials: 'function',
+      },
+    },
+    log: {
+      device: {
+        deleteMany: 'function',
+      },
+    },
+    process: {
+      functionality: {
+        image: {
+          create: 'function',
+        },
+      },
+    },
+    user: {
+      notifications: {
+        putAll: 'function',
+      },
+      delete: 'function',
+      get: 'function',
+      list: 'function',
+      update: 'function',
+    },
+  }
 
-  const EXPECTED_MODULES = new Set([
-    'auth',
-    'user',
-    'device',
-    'log',
-    'process',
-    'deviceAPI',
-  ])
-
-  it('this test gets updated when a new fn or module is added', () => {
-    expect(Object.keys(nexus)).toHaveLength(
-      EXPECTED_MODULES.size + EXPECTED_FUNCTIONS.size,
-    )
-  })
-
-  EXPECTED_MODULES.forEach(module => {
-    it(`exports the ${module} module`, () => {
-      expect(typeof nexus[module]).toBe('object')
+  function testFunctionPresentInModule(functionName, module) {
+    it(`exposes ${functionName}`, () => {
+      expect(typeof module[functionName]).toBe('function')
     })
-  })
+  }
+
+  function assertValueFunctionOrObject(value) {
+    // this check provides some safety on the MODULE_STRUCTURE above so it is not extended
+    // with something unexpected unintentionally
+    if (value !== 'function' && typeof value !== 'object') {
+      throw new Error(`${value} must be string 'function' or an object`)
+    }
+  }
+
+  function testExportAgainstNexus(exportName, exportValue, path) {
+    assertValueFunctionOrObject(exportValue)
+
+    exportValue === 'function' // eslint-disable-line
+      ? testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
+      : testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line
+  }
+
+  function testModuleContainsExpectedNumberOfExports(expectedModule, nexusModule) {
+    const expectedNumberExports = Object.keys(expectedModule).length
+    const numberExportsPresent = Object.keys(nexusModule).length
+
+    it(`exports ${expectedNumberExports} functions + modules`, () => {
+      expect(numberExportsPresent).toBe(expectedNumberExports)
+    })
+  }
+
+  function assertIsModule(nexusModule, path) {
+    if (typeof nexusModule !== 'object') {
+      throw new Error(`nexusModule at: ${path.join('.')} is not an object`)
+    }
+  }
+
+  function testModuleStructure(expectedModule, path) {
+    describe(`${path.join('.')}`, () => {
+      const nexusModule = eval(path.join('.')) // eslint-disable-line
+      assertIsModule(nexusModule, path)
+      testModuleContainsExpectedNumberOfExports(expectedModule, nexusModule)
+
+      Object.entries(expectedModule).forEach(([ exportName, exportValue ]) => {
+        testExportAgainstNexus(exportName, exportValue, path)
+      })
+    })
+  }
+
+  testModuleStructure(MODULE_STRUCTURE, [ 'nexus' ])
 
   describe('connect', () => {
     it('calls createConfig with the expected default connection options if none are provided', () => {
