@@ -15,8 +15,7 @@ function createDataUriFromFile(file) {
 }
 
 /**
- * Uploads a process image, accepts either the pathToImage or the imageDataUri in the params
- * prioritizes the imageDataUri when both are present
+ * Uploads a process image
  * @async
  * @param processId the process Id
  * @param functionalityId the process Id

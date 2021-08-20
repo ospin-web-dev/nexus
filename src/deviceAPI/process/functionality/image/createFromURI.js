@@ -14,7 +14,7 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
  * @example
  * processId: 9588c1cc-9c39-4ddb-bb7d-bd3a2e9b26cf,
  * functionalityId:df78c050-4dc6-47d4-910e-812c175e05d9,
- * params: { pathToImage: 'data:image/png;base64,iVBORw0KGgoAAA',imageCreatedAt: 13463458943  }
+ * params: { imageDataUri: 'data:image/png;base64,iVBORw0KGgoAAA',imageCreatedAt: 13463458943  }
  * @returns {Promise <object>} Promise resolving with the createdImageRef
  */
 
