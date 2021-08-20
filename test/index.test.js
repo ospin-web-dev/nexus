@@ -36,6 +36,14 @@ describe('nexus', () => {
         validateAuthorization: 'function',
         setCredentials: 'function',
       },
+      process: {
+        functionality: {
+          image:{
+            createFromFile: 'function',
+            createFromURI: 'function',
+          }
+        }
+      }
     },
     log: {
       device: {
