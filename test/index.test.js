@@ -1,4 +1,3 @@
-const util = require('util')
 const { Amplify } = require('aws-amplify')
 
 const configGenerator = require('../src/amplify/configGenerator')
@@ -55,6 +54,11 @@ describe('nexus', () => {
         image: {
           create: 'function',
         },
+      },
+    },
+    uIConfig: {
+      userFctGraphUIConfig: {
+        put: 'function',
       },
     },
     user: {

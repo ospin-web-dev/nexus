@@ -6,6 +6,7 @@ const Device = require('./src/device')
 const Log = require('./src/log')
 const Process = require('./src/process')
 const deviceAPI = require('./src/deviceAPI')
+const UIConfig = require('./src/uIConfig')
 const { createConfig } = require('./src/amplify/configGenerator')
 
 const DEFAULT_CONNECTION_OPTS = {
@@ -30,6 +31,7 @@ module.exports = {
   device: Device,
   log: Log,
   process: Process,
+  uIConfig: UIConfig,
   deviceAPI,
   connect,
   createConfig,
