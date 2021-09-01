@@ -59,10 +59,14 @@ With the nexus configured, a device can authenticate using its certificate:
 ```js
 const nexus = require('@ospin/nexus')
 
-nexus.deviceAPI.setCredentails({
+nexus.createConfig()
+nexus.connect()
+
+nexus.deviceAPI.authentication.setCredentials({
   deviceId: <deviceId>,
   pathToCert: <pathToCert>
 })
+
 
 nexus.deviceAPI.validateAuthorization()
 // -> { sucess, status, data, errorMsg }

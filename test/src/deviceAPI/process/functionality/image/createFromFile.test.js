@@ -28,12 +28,12 @@ describe('create Process Functionality Image', () => {
     )
 
     expect(AuthenticatedDeviceAPI.post).toHaveBeenCalledWith(
-      `/processes/${processId}/functionalities/${functionalityId}/images`,
-      { body: {
+      `processes/${processId}/functionalities/${functionalityId}/images`,
+      {
         imageCreatedAt,
         imageDataUri: expect.anything(),
       },
-      ...DEFAULT_REQ_OPTS },
+      { ...DEFAULT_REQ_OPTS },
 
     )
   })
