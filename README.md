@@ -3,6 +3,9 @@
 
 This documentation is likely to remain sparse, as it is for internal use and under development!
 
+[For additional documentation see our endpoint documentation](https://app.swaggerhub.com/apis-docs/OSPIN-Webapp/ospin-rest_api/latest)
+
+
 ---
 
 ## Table of Contents
