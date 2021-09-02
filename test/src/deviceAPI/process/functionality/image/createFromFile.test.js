@@ -33,7 +33,7 @@ describe('create Process Functionality Image', () => {
         imageCreatedAt,
         imageDataUri: expect.anything(),
       },
-      { ...DEFAULT_REQ_OPTS },
+      DEFAULT_REQ_OPTS,
 
     )
   })
