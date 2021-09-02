@@ -53,6 +53,7 @@ describe('nexus', () => {
       functionality: {
         image: {
           create: 'function',
+          list: 'function',
         },
       },
     },
