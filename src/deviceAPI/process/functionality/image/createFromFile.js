@@ -38,8 +38,8 @@ module.exports = serializeAxiosResponse(
     delete requestBody.pathToImage
     return AuthorizedDeviceAPI.post(
       `processes/${processId}/functionalities/${functionalityId}/images`,
-      { ...requestBody },
-      { ...DEFAULT_REQ_OPTS },
+      requestBody,
+      DEFAULT_REQ_OPTS,
     )
   },
 )

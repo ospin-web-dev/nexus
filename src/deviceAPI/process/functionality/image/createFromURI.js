@@ -21,6 +21,6 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
 module.exports = serializeAxiosResponse(
   (processId, functionalityId, body) => AuthorizedDeviceAPI.post(
     `processes/${processId}/functionalities/${functionalityId}/images`,
-    { ...body }, { ...DEFAULT_REQ_OPTS },
+    body, DEFAULT_REQ_OPTS,
   ),
 )
