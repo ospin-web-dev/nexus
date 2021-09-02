@@ -27,8 +27,8 @@ describe('create Process Functionality Image', () => {
     )
 
     expect(AuthenticatedDeviceAPI.post).toHaveBeenCalledWith(
-      `/processes/${processId}/functionalities/${functionalityId}/images`,
-      { body, ...DEFAULT_REQ_OPTS },
+      `processes/${processId}/functionalities/${functionalityId}/images`,
+      body, DEFAULT_REQ_OPTS,
 
     )
   })

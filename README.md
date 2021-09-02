@@ -3,6 +3,9 @@
 
 This documentation is likely to remain sparse, as it is for internal use and under development!
 
+[For additional documentation see our endpoint documentation](https://app.swaggerhub.com/apis-docs/OSPIN-Webapp/ospin-rest_api/latest)
+
+
 ---
 
 ## Table of Contents
@@ -56,10 +59,14 @@ With the nexus configured, a device can authenticate using its certificate:
 ```js
 const nexus = require('@ospin/nexus')
 
-nexus.deviceAPI.setCredentails({
+nexus.createConfig()
+nexus.connect()
+
+nexus.deviceAPI.authentication.setCredentials({
   deviceId: <deviceId>,
   pathToCert: <pathToCert>
 })
+
 
 nexus.deviceAPI.validateAuthorization()
 // -> { sucess, status, data, errorMsg }

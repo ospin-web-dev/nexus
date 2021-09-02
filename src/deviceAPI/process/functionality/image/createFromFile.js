@@ -31,14 +31,15 @@ function createDataUriFromFile(file) {
 
 module.exports = serializeAxiosResponse(
   (processId, functionalityId, body) => {
-    const imageDataUri = createDataUriFromFile(body.pathToImage)
+    const requestBody = {
+      ...body,
+      imageDataUri: createDataUriFromFile(body.pathToImage),
+    }
+    delete requestBody.pathToImage
     return AuthorizedDeviceAPI.post(
-      `/processes/${processId}/functionalities/${functionalityId}/images`,
-      { body: {
-        imageCreatedAt: body.imageCreatedAt,
-        imageDataUri,
-      },
-      ...DEFAULT_REQ_OPTS },
+      `processes/${processId}/functionalities/${functionalityId}/images`,
+      requestBody,
+      DEFAULT_REQ_OPTS,
     )
   },
 )

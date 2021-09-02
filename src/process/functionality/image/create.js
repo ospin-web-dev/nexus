@@ -7,7 +7,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * and the file type as string
  * @async
  * @param {string} ProcessId @param {string} FunctionalityId
- * @param {object} Body {imageData: ****, fileType: 'jpeg'}
+ * @param {object} Body
  * @returns {Promise <object>} Promise resolving with the createdImageRef
  */
 module.exports = serializeAxiosResponse(
