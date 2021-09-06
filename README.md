@@ -102,7 +102,8 @@ nexus
 ├── process
 |    └── functionality
 |         └── image
-|              └── create
+|              ├── create
+|              └── list
 └── deviceAPI
      ├── authentication
      |    ├── setCredentials
