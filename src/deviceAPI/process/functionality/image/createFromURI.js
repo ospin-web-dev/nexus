@@ -4,7 +4,8 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
 
 /**
  * Uploads a process image based on a given dataUri, for file based uploads
- * see createFromFile
+ * see createFromFile, for information on the necessary
+ * parameters check the api documentation in the readme
  * @async
  * @param processId the process Id
  * @param functionalityId the process Id
