@@ -9,7 +9,7 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
  * @async
  * @param processId the process Id
  * @param functionalityId the process Id
- * @param body Object containing the image and metadata for information about
+ * @param body Object containing the image and metadata
  * @param body.imageDataUri the image encoded as dataUri in base64 format
  * @param body.imageCreatedAt the unix timestamp of the image creation
  * @example
