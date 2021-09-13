@@ -37,12 +37,18 @@ describe('nexus', () => {
       },
       process: {
         functionality: {
-          image:{
+          image: {
             createFromFile: 'function',
             createFromURI: 'function',
-          }
-        }
-      }
+          },
+        },
+        stream: {
+          image: {
+            createFromFile: 'function',
+            createFromURI: 'function',
+          },
+        },
+      },
     },
     log: {
       device: {
