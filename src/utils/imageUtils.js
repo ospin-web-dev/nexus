@@ -1,5 +1,5 @@
 const fs = require('fs')
-const RegexUtils = require('utils/RegexUtils')
+const RegexUtils = require('./RegexUtils')
 
 function createDataUriFromFile(file) {
   if (!fs.existsSync(file)) {

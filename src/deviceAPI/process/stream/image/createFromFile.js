@@ -1,7 +1,7 @@
+const { createDataUriFromFile } = require('../../../../utils/imageUtils')
 const serializeAxiosResponse = require('../../../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../../../utils/defaultReqOpts')
 const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
-const { createDataUriFromFile } = require('utils/imageUtils')
 
 /**
  * Uploads a process image based given filen path
