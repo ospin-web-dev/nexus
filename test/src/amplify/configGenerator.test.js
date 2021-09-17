@@ -17,6 +17,11 @@ describe('createConfig', () => {
         API: {
           endpoints: [
             {
+              endpoint: `https://api-${ENV}.ospin-services.com/datapoints/`,
+              name: 'datapoints',
+              region: AWS_REGION,
+            },
+            {
               endpoint: `https://api-${ENV}.ospin-services.com/devices/`,
               name: 'device',
               region: AWS_REGION,

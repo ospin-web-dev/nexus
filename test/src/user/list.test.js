@@ -1,6 +1,6 @@
 const { API } = require('aws-amplify')
 
-const list = require('device/list')
+const list = require('user/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
 describe('list', () => {
@@ -11,7 +11,7 @@ describe('list', () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await list()
-    expect(API.get).toHaveBeenCalledWith('device', '', { ...DEFAULT_REQ_OPTS })
+    expect(API.get).toHaveBeenCalledWith('user', '', { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.get success', () => {
