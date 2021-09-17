@@ -8,9 +8,9 @@ describe('get', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
+  const processId = faker.datatype.uuid()
+  const reporterFctId = faker.datatype.uuid()
   const params = {
-    processId: faker.datatype.uuid(),
-    reporterFctId: faker.datatype.uuid(),
     numberOfPoints: 1000,
     start: Date.now(),
     end: Date.now() + 10000,
@@ -19,8 +19,8 @@ describe('get', () => {
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
-    await get(params)
-    expect(API.get).toHaveBeenCalledWith('datapoints', `processes/${params.processId}/functionalities/${params.reporterFctId}?numberOfPoints=${params.numberOfPoints}&start=${params.start}&end=${params.end}`, { ...DEFAULT_REQ_OPTS })
+    await get(processId, reporterFctId, params)
+    expect(API.get).toHaveBeenCalledWith('datapoints', `processes/${processId}/functionalities/${reporterFctId}?numberOfPoints=${params.numberOfPoints}&start=${params.start}&end=${params.end}`, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.get success', () => {
@@ -30,7 +30,7 @@ describe('get', () => {
     })
 
     it('returns the serialized result', async () => {
-      const resp = await get(params)
+      const resp = await get(process, reporterFctId, params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
@@ -50,7 +50,7 @@ describe('get', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await get(params)
+      const resp = await get(processId, reporterFctId, params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: false,
