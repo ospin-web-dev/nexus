@@ -108,6 +108,11 @@ nexus
      ├── authentication
      |    ├── setCredentials
      |    └── validateAuthorization
+     ├── process
+     |    └── functionality
+     |         └── image
+     |              ├── createFromUri
+     |              └── createFromFile
      └── process
           └── functionality
                └── image
