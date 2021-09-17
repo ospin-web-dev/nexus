@@ -1,17 +1,26 @@
 const { API } = require('aws-amplify')
+const faker = require('faker')
 
-const list = require('device/list')
+const get = require('dataPoints/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
-describe('list', () => {
+describe('get', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
+
+  const params = {
+    processId: faker.datatype.uuid(),
+    reporterFctId: faker.datatype.uuid(),
+    numberOfPoints: 1000,
+    start: Date.now(),
+    end: Date.now() + 10000,
+  }
 
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
-    await list()
-    expect(API.get).toHaveBeenCalledWith('device', '', { ...DEFAULT_REQ_OPTS })
+    await get(params)
+    expect(API.get).toHaveBeenCalledWith('datapoints', `processes/${params.processId}/functionalities/${params.reporterFctId}?numberOfPoints=${params.numberOfPoints}&start=${params.start}&end=${params.end}`, { ...DEFAULT_REQ_OPTS })
   })
 
   describe('on API.get success', () => {
@@ -21,7 +30,7 @@ describe('list', () => {
     })
 
     it('returns the serialized result', async () => {
-      const resp = await list()
+      const resp = await get(params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
@@ -41,7 +50,7 @@ describe('list', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await list()
+      const resp = await get(params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: false,
