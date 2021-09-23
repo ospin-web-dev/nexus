@@ -36,6 +36,7 @@ describe('nexus', () => {
         setCredentials: 'function',
       },
       process: {
+        get: 'function',
         functionality: {
           image: {
             createFromFile: 'function',
