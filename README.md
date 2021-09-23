@@ -91,6 +91,8 @@ nexus
 │    ├── update(<userId>, <userParamsObj>)
 │    └── notifications
 │         └── putAll(<notificationObj>)
+├── datapoints
+│    └──get(<processId>, <reporterFctId>, <params>)
 ├── device
 │    ├── list()
 │    ├── create(<deviceParamsObj>)

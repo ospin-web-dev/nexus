@@ -12,7 +12,7 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
  * @param streamId the stream Id
  * @param body Object containing the image and metadata
  * @param body.pathToImage the absolute path to the image
- * @param body.imageCreatedAt the unix timestamp of the image creation
+ * @param body.imageCreatedAt the unix timestamp in miliseconds of the image creation
  * @example {
  * processId: 9588c1cc-9c39-4ddb-bb7d-bd3a2e9b26cf,
  * streamId:1345526,

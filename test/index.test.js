@@ -23,6 +23,9 @@ describe('nexus', () => {
       signIn: 'function',
       signOut: 'function',
     },
+    dataPoints: {
+      get: 'function',
+    },
     device: {
       certificate: {
         get: 'function',
