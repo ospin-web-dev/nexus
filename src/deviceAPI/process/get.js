@@ -1,5 +1,5 @@
-const serializeAxiosResponse = require('utils/serializeAxiosResponse')
-const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
+const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 const AuthorizedDeviceAPI = require('../AuthorizedDeviceAPI')
 /**
  * Fetches information for a specific process
