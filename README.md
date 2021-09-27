@@ -102,6 +102,7 @@ nexus
 |    └── device
 |         └── deleteMany(<deviceId>)
 ├── process
+|    ├── get(<processId>)
 |    └── functionality
 |         └── image
 |              ├── create
