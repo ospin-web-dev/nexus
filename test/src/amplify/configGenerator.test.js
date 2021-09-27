@@ -22,6 +22,11 @@ describe('createConfig', () => {
               region: AWS_REGION,
             },
             {
+              name: 'command',
+              endpoint: `https://api-${ENV}.ospin-services.com/commands/`,
+              region: AWS_REGION,
+            },
+            {
               endpoint: `https://api-${ENV}.ospin-services.com/devices/`,
               name: 'device',
               region: AWS_REGION,

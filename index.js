@@ -2,6 +2,7 @@ const { Amplify } = require('aws-amplify')
 
 const Auth = require('./src/auth')
 const User = require('./src/user')
+const Command = require('./src/command')
 const Device = require('./src/device')
 const Log = require('./src/log')
 const Process = require('./src/process')
@@ -29,6 +30,7 @@ const connect = customConnectionOpts => {
 module.exports = {
   auth: Auth,
   user: User,
+  command: Command,
   device: Device,
   log: Log,
   process: Process,
