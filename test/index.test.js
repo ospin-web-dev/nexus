@@ -25,6 +25,7 @@ describe('nexus', () => {
     },
     dataPoints: {
       get: 'function',
+      requestReporterFctData: 'function',
     },
     device: {
       certificate: {
