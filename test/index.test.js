@@ -23,6 +23,13 @@ describe('nexus', () => {
       signIn: 'function',
       signOut: 'function',
     },
+    command: {
+      device: {
+        process: {
+          startProcess: 'function',
+        },
+      },
+    },
     dataPoints: {
       get: 'function',
       requestReporterFctData: 'function',

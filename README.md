@@ -91,6 +91,10 @@ nexus
 │    ├── update(<userId>, <userParamsObj>)
 │    └── notifications
 │         └── putAll(<notificationObj>)
+├── command
+│    └── device
+│         └── process
+│               └── start-process
 ├── datapoints
 │    └──get(<processId>, <reporterFctId>, <params>)
 ├── device
@@ -102,7 +106,6 @@ nexus
 |    └── device
 |         └── deleteMany(<deviceId>)
 ├── process
-|    ├── get(<processId>)
 |    └── functionality
 |         └── image
 |              ├── create
@@ -112,6 +115,7 @@ nexus
      |    ├── setCredentials
      |    └── validateAuthorization
      ├── process
+    `|    ├── get(<processId>)
      |    └── functionality
      |         └── image
      |              ├── createFromUri
