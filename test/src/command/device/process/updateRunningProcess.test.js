@@ -1,9 +1,9 @@
 const faker = require('faker')
-const startProcess = require('command/device/process/startProcess')
+const updateRunningProcess = require('command/device/process/updateRunningProcess')
 const { API } = require('aws-amplify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
-describe('startProcess', () => {
+describe('updateRunningProcess', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
@@ -13,15 +13,19 @@ describe('startProcess', () => {
 
   const processId = faker.datatype.uuid()
   const deviceId = faker.datatype.uuid()
+  const defaultBody = {
+    elapsedTime: faker.datatype.number(),
+    entryPhaseId: faker.datatype.number(),
+  }
 
   it('calls amplifys API.post with the expected args', async () => {
 
-    startProcess(deviceId, processId)
+    updateRunningProcess(deviceId, processId, defaultBody)
 
     expect(API.post).toHaveBeenCalledWith(
       'command',
-      `devices/${deviceId}/processes/${processId}/start-process`,
-      { body: {}, ...DEFAULT_REQ_OPTS },
+      `devices/${deviceId}/processes/${processId}/update-running-process`,
+      { body: defaultBody, ...DEFAULT_REQ_OPTS },
 
     )
   })
@@ -33,7 +37,7 @@ describe('startProcess', () => {
     })
 
     it('should respond with the data ,the status code and success=true', async () => {
-      const resp = await startProcess({})
+      const resp = await updateRunningProcess({})
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
@@ -52,7 +56,7 @@ describe('startProcess', () => {
 
       it('should repond with the error message,the status code and success=false', async () => {
 
-        const resp = await startProcess({})
+        const resp = await updateRunningProcess({})
 
         expect(resp).toStrictEqual(expect.objectContaining({
           success: false,

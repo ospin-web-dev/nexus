@@ -27,6 +27,7 @@ describe('nexus', () => {
       device: {
         process: {
           startProcess: 'function',
+          updateRunningProcess: 'function',
         },
       },
     },
