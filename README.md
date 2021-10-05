@@ -94,9 +94,9 @@ nexus
 ├── command
 │    └── device
 │         └── process
-│               └── start-process
+│               └── startProcess(<deviceId>, <processId>)
 ├── datapoints
-│    └──get(<processId>, <reporterFctId>, <params>)
+│    └── get(<processId>, <reporterFctId>, <params>)
 ├── device
 │    ├── list()
 │    ├── create(<deviceParamsObj>)
@@ -108,24 +108,18 @@ nexus
 ├── process
 |    └── functionality
 |         └── image
-|              ├── create
-|              └── list
+|              ├── create(<processId>, <fctId>, <body>)
+|              └── list(<processId>, <fctId>, <opts>)
 └── deviceAPI
      ├── authentication
-     |    ├── setCredentials
-     |    └── validateAuthorization
-     ├── process
-    `|    ├── get(<processId>)
-     |    └── functionality
-     |         └── image
-     |              ├── createFromUri
-     |              └── createFromFile
+     |    ├── setCredentials({ deviceId, pathToCert })
+     |    └── validateAuthorization()
      └── process
+          ├── get(<processId>)
           └── functionality
                └── image
-                    ├── createFromUri
-                    └── createFromFile
-
+                    ├── createFromUri(<processId>, <fctId>, <body>)
+                    └── createFromFile(<processId>, <fctId>, <body>)
 ```
 
 
@@ -208,6 +202,3 @@ Available types:
  - revert: Reverts a previous commit
 
 ---
-
-## <a name="Upcoming">Upcoming</a>
-- endpoint for posting process functionality images
