@@ -202,3 +202,4 @@ Available types:
  - revert: Reverts a previous commit
 
 ---
+
