@@ -34,6 +34,7 @@ describe('nexus', () => {
     dataPoints: {
       get: 'function',
       requestReporterFctData: 'function',
+      requestAllReporterFctData: 'function',
       getDownloadRequests: 'function',
     },
     device: {
