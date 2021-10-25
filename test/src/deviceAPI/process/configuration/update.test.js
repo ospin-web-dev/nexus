@@ -10,7 +10,6 @@ describe('update Configuration', () => {
 
   beforeEach(() => {
     jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(args => args)
-    setUpAuthenticatedDeviceAPI()
   })
 
   const body = {
@@ -22,7 +21,10 @@ describe('update Configuration', () => {
   }
 
   it('calls amplifys API.post with the expected args', async () => {
-    nexus.deviceAPI.configuration.update(body)
+    setUpAuthenticatedDeviceAPI()
+
+
+    await nexus.deviceAPI.configuration.update(body)
 
     expect(AuthenticatedDeviceAPI.post).toHaveBeenCalledWith(
       'configuration',
@@ -38,6 +40,9 @@ describe('update Configuration', () => {
     })
 
     it('should respond with the data ,the status code and success=true', async () => {
+      setUpAuthenticatedDeviceAPI()
+
+
       const resp = await nexus.deviceAPI.configuration.update(body)
 
       expect(resp).toStrictEqual(expect.objectContaining({
@@ -56,6 +61,7 @@ describe('update Configuration', () => {
       })
 
       it('should repond with the error message,the status code and success=false', async () => {
+        setUpAuthenticatedDeviceAPI()
 
         const resp = await nexus.deviceAPI.configuration.update(body)
 
