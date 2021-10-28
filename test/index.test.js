@@ -64,6 +64,9 @@ describe('nexus', () => {
           },
         },
       },
+      configuration: {
+        update: 'function',
+      },
     },
     log: {
       device: {
