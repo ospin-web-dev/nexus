@@ -15,7 +15,7 @@ describe('list', () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await list({ userId, deviceId })
-    expect(API.get).toHaveBeenCalledWith('processes', '', { queryStringParameters: { userId, deviceId }, ...DEFAULT_REQ_OPTS })
+    expect(API.get).toHaveBeenCalledWith('process', '', { queryStringParameters: { userId, deviceId }, ...DEFAULT_REQ_OPTS })
   })
 
   it('should take query parameters', async () => {
@@ -23,7 +23,7 @@ describe('list', () => {
     const queryStringParameters = { skip: 1, limit: 1, userId, deviceId }
 
     await list(queryStringParameters)
-    expect(API.get).toHaveBeenCalledWith('processes', '', { ...DEFAULT_REQ_OPTS, queryStringParameters })
+    expect(API.get).toHaveBeenCalledWith('process', '', { ...DEFAULT_REQ_OPTS, queryStringParameters })
 
   });
 
