@@ -80,6 +80,7 @@ describe('nexus', () => {
           list: 'function',
         },
       },
+      list: 'function',
     },
     uIConfig: {
       userFctGraphUIConfig: {
