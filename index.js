@@ -1,14 +1,15 @@
 const { Amplify } = require('aws-amplify')
 
-const Auth = require('./src/auth')
-const User = require('./src/user')
-const Command = require('./src/command')
-const Device = require('./src/device')
-const Log = require('./src/log')
-const Process = require('./src/process')
+const auth = require('./src/auth')
+const user = require('./src/user')
+const command = require('./src/command')
+const device = require('./src/device')
+const log = require('./src/log')
+const process = require('./src/process')
 const deviceAPI = require('./src/deviceAPI')
-const UIConfig = require('./src/uIConfig')
-const DataPoints = require('./src/dataPoints')
+const uIConfig = require('./src/uIConfig')
+const dataPoints = require('./src/dataPoints')
+const pusher = require('./src/pusher')
 const { createConfig } = require('./src/amplify/configGenerator')
 
 const DEFAULT_CONNECTION_OPTS = {
@@ -28,14 +29,15 @@ const connect = customConnectionOpts => {
 }
 
 module.exports = {
-  auth: Auth,
-  user: User,
-  command: Command,
-  device: Device,
-  log: Log,
-  process: Process,
-  uIConfig: UIConfig,
-  dataPoints: DataPoints,
+  auth,
+  user,
+  command,
+  device,
+  log,
+  process,
+  uIConfig,
+  dataPoints,
+  pusher,
   deviceAPI,
   connect,
   createConfig,
