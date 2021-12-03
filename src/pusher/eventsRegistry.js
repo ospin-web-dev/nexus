@@ -13,7 +13,9 @@ const DEVICE_PROCESS_EVENTS = {
   UPDATE_DOWNLOAD_REQUEST: 'update-download-request',
 }
 
-const DEVICE_MAINTENANCE_EVENTS = { SSH_ENDPOINTS: 'ssh-endpoints' }
+const DEVICE_MAINTENANCE_EVENTS = {
+  SSH_ENDPOINTS: 'ssh-endpoints',
+}
 
 module.exports = {
   DEVICE_OPERATION_EVENTS,

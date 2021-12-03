@@ -82,6 +82,33 @@ describe('nexus', () => {
       },
       list: 'function',
     },
+    pusher: {
+      init: 'function',
+      getPusherClient: 'function',
+      disconnect: 'function',
+      subscribeToDeviceOperationEvents: 'function',
+      subscribeToDeviceMaintenanceEvents: 'function',
+      subscribeToDeviceProcessEvents: 'function',
+      unsubscribeFromDeviceOperation: 'function',
+      unsubscribeFromDeviceProcess: 'function',
+      unsubscribeFromDeviceMaintenance: 'function',
+      DEVICE_OPERATION_EVENTS: {
+        UPDATE_DEVICE_DESCRIPTION: 'string',
+        UPDATE_DEVICE_CONNECTION: 'string',
+        UPDATE_DEVICE_STATE: 'string',
+        UPDATE_DEVICE_DEFAULT_FCTGRAPH: 'string',
+        DEVICE_EVENT: 'string',
+      },
+      DEVICE_PROCESS_EVENTS: {
+        PHASE_CHANGE: 'string',
+        ADD_DATAPOINTS: 'string',
+        ADD_IMAGES: 'string',
+        UPDATE_DOWNLOAD_REQUEST: 'string',
+      },
+      DEVICE_MAINTENANCE_EVENTS: {
+        SSH_ENDPOINTS: 'string',
+      },
+    },
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
@@ -95,6 +122,8 @@ describe('nexus', () => {
       get: 'function',
       list: 'function',
       update: 'function',
+      authorizeDeviceSubscriptions: 'function',
+      authorizeDeviceProcessSubscriptions: 'function',
     },
   }
 
@@ -104,27 +133,44 @@ describe('nexus', () => {
     })
   }
 
+  function testStringPresentInModule(stringExportName, module) {
+    it(`exposes ${stringExportName}`, () => {
+      expect(typeof module[stringExportName]).toBe('string')
+    })
+  }
+
   function assertValueFunctionOrObject(value) {
     // this check provides some safety on the MODULE_STRUCTURE above so it is not extended
     // with something unexpected unintentionally
-    if (value !== 'function' && typeof value !== 'object') {
-      throw new Error(`${value} must be string 'function' or an object`)
+    if (value !== 'function' && value !== 'string' && typeof value !== 'object') {
+      throw new Error(`${value} must be string 'function', 'string' or an object`)
     }
   }
 
   function testExportAgainstNexus(exportName, exportValue, path) {
     assertValueFunctionOrObject(exportValue)
 
-    exportValue === 'function' // eslint-disable-line
-      ? testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
-      : testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line
+    switch (exportValue) {
+      case 'function': {
+        testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
+        break;
+      }
+      case 'string': {
+        testStringPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
+        break;
+      }
+      default: {
+        testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line
+      }
+
+    }
   }
 
   function testModuleContainsExpectedNumberOfExports(expectedModule, nexusModule) {
     const expectedNumberExports = Object.keys(expectedModule).length
     const numberExportsPresent = Object.keys(nexusModule).length
 
-    it(`exports ${expectedNumberExports} functions + modules`, () => {
+    it(`exports ${expectedNumberExports} functions/values + modules`, () => {
       expect(numberExportsPresent).toBe(expectedNumberExports)
     })
   }
