@@ -6,7 +6,7 @@ const resetPusherClient = () => {
   pusher = null
 }
 
-const init = async ({
+const init = ({
   apiKey,
   authorizer,
   badStateUpdateHandler = null,
