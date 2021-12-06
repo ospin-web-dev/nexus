@@ -86,28 +86,8 @@ describe('nexus', () => {
       init: 'function',
       getPusherClient: 'function',
       disconnect: 'function',
-      subscribeToDeviceOperationEvents: 'function',
-      subscribeToDeviceMaintenanceEvents: 'function',
-      subscribeToDeviceProcessEvents: 'function',
-      unsubscribeFromDeviceOperation: 'function',
-      unsubscribeFromDeviceProcess: 'function',
-      unsubscribeFromDeviceMaintenance: 'function',
-      DEVICE_OPERATION_EVENTS: {
-        UPDATE_DEVICE_DESCRIPTION: 'string',
-        UPDATE_DEVICE_CONNECTION: 'string',
-        UPDATE_DEVICE_STATE: 'string',
-        UPDATE_DEVICE_DEFAULT_FCTGRAPH: 'string',
-        DEVICE_EVENT: 'string',
-      },
-      DEVICE_PROCESS_EVENTS: {
-        PHASE_CHANGE: 'string',
-        ADD_DATAPOINTS: 'string',
-        ADD_IMAGES: 'string',
-        UPDATE_DOWNLOAD_REQUEST: 'string',
-      },
-      DEVICE_MAINTENANCE_EVENTS: {
-        SSH_ENDPOINTS: 'string',
-      },
+      subscribe: 'function',
+      unsubscribe: 'function',
     },
     uIConfig: {
       userFctGraphUIConfig: {
@@ -153,11 +133,11 @@ describe('nexus', () => {
     switch (exportValue) {
       case 'function': {
         testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
-        break;
+        break
       }
       case 'string': {
         testStringPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
-        break;
+        break
       }
       default: {
         testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line

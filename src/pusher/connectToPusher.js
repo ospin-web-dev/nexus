@@ -1,5 +1,4 @@
 const Pusher = require('pusher-js')
-const batchAuthorizer = require('./batchAuthorizer')
 
 let pusher = null
 
@@ -7,12 +6,17 @@ const resetPusherClient = () => {
   pusher = null
 }
 
-const init = async (apiKey, userId, badStateUpdateHandler = null) => {
+const init = async ({
+  apiKey,
+  authorizer,
+  badStateUpdateHandler = null,
+  cluster = 'eu',
+}) => {
   if (pusher) return pusher
 
   pusher = new Pusher(apiKey, {
-    cluster: 'eu',
-    authorizer: batchAuthorizer(userId),
+    cluster,
+    authorizer,
   })
 
   pusher.connection.bind('state_change', states => {

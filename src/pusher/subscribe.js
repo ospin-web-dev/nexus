@@ -1,10 +1,4 @@
 const { getPusherClient } = require('./connectToPusher')
-const {
-  DEVICE_OPERATION_EVENTS,
-  DEVICE_PROCESS_EVENTS,
-  DEVICE_MAINTENANCE_EVENTS,
-} = require('./eventsRegistry')
-const channelNameGenerator = require('./channelNameGenerator')
 
 const subscribe = (channelName, events, eventHandler) => {
 
@@ -20,21 +14,4 @@ const subscribe = (channelName, events, eventHandler) => {
   })
 }
 
-const subscribeToDeviceOperationEvents = (deviceId, eventHandler) => {
-  subscribe(channelNameGenerator.deviceOperation(deviceId), DEVICE_OPERATION_EVENTS, eventHandler)
-}
-
-const subscribeToDeviceProcessEvents = (deviceId, eventHandler) => {
-  subscribe(channelNameGenerator.deviceProcess(deviceId), DEVICE_PROCESS_EVENTS, eventHandler)
-}
-
-const subscribeToDeviceMaintenanceEvents = (deviceId, eventHandler) => {
-  subscribe(channelNameGenerator
-    .deviceMaintenance(deviceId), DEVICE_MAINTENANCE_EVENTS, eventHandler)
-}
-
-module.exports = {
-  subscribeToDeviceOperationEvents,
-  subscribeToDeviceProcessEvents,
-  subscribeToDeviceMaintenanceEvents,
-}
+module.exports = subscribe
