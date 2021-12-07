@@ -81,6 +81,8 @@ describe('nexus', () => {
         },
       },
       list: 'function',
+      get: 'function',
+      deleteMany: 'function',
     },
     uIConfig: {
       userFctGraphUIConfig: {
