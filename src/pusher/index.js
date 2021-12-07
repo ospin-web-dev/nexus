@@ -1,12 +1,3 @@
-const { init, getPusherClient } = require('./connectToPusher')
-const disconnect = require('./disconnectFromPusher')
-const subscribe = require('./subscribe')
-const unsubscribe = require('./unsubscribe')
+const OspinPusherClient = require('./OspinPusherClient')
 
-module.exports = {
-  init,
-  getPusherClient,
-  subscribe,
-  unsubscribe,
-  disconnect,
-}
+module.exports = { OspinPusherClient }

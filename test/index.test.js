@@ -83,11 +83,7 @@ describe('nexus', () => {
       list: 'function',
     },
     pusher: {
-      init: 'function',
-      getPusherClient: 'function',
-      disconnect: 'function',
-      subscribe: 'function',
-      unsubscribe: 'function',
+      OspinPusherClient: 'function',
     },
     uIConfig: {
       userFctGraphUIConfig: {
