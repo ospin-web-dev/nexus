@@ -14,7 +14,7 @@ describe('get', () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await get(processId)
-    expect(API.get).toHaveBeenCalledWith(`processes/${processId}`, '', DEFAULT_REQ_OPTS)
+    expect(API.get).toHaveBeenCalledWith(`process`, processId, DEFAULT_REQ_OPTS)
   })
 
   describe('on API.get success', () => {
