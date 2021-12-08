@@ -1,4 +1,5 @@
 const Pusher = require('pusher-js')
+
 const faker = require('faker')
 const PusherClient = require('pusher/PusherClient')
 
@@ -178,7 +179,7 @@ describe('the PusherClient', () => {
 
   describe('unsubscribe', () => {
     describe('when NOT initialized beforehand', () => {
-      it('calls the unsubscribe function', () => {
+      it('calls the console.warn function', () => {
         const spy = jest.spyOn(global.console, 'warn').mockImplementation(() => {})
         const channelName = 'my-channel'
         PusherClient.unsubscribe(channelName)

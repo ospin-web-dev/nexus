@@ -1,5 +1,5 @@
 const faker = require('faker')
-const { OspinPusherClient } = require('pusher')
+const OspinPusherClient = require('pusher')
 const PusherClient = require('pusher/PusherClient')
 
 jest.mock('pusher-js', () => {
