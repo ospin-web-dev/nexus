@@ -1,4 +1,4 @@
-const authorizeDeviceSubscriptions = require('user/authorizeDeviceSubscriptions')
+const authorizeDeviceSubscriptions = require('../user/authorizeDeviceSubscriptions')
 
 let queuedRequests = []
 

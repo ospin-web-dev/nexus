@@ -1,3 +1,3 @@
 const OspinPusherClient = require('./OspinPusherClient')
 
-module.exports = { OspinPusherClient }
+module.exports = OspinPusherClient

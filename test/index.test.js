@@ -82,9 +82,7 @@ describe('nexus', () => {
       },
       list: 'function',
     },
-    pusher: {
-      OspinPusherClient: 'function',
-    },
+    OspinPusherClient: 'function',
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
