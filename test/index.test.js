@@ -82,6 +82,7 @@ describe('nexus', () => {
       },
       list: 'function',
       get: 'function',
+      clone: 'function',
       deleteMany: 'function',
     },
     OspinPusherClient: 'function',
