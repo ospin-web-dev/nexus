@@ -1,42 +1,40 @@
 const Pusher = require('pusher-js')
 const batchAuthorizer = require('./batchAuthorizer')
 
-let pusher = null
-
 class PusherClient {
 
+  static client = null
+
   static connect({ apiKey, userId, cluster = 'eu' }) {
-    if (pusher) return pusher
-    pusher = new Pusher(apiKey, { cluster, authorizer: batchAuthorizer(userId) })
-    return pusher
+    if (PusherClient.client) return PusherClient.client
+    PusherClient.client = new Pusher(apiKey, { cluster, authorizer: batchAuthorizer(userId) })
+    return PusherClient.client
   }
 
   static registerConnectionEvent(eventName, eventHandler) {
-    if (!pusher) {
-      console.warn('Initialize pusher before trying to register connection events')
+    if (!PusherClient.client) {
+      console.warn('Connect PusherClient before trying to register connection events')
       return
     }
-    pusher.connection.bind(eventName, eventHandler)
+    PusherClient.client.connection.bind(eventName, eventHandler)
   }
 
-  static getClient() { return pusher }
-
-  static resetPusherClient() { pusher = null }
+  static resetPusherClient() { PusherClient.client = null }
 
   static disconnect() {
-    if (pusher) {
-      pusher.disconnect()
+    if (PusherClient.client) {
+      PusherClient.client.disconnect()
       this.resetPusherClient()
     }
   }
 
   static subscribe(channelName, eventHandlers) {
-    if (!pusher) {
-      console.warn('Initialize pusher before trying to subscribe')
+    if (!PusherClient.client) {
+      console.warn('Connect PusherClient before trying to subscribe')
       return
     }
 
-    const channel = pusher.subscribe(channelName)
+    const channel = PusherClient.client.subscribe(channelName)
     Object.entries(eventHandlers).forEach(([eventName, eventHandler]) => {
       if (typeof eventHandler !== 'function') {
         console.warn(`event handler for pusher event ${eventName} for channel ${channelName} is not a function`)
@@ -47,11 +45,11 @@ class PusherClient {
   }
 
   static unsubscribe(channelName) {
-    if (!pusher) {
-      console.warn('Initialize pusher before trying to unsubscribe')
+    if (!PusherClient.client) {
+      console.warn('Connect PusherClient before trying to unsubscribe')
       return
     }
-    pusher.unsubscribe(channelName)
+    PusherClient.client.unsubscribe(channelName)
   }
 
 }

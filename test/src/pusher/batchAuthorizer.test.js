@@ -1,7 +1,7 @@
 const faker = require('faker')
 const batchAuthorizer = require('pusher/batchAuthorizer')
 
-jest.mock('user/authorizeDeviceSubscriptions.js', () => jest.fn()
+jest.mock('user/pusher/subscriptions/device/authorizeMany.js', () => jest.fn()
   .mockImplementationOnce((userId, { channelNames } = {}) => ({
     data: {
       tokens: channelNames.map(channelName => ({

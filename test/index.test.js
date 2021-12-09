@@ -98,8 +98,16 @@ describe('nexus', () => {
       get: 'function',
       list: 'function',
       update: 'function',
-      authorizeDeviceSubscriptions: 'function',
-      authorizeDeviceProcessSubscriptions: 'function',
+      pusher: {
+        subscriptions: {
+          device: {
+            authorizeMany: 'function',
+            process: {
+              authorizeMany: 'function',
+            },
+          },
+        },
+      },
     },
   }
 

@@ -86,34 +86,13 @@ describe('the PusherClient', () => {
     })
   })
 
-  describe('getClient', () => {
-    describe('when NOT already initialized', () => {
-      it('returns null', () => {
-        const client = PusherClient.getClient()
-
-        expect(client).toBeNull()
-      })
-    })
-
-    describe('when initialized beforehand', () => {
-      it('returns the existing client', () => {
-        const existingClient = initDefaultClient()
-
-        const client = PusherClient.getClient()
-
-        expect(client).toStrictEqual(existingClient)
-      })
-    })
-  })
-
   describe('resetPusherClient', () => {
     it('resets the client to null', () => {
       initDefaultClient()
 
       PusherClient.resetPusherClient()
-      const client = PusherClient.getClient()
 
-      expect(client).toBeNull()
+      expect(PusherClient.client).toBeNull()
     })
   })
 
