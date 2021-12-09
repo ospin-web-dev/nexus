@@ -1,8 +1,12 @@
 const Pusher = require('pusher-js')
 
+let client = null
+
 class PusherClient {
 
-  static client = null
+  static get client() { return client }
+
+  static set client(value) { client = value }
 
   static connect({ apiKey, cluster, authorizer }) {
     if (PusherClient.client) return PusherClient.client
