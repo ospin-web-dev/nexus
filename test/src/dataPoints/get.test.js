@@ -1,5 +1,6 @@
 const { API } = require('aws-amplify')
 const faker = require('faker')
+const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 const get = require('dataPoints/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -23,41 +24,5 @@ describe('get', () => {
     expect(API.get).toHaveBeenCalledWith('datapoints', `processes/${processId}/functionalities/${reporterFctId}?numberOfPoints=${params.numberOfPoints}&start=${params.start}&end=${params.end}`, { ...DEFAULT_REQ_OPTS })
   })
 
-  describe('on API.get success', () => {
-    beforeAll(() => {
-      jest.spyOn(API, 'get')
-        .mockImplementation((() => ({ data: 'success!', status: 200 })))
-    })
-
-    it('returns the serialized result', async () => {
-      const resp = await get(process, reporterFctId, params)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
-        data: 'success!',
-        error: null,
-        status: 200,
-      }))
-    })
-  })
-
-  describe('on API.get error', () => {
-    const error = new Error()
-
-    beforeAll(() => {
-      jest.spyOn(API, 'get')
-        .mockImplementation(() => { throw error })
-    })
-
-    it('returns a serialized error response', async () => {
-      const resp = await get(processId, reporterFctId, params)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        error,
-        status: null,
-      }))
-    })
-  })
+  testDefaultHTTPResponses(() => get(processId, reporterFctId, params), 'get')
 })
