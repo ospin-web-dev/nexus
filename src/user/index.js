@@ -3,6 +3,7 @@ const list = require('./list')
 const update = require('./update')
 const deleteUser = require('./delete')
 const notifications = require('./notifications')
+const pusher = require('./pusher')
 
 module.exports = {
   get,
@@ -10,4 +11,5 @@ module.exports = {
   update,
   delete: deleteUser,
   notifications,
+  pusher,
 }

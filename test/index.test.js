@@ -85,6 +85,7 @@ describe('nexus', () => {
       clone: 'function',
       deleteMany: 'function',
     },
+    OspinPusherClient: 'function',
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
@@ -98,6 +99,16 @@ describe('nexus', () => {
       get: 'function',
       list: 'function',
       update: 'function',
+      pusher: {
+        subscriptions: {
+          device: {
+            authorizeMany: 'function',
+            process: {
+              authorizeMany: 'function',
+            },
+          },
+        },
+      },
     },
   }
 
@@ -107,27 +118,44 @@ describe('nexus', () => {
     })
   }
 
+  function testStringPresentInModule(stringExportName, module) {
+    it(`exposes ${stringExportName}`, () => {
+      expect(typeof module[stringExportName]).toBe('string')
+    })
+  }
+
   function assertValueFunctionOrObject(value) {
     // this check provides some safety on the MODULE_STRUCTURE above so it is not extended
     // with something unexpected unintentionally
-    if (value !== 'function' && typeof value !== 'object') {
-      throw new Error(`${value} must be string 'function' or an object`)
+    if (value !== 'function' && value !== 'string' && typeof value !== 'object') {
+      throw new Error(`${value} must be string 'function', 'string' or an object`)
     }
   }
 
   function testExportAgainstNexus(exportName, exportValue, path) {
     assertValueFunctionOrObject(exportValue)
 
-    exportValue === 'function' // eslint-disable-line
-      ? testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
-      : testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line
+    switch (exportValue) {
+      case 'function': {
+        testFunctionPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
+        break
+      }
+      case 'string': {
+        testStringPresentInModule(exportName, eval(path.join('.'))) // eslint-disable-line
+        break
+      }
+      default: {
+        testModuleStructure(exportValue, [ ...path, exportName ]) // eslint-disable-line
+      }
+
+    }
   }
 
   function testModuleContainsExpectedNumberOfExports(expectedModule, nexusModule) {
     const expectedNumberExports = Object.keys(expectedModule).length
     const numberExportsPresent = Object.keys(nexusModule).length
 
-    it(`exports ${expectedNumberExports} functions + modules`, () => {
+    it(`exports ${expectedNumberExports} functions/values + modules`, () => {
       expect(numberExportsPresent).toBe(expectedNumberExports)
     })
   }

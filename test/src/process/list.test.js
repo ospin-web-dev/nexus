@@ -3,6 +3,7 @@ const faker = require('faker')
 
 const list = require('process/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 describe('list', () => {
   const userId = faker.datatype.uuid()
@@ -27,43 +28,5 @@ describe('list', () => {
 
   });
 
-  describe('on API.get success', () => {
-    beforeAll(() => {
-      jest.spyOn(API, 'get')
-        .mockImplementation((() => ({ data: 'success!', status: 200 })))
-    })
-
-    it('returns the serialized result', async () => {
-      const resp = await list()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
-        data: 'success!',
-        error: null,
-        errorMsg: null,
-        status: 200,
-      }))
-    })
-  })
-
-  describe('on API.get error', () => {
-    const error = new Error()
-
-    beforeAll(() => {
-      jest.spyOn(API, 'get')
-        .mockImplementation(() => { throw error })
-    })
-
-    it('returns a serialized error response', async () => {
-      const resp = await list()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        error,
-        errorMsg: '',
-        status: null,
-      }))
-    })
-  })
+  testDefaultHTTPResponses(list, 'get')
 })
