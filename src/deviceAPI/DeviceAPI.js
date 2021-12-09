@@ -14,7 +14,7 @@ class DeviceAPI {
     if (!deviceId) {
       throw Error('No Device ID specified')
     }
-    if (!deviceId.match(RegexUtils.UUIDV4_REGEX_STRING)) {
+    if (!deviceId.match(RegexUtils.UUIDV4)) {
       throw Error(`${deviceId} is not a valid UUIDv4`)
     }
     DeviceAPI._deviceId = deviceId

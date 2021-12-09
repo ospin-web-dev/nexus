@@ -1,4 +1,6 @@
 const authorizeDeviceSubscriptions = require('../user/pusher/subscriptions/device/authorizeMany')
+const authorizeDeviceProcessSubscriptions = require('../user/pusher/subscriptions/device/process/authorizeMany')
+const OspinPusherClient = require('./OspinPusherClient')
 
 let queuedRequests = []
 
@@ -11,15 +13,42 @@ const stopQueueing = () => {
   queueingInterval = null
 }
 
+const getAuthTokens = async (channelNames, socketId, userId) => {
+  const nonDeviceProcessChannelNames = channelNames
+    .filter(channelName => !OspinPusherClient.isDeviceProcessChannel(channelName))
+  const deviceProcessChannelNames = channelNames.filter(OspinPusherClient.isDeviceProcessChannel)
+
+  if (!nonDeviceProcessChannelNames.length) {
+    const { data: { tokens } } = await authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId })
+    return tokens
+  }
+
+  if (!deviceProcessChannelNames.length) {
+    const { data: { tokens } } = await authorizeDeviceSubscriptions(userId, { channelNames: nonDeviceProcessChannelNames, socketId })
+    return tokens
+  }
+
+  const [
+    { data: { tokens: deviceProcessChannelTokens } },
+    { data: { tokens: nonDeviceProcessChannelTokens } }
+  ] = await Promise.all([
+    authorizeDeviceSubscriptions(userId, { channelNames: nonDeviceProcessChannelNames, socketId }),
+    authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId }),
+  ])
+
+  return [ ...deviceProcessChannelTokens, ...nonDeviceProcessChannelTokens ]
+}
+
 const authorizeChannels = async () => {
 
   const requests = [ ...queuedRequests ]
   queuedRequests = []
 
-  const channelNames = requests.map(req => req.channelName)
   const { socketId, userId } = requests[0]
 
-  const { data: { tokens } } = await authorizeDeviceSubscriptions(userId, { channelNames, socketId })
+  const channelNames = requests.map(req => req.channelName)
+
+  const tokens = await getAuthTokens(channelNames, socketId, userId)
 
   for (const channelTokenResponse of tokens) {
     const { token, channelName } = channelTokenResponse

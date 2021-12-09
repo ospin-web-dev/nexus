@@ -18,9 +18,9 @@ describe('the PusherClient', () => {
 
   const initDefaultClient = () => {
     const apiKey = '123'
-    const userId = faker.datatype.uuid()
+    const authorizer = () => {}
     const cluster = 'us'
-    const initData = { apiKey, userId, cluster }
+    const initData = { apiKey, authorizer, cluster }
 
     return PusherClient.connect(initData)
   }
@@ -29,32 +29,22 @@ describe('the PusherClient', () => {
     describe('when NOT already initialized', () => {
       it('returns an instance of the pusher client', () => {
         const apiKey = '123'
-        const userId = faker.datatype.uuid()
+        const authorizer = () => {}
         const cluster = 'us'
-        const initData = { apiKey, userId, cluster }
+        const initData = { apiKey, authorizer, cluster }
 
         const client = PusherClient.connect(initData)
 
         expect(client).toBeInstanceOf(Pusher)
-      })
-
-      it('sets the default value for the cluster to eu', () => {
-        const apiKey = '123'
-        const userId = faker.datatype.uuid()
-        const initData = { apiKey, userId }
-
-        const client = PusherClient.connect(initData)
-
-        expect(client.config.cluster).toBe('eu')
       })
     })
 
     describe('when initialized beforehand', () => {
       it('returns the existing client', () => {
         const apiKey = '123'
-        const userId = faker.datatype.uuid()
+        const authorizer = () => {}
         const cluster = 'us'
-        const initData = { apiKey, userId, cluster }
+        const initData = { apiKey, authorizer, cluster }
         const existingClient = initDefaultClient()
 
         const client = PusherClient.connect(initData)

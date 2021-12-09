@@ -1,13 +1,12 @@
 const Pusher = require('pusher-js')
-const batchAuthorizer = require('./batchAuthorizer')
 
 class PusherClient {
 
   static client = null
 
-  static connect({ apiKey, userId, cluster = 'eu' }) {
+  static connect({ apiKey, cluster, authorizer }) {
     if (PusherClient.client) return PusherClient.client
-    PusherClient.client = new Pusher(apiKey, { cluster, authorizer: batchAuthorizer(userId) })
+    PusherClient.client = new Pusher(apiKey, { cluster, authorizer })
     return PusherClient.client
   }
 
