@@ -9,7 +9,7 @@ const process = require('./src/process')
 const deviceAPI = require('./src/deviceAPI')
 const uIConfig = require('./src/uIConfig')
 const dataPoints = require('./src/dataPoints')
-const OspinPusherClient = require('./src/pusher')
+const pusher = require('./src/pusher')
 const { createConfig } = require('./src/amplify/configGenerator')
 
 const DEFAULT_CONNECTION_OPTS = {
@@ -37,7 +37,7 @@ module.exports = {
   process,
   uIConfig,
   dataPoints,
-  OspinPusherClient,
+  pusher,
   deviceAPI,
   connect,
   createConfig,

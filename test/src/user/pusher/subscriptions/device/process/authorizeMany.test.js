@@ -13,7 +13,7 @@ describe('authorizeMany', () => {
     const payload = { socketId: '12345-54321', channelName: 'channelName' }
 
     await authorizeMany(userId, payload)
-    expect(API.post).toHaveBeenCalledWith('user', `${userId}/subscriptions/device-processes`, { body: payload, ...DEFAULT_REQ_OPTS })
+    expect(API.post).toHaveBeenCalledWith('user', `${userId}/subscriptions/processes`, { body: payload, ...DEFAULT_REQ_OPTS })
   })
 
   testDefaultHTTPResponses(authorizeMany, 'post')

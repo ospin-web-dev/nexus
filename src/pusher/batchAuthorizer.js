@@ -1,6 +1,6 @@
 const authorizeDeviceSubscriptions = require('../user/pusher/subscriptions/device/authorizeMany')
 const authorizeDeviceProcessSubscriptions = require('../user/pusher/subscriptions/device/process/authorizeMany')
-const OspinPusherClient = require('./OspinPusherClient')
+const RegexUtils = require('../utils/RegexUtils')
 
 let queuedRequests = []
 
@@ -13,10 +13,18 @@ const stopQueueing = () => {
   queueingInterval = null
 }
 
+
+const isDeviceProcessChannel = channelName => {
+  const uuidRegString = RegexUtils.UUIDV4_REGEX_STRING
+  const regex = new RegExp(`private-device_${uuidRegString}_process_${uuidRegString}(|_streaming_data)$`)
+  return regex.test(channelName)
+}
+
 const getAuthTokens = async (channelNames, socketId, userId) => {
   const nonDeviceProcessChannelNames = channelNames
-    .filter(channelName => !OspinPusherClient.isDeviceProcessChannel(channelName))
-  const deviceProcessChannelNames = channelNames.filter(OspinPusherClient.isDeviceProcessChannel)
+    .filter(channelName => !isDeviceProcessChannel(channelName))
+  const deviceProcessChannelNames = channelNames
+    .filter(isDeviceProcessChannel)
 
   if (!nonDeviceProcessChannelNames.length) {
     const { data: { tokens } } = await authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId })

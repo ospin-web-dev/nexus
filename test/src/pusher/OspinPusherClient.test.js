@@ -1,6 +1,6 @@
+const Pusher = require('pusher-js')
 const faker = require('faker')
-const OspinPusherClient = require('pusher')
-const PusherClient = require('pusher/PusherClient')
+const { OspinPusherClient } = require('pusher')
 
 jest.mock('pusher-js', () => {
   const { PusherMock } = require('pusher-js-mock')
@@ -11,221 +11,111 @@ jest.mock('pusher-js', () => {
 describe('the OspinPusherClient', () => {
 
   beforeEach(() => {
-    OspinPusherClient.resetPusherClient()
+    OspinPusherClient.resetOspinPusherClient()
     jest.clearAllMocks()
   })
 
+  const initDefaultClient = () => {
+    const apiKey = '123'
+    const userId = faker.datatype.uuid()
+    const cluster = 'us'
+    const initData = { apiKey, userId, cluster }
+
+    return OspinPusherClient.connect(initData)
+  }
+
   describe('connect', () => {
-    it('calls super.connect', () => {
-      const spy = jest.spyOn(PusherClient, 'connect').mockImplementation()
-      const userId = faker.datatype.uuid
-      const apiKey = '1234'
-      OspinPusherClient.connect({ apiKey, userId })
+    describe('when NOT already initialized', () => {
+      it('returns an instance of the pusher client', () => {
+        const apiKey = '123'
+        const userId = faker.datatype.uuid()
+        const cluster = 'us'
+        const initData = { apiKey, userId, cluster }
 
-      expect(spy).toHaveBeenCalledTimes(1)
+        const client = OspinPusherClient.connect(initData)
+
+        expect(client).toBeInstanceOf(Pusher)
+      })
+
+      it('sets the default value for the cluster to eu', () => {
+        const apiKey = '123'
+        const userId = faker.datatype.uuid()
+        const initData = { apiKey, userId }
+
+        const client = OspinPusherClient.connect(initData)
+
+        expect(client.config.cluster).toBe('eu')
+      })
     })
-  })
 
-  describe('the getter for DEVICE_OPERATION_EVENTS', () => {
-    it('returns the map of device operation events', () => {
-      const map = OspinPusherClient.DEVICE_EVENTS
+    describe('when initialized beforehand', () => {
+      it('returns the existing client', () => {
+        const apiKey = '123'
+        const userId = faker.datatype.uuid()
+        const cluster = 'us'
+        const initData = { apiKey, userId, cluster }
+        const existingClient = initDefaultClient()
 
-      expect(map).toStrictEqual({
-        DEVICE_DESCRIPTION_UPDATED: 'device-description-updated',
-        DEVICE_CONNECTION_UPDATED: 'device-connection-updated',
-        DEVICE_STATE_UPDATED: 'device-state-updated',
-        DEVICE_DEFAULT_FCT_GRAPH_UPDATED: 'device-default-fct-graph-updated',
-        DEVICE_EVENT_CREATED: 'device-event-created'
+        const client = OspinPusherClient.connect(initData)
+
+        expect(client).toStrictEqual(existingClient)
       })
     })
   })
 
-  describe('the getter for DEVICE_MAINTENANCE_EVENTS', () => {
-    it('returns the map of device maintenance events', () => {
-      const map = OspinPusherClient.DEVICE_MAINTENANCE_EVENTS
+  describe('disconnect', () => {
+    describe('when NOT already initialized', () => {
+      it('does not call resetOspinPusherClient', () => {
+        const spy = jest.spyOn(OspinPusherClient, 'resetOspinPusherClient')
+        OspinPusherClient.disconnect()
 
-      expect(map).toStrictEqual({
-        DEVICE_SSH_CONNECTION_OPENED: 'device-ssh-connection-opened',
+        expect(spy).toHaveBeenCalledTimes(0)
+      })
+    })
+
+    describe('when initialized beforehand', () => {
+      it('does call resetOspinPusherClient', () => {
+        initDefaultClient()
+        const spy = jest.spyOn(OspinPusherClient, 'resetOspinPusherClient')
+
+        OspinPusherClient.disconnect()
+
+        expect(spy).toHaveBeenCalledTimes(1)
       })
     })
   })
 
-  describe('the getter for DEVICE_PROCESSES_EVENTS', () => {
-    it('returns the map of device maintenance events', () => {
-      const map = OspinPusherClient.DEVICE_PROCESSES_EVENTS
+  describe('resetOspinPusherClient', () => {
+    it('resets the client to null', () => {
+      initDefaultClient()
 
-      expect(map).toStrictEqual({
-        PROCESS_PHASE_CHANGED: 'process-phase-changed',
-        PROCESS_DOWNLOAD_REQUEST_UPDATED: 'process-download-request-updated',
+      OspinPusherClient.resetOspinPusherClient()
+
+      expect(OspinPusherClient.client).toBeNull()
+    })
+  })
+
+  describe('registerConnectionEvent', () => {
+    describe('when NOT already initialized', () => {
+      it('does call console.warn', () => {
+        const spy = jest.spyOn(global.console, 'warn').mockImplementation(() => {})
+        const handler = () => {}
+        OspinPusherClient.registerConnectionEvent('state_change', handler)
+
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    describe('when initialized beforehand', () => {
+      it('registers the function for the event and executes it when the event is fired', () => {
+        const client = initDefaultClient()
+        const handler = jest.fn()
+        OspinPusherClient.registerConnectionEvent('state_change', handler)
+
+        client.connection.emit('state_change')
+
+        expect(handler).toHaveBeenCalledTimes(1)
       })
     })
   })
-
-  describe('the getter for DEVICE_PROCESS_EVENTS', () => {
-    it('returns the map of device process events', () => {
-      const map = OspinPusherClient.DEVICE_PROCESS_EVENTS
-
-      expect(map).toStrictEqual({})
-    })
-  })
-
-  describe('the getter for DEVICE_PROCESS_STREAM_DATA_EVENTS', () => {
-    it('returns the map of device process events', () => {
-      const map = OspinPusherClient.DEVICE_PROCESS_STREAM_DATA_EVENTS
-
-      expect(map).toStrictEqual({
-        PROCESS_IMAGE_GENERATED: 'process-image-created',
-        PROCESS_SENSOR_DATA_GENERATED: 'process-sensor-data-generated',
-      })
-    })
-  })
-
-  describe('generateDeviceProcessChannelName', () => {
-    it('returns the generated correct channelName', () => {
-      const deviceId = faker.datatype.uuid
-      const processId = faker.datatype.uuid
-      const res = OspinPusherClient.generateDeviceProcessChannelName(deviceId, processId)
-
-      expect(res).toBe(`private-device_${deviceId}_process_${processId}`)
-    })
-  })
-
-  describe('generateDeviceMaintenanceChannelName', () => {
-    it('returns the generated correct channelName', () => {
-      const deviceId = faker.datatype.uuid
-      const res = OspinPusherClient.generateDeviceMaintenanceChannelName(deviceId)
-
-      expect(res).toBe(`private-device_${deviceId}_maintenance`)
-    })
-  })
-
-  describe('generateDeviceChannelName', () => {
-    it('returns the generated correct channelName', () => {
-      const deviceId = faker.datatype.uuid
-      const res = OspinPusherClient.generateDeviceChannelName(deviceId)
-
-      expect(res).toBe(`private-device_${deviceId}`)
-    })
-  })
-
-  describe('subscribeToDeviceEvents', () => {
-    it('calls super.subscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'subscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.subscribeToDeviceEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('subscribeToDeviceProcessesEvents', () => {
-    it('calls super.subscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'subscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.subscribeToDeviceProcessesEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('subscribeToDeviceProcessStreamingDataEvents', () => {
-    it('calls super.subscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'subscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.subscribeToDeviceProcessStreamingDataEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('subscribeToDeviceMaintenanceEvents', () => {
-    it('calls super.subscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'subscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.subscribeToDeviceMaintenanceEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('subscribeToDeviceProcessEvents', () => {
-    it('calls super.subscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'subscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.subscribeToDeviceProcessEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('unsubscribeFromDeviceEvents', () => {
-    it('calls super.unsubscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'unsubscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.unsubscribeFromDeviceEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('unsubscribeFromDeviceProcessesEvents', () => {
-    it('calls super.unsubscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'unsubscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.unsubscribeFromDeviceProcessesEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('unsubscribeFromDeviceMaintenanceEvents', () => {
-    it('calls super.unsubscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'unsubscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.unsubscribeFromDeviceMaintenanceEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('unsubscribeFromDeviceProcessEvents', () => {
-    it('calls super.unsubscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'unsubscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.unsubscribeFromDeviceProcessEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('unsubscribeFromDeviceProcessStreamingDataEvents', () => {
-    it('calls super.unsubscribe with the correct parameters', () => {
-      const spy = jest.spyOn(PusherClient, 'unsubscribe').mockImplementation()
-      const deviceId = faker.datatype.uuid
-      const eventHandler = { 'my-event': () => {} }
-
-      OspinPusherClient.unsubscribeFromDeviceProcessStreamingDataEvents(deviceId, eventHandler)
-
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
-
 })
