@@ -110,6 +110,13 @@ nexus
 |         └── image
 |              ├── create(<processId>, <fctId>, <body>)
 |              └── list(<processId>, <fctId>, <opts>)
+├── pusher
+│    ├── OspinPusherClient
+│    ├── DevicePusherChannel
+│    ├── DeviceProcessesPusherChannel
+│    ├── DeviceMaintenancePusherChannel
+│    ├── DeviceProcessPusherChannel
+|    └── DeviceProcessStreamingDataPusherChannel
 └── deviceAPI
      ├── authentication
      |    ├── setCredentials({ deviceId, pathToCert })
