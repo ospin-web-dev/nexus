@@ -1,70 +1,35 @@
-const PusherClient = require('./PusherClient')
+const Pusher = require('pusher-js')
+const batchAuthorizer = require('./batchAuthorizer')
 
-class OspinPusherClient extends PusherClient {
+let client = null
 
-  static get DEVICE_OPERATION_EVENTS() {
-    return {
-      UPDATE_DEVICE_DESCRIPTION: 'update-device-description',
-      UPDATE_DEVICE_CONNECTION: 'update-device-connection',
-      UPDATE_DEVICE_STATE: 'update-device-state',
-      UPDATE_DEVICE_DEFAULT_FCTGRAPH: 'update-device-default-fctGraph',
-      DEVICE_EVENT: 'device-event',
+class OspinPusherClient {
+
+  static get client() { return client }
+
+  static set client(value) { client = value }
+
+  static connect({ apiKey, cluster = 'eu', userId }) {
+    if (OspinPusherClient.client) return OspinPusherClient.client
+    OspinPusherClient.client = new Pusher(apiKey, { cluster, authorizer: batchAuthorizer(userId) })
+    return OspinPusherClient.client
+  }
+
+  static registerConnectionEvent(eventName, eventHandler) {
+    if (!OspinPusherClient.client) {
+      console.warn('Connect OspinPusherClient before trying to register connection events')
+      return
     }
+    OspinPusherClient.client.connection.bind(eventName, eventHandler)
   }
 
-  static get DEVICE_PROCESS_EVENTS() {
-    return {
-      PHASE_CHANGE: 'phase-change',
-      ADD_DATAPOINTS: 'add-datapoints',
-      ADD_IMAGES: 'add-images',
-      UPDATE_DOWNLOAD_REQUEST: 'update-download-request',
+  static resetOspinPusherClient() { OspinPusherClient.client = null }
+
+  static disconnect() {
+    if (OspinPusherClient.client) {
+      OspinPusherClient.client.disconnect()
+      this.resetOspinPusherClient()
     }
-  }
-
-  static get DEVICE_MAINTENANCE_EVENTS() {
-    return {
-      SSH_ENDPOINTS: 'ssh-endpoints',
-    }
-  }
-
-  static generateCommonChannelNameSegment(deviceId) {
-    return `private-device_${deviceId}`
-  }
-
-  static generateDeviceProcessChannelName(deviceId) {
-    return `${OspinPusherClient.generateCommonChannelNameSegment(deviceId)}_process`
-  }
-
-  static generateDeviceOperationChannelName(deviceId) {
-    return `${OspinPusherClient.generateCommonChannelNameSegment(deviceId)}_operation`
-  }
-
-  static generateDeviceMaintenanceChannelName(deviceId) {
-    return `${OspinPusherClient.generateCommonChannelNameSegment(deviceId)}_maintenance`
-  }
-
-  static subscribeToDeviceProcessEvents(deviceId, eventHandler) {
-    super.subscribe(OspinPusherClient.generateDeviceProcessChannelName(deviceId), eventHandler)
-  }
-
-  static subscribeToDeviceOperationEvents(deviceId, eventHandler) {
-    super.subscribe(OspinPusherClient.generateDeviceOperationChannelName(deviceId), eventHandler)
-  }
-
-  static subscribeToDeviceMaintenanceEvents(deviceId, eventHandler) {
-    super.subscribe(OspinPusherClient.generateDeviceMaintenanceChannelName(deviceId), eventHandler)
-  }
-
-  static unsubscribeFromDeviceProcessEvents(deviceId) {
-    super.unsubscribe(OspinPusherClient.generateDeviceProcessChannelName(deviceId))
-  }
-
-  static unsubscribeFromDeviceOperationEvents(deviceId) {
-    super.unsubscribe(OspinPusherClient.generateDeviceOperationChannelName(deviceId))
-  }
-
-  static unsubscribeFromDeviceMaintenanceEvents(deviceId) {
-    super.unsubscribe(OspinPusherClient.generateDeviceMaintenanceChannelName(deviceId))
   }
 
 }
