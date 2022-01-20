@@ -1,4 +1,4 @@
-const { API } = require('aws-amplify')
+const API = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
 const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 
