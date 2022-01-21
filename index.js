@@ -1,4 +1,6 @@
 const Amplify = require('@aws-amplify/core')
+const Auth =require('@aws-amplify/auth')
+const API = require('@aws-amplify/api-rest')
 const auth = require('./src/auth')
 const user = require('./src/user')
 const command = require('./src/command')
@@ -22,7 +24,8 @@ const connect = customConnectionOpts => {
     ...customConnectionOpts,
   }
   const config = createConfig(connectionOpts)
-  const result = Amplify.configure(config)
+  console.log(Amplify);
+  const result = Amplify.default.configure(config)
 
   return { result, config }
 }

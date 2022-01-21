@@ -6,11 +6,11 @@ describe('getCurrentSession', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s Auth.currentSession method', async () => {
-    jest.spyOn(Auth, 'currentSession').mockImplementation(args => args)
+  it.only('calls amplify\'s Auth.currentSession method', async () => {
+    jest.spyOn(Auth.default, 'currentSession').mockImplementation(args => args)
 
     await getCurrentSession()
-    expect(Auth.currentSession).toHaveBeenCalledTimes(1)
+    expect(Auth.default.currentSession).toHaveBeenCalledTimes(1)
   })
 
   describe('on Auth.currentSession success', () => {
