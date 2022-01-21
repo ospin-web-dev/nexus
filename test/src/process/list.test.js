@@ -1,4 +1,4 @@
-const API = require('@aws-amplify/api-rest')
+const {default: API} = require('@aws-amplify/api-rest')
 const faker = require('faker')
 
 const list = require('process/list')

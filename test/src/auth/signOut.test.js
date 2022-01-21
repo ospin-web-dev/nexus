@@ -1,4 +1,4 @@
-const Auth = require('@aws-amplify/auth')
+const {default: Auth} = require('@aws-amplify/auth')
 
 const signOut = require('auth/signOut')
 

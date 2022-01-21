@@ -1,4 +1,4 @@
-const API = require('@aws-amplify/api-rest')
+const {default: API} = require('@aws-amplify/api-rest')
 const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 const RegexUtils = require('../utils/RegexUtils')
 

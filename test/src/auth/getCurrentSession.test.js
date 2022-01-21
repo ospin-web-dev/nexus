@@ -1,4 +1,4 @@
-const Auth = require('@aws-amplify/auth')
+const {default: Auth} = require('@aws-amplify/auth')
 
 const getCurrentSession = require('auth/getCurrentSession')
 
@@ -7,10 +7,10 @@ describe('getCurrentSession', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   it.only('calls amplify\'s Auth.currentSession method', async () => {
-    jest.spyOn(Auth.default, 'currentSession').mockImplementation(args => args)
+    jest.spyOn(Auth, 'currentSession').mockImplementation(args => args)
 
     await getCurrentSession()
-    expect(Auth.default.currentSession).toHaveBeenCalledTimes(1)
+    expect(Auth.currentSession).toHaveBeenCalledTimes(1)
   })
 
   describe('on Auth.currentSession success', () => {
