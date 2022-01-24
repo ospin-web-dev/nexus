@@ -1,4 +1,4 @@
-const Amplify = require('aws-amplify')
+const {default: API} = require('@aws-amplify/api-rest')
 const serializeAxiosResponse = require('../../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
 /**
@@ -11,7 +11,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @returns {Promise <object>} Promise resolving with the createdImageRef
  */
 module.exports = serializeAxiosResponse(
-  (processId, functionalityId, body) => Amplify.API.post(
+  (processId, functionalityId, body) => API.post(
     'process', `${processId}/functionalities/${functionalityId}/images`,
     { body, ...DEFAULT_REQ_OPTS },
   ),

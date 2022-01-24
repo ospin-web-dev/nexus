@@ -1,6 +1,6 @@
 const faker = require('faker')
 const startProcess = require('command/device/process/startProcess')
-const { API } = require('aws-amplify')
+const {default: API} = require('@aws-amplify/api-rest')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 

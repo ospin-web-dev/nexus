@@ -1,4 +1,4 @@
-const { API } = require('aws-amplify')
+const {default: API} = require('@aws-amplify/api-rest')
 
 const list = require('user/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
