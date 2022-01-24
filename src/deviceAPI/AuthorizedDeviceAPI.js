@@ -1,6 +1,6 @@
-const crypto = require('crypto-browserify')
-const fs = require('browserify-fs');
-const path = require('path-browserify')
+const crypto = require('crypto')
+const fs = require('fs');
+const path = require('path')
 
 const DeviceAPI = require('./DeviceAPI')
 
