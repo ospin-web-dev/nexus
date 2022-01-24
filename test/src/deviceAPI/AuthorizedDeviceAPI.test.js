@@ -1,5 +1,5 @@
 const faker = require('faker')
-const crypto = require('crypto')
+const crypto = require('crypto-browserify')
 const {default: API} = require('@aws-amplify/api-rest')
 
 const AuthorizedDeviceAPI = require('../../../src/deviceAPI/AuthorizedDeviceAPI')
