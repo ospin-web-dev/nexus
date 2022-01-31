@@ -30,9 +30,14 @@ describe('nexus', () => {
     command: {
       device: {
         process: {
+          endProcess: 'function',
+          nextPhase: 'function',
+          pauseProcess: 'function',
+          resumeProcess: 'function',
           startProcess: 'function',
           updateRunningProcess: 'function',
         },
+        openSsh: 'function',
       },
     },
     dataPoints: {
