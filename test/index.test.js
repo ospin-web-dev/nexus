@@ -103,6 +103,7 @@ describe('nexus', () => {
       device: {
         deleteMany: 'function',
       },
+      list: 'function',
     },
     process: {
       functionality: {
