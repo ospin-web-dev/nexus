@@ -173,6 +173,9 @@ describe('nexus', () => {
         },
       },
     },
+    utils: {
+      logClientError: 'function',
+    },
   }
 
   function testFunctionPresentInModule(functionName, module) {
