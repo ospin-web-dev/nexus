@@ -6,7 +6,7 @@ describe('createConfig', () => {
   const AWS_REGION = 'eu-central-1'
 
   ENVS.forEach(ENV => {
-    test(`returns a config object with values that reflect the ${ENV} ENV`, () => {
+    it(`returns a config object with values that reflect the ${ENV} ENV`, () => {
       const expected = {
         Analytics: { disabled: true },
         ...getAuthConfig({ ENV, AWS_REGION }),

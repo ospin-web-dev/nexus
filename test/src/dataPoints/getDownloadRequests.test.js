@@ -10,6 +10,7 @@ describe('getDownloadRequests', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const processId = faker.datatype.uuid()
+
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 

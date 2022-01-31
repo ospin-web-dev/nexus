@@ -13,9 +13,7 @@ describe('the DeviceMaintenancePusherChannel', () => {
     jest.clearAllMocks()
   })
 
-  const connectClient = () => {
-    return OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
-  }
+  const connectClient = () => OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
 
   describe('the getter for EVENTS', () => {
 
@@ -32,7 +30,7 @@ describe('the DeviceMaintenancePusherChannel', () => {
     it('calls client.subscribe with the correct parameters', () => {
       const client = connectClient()
       const spy = jest.spyOn(client, 'subscribe').mockImplementation(() => ({
-        bind: () => {}
+        bind: () => {},
       }))
       const deviceId = faker.datatype.uuid()
       const eventHandler = { 'device-ssh-connection-opened': () => {} }

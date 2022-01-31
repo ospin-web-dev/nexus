@@ -1,9 +1,9 @@
 const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 const clone = require('process/clone')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 describe('clone process', () => {
   const processId = faker.datatype.uuid()

@@ -13,7 +13,6 @@ const stopQueueing = () => {
   queueingInterval = null
 }
 
-
 const isDeviceProcessChannel = channelName => {
   const uuidRegString = RegexUtils.UUIDV4_REGEX_STRING
   const regex = new RegExp(`private-device_${uuidRegString}_process_${uuidRegString}(|_streaming_data)$`)
@@ -38,7 +37,7 @@ const getAuthTokens = async (channelNames, socketId, userId) => {
 
   const [
     { data: { tokens: deviceProcessChannelTokens } },
-    { data: { tokens: nonDeviceProcessChannelTokens } }
+    { data: { tokens: nonDeviceProcessChannelTokens } },
   ] = await Promise.all([
     authorizeDeviceSubscriptions(userId, { channelNames: nonDeviceProcessChannelNames, socketId }),
     authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId }),

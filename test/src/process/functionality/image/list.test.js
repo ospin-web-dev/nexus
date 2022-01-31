@@ -1,14 +1,13 @@
 const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
-const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 
 const list = require('process/functionality/image/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 
 describe('list', () => {
   const processId = faker.datatype.uuid()
   const functionalityId = faker.datatype.uuid()
-
 
   afterAll(() => { jest.restoreAllMocks() })
 

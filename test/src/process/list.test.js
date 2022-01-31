@@ -9,7 +9,6 @@ describe('list', () => {
   const userId = faker.datatype.uuid()
   const deviceId = faker.datatype.uuid()
 
-
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s API.get method', async () => {
@@ -26,7 +25,7 @@ describe('list', () => {
     await list(queryStringParameters)
     expect(API.get).toHaveBeenCalledWith('process', '', { ...DEFAULT_REQ_OPTS, queryStringParameters })
 
-  });
+  })
 
   testDefaultHTTPResponses(list, 'get')
 })

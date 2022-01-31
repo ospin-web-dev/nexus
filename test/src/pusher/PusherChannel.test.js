@@ -18,9 +18,7 @@ describe('the DevicePusherChannel', () => {
     OspinPusherClient.resetOspinPusherClient()
   })
 
-  const connectClient = () => {
-    return OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
-  }
+  const connectClient = () => OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
 
   describe('subscribe', () => {
     describe('when the client is not connected', () => {
@@ -41,7 +39,7 @@ describe('the DevicePusherChannel', () => {
         const client = connectClient()
         const spy = jest.spyOn(console, 'warn').mockImplementation()
         const deviceId = faker.datatype.uuid()
-        const eventHandler = { 'miracle': () => {} }
+        const eventHandler = { miracle: () => {} }
 
         DevicePusherChannel.subscribe({ deviceId }, eventHandler)
 

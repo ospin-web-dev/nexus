@@ -1,7 +1,7 @@
 const faker = require('faker')
-const nexus = require('../../../../../../index')
 const AuthenticatedDeviceAPI = require('deviceAPI/AuthorizedDeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const nexus = require('../../../../../../index')
 const setUpAuthenticatedDeviceAPI = require('../../../../../testHelpers/setUpAuthenticatedDeviceAPI')
 
 describe('create Process stream Image', () => {
