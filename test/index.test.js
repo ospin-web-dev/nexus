@@ -136,6 +136,10 @@ describe('nexus', () => {
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
+        get: 'function',
+      },
+      device: {
+        put: 'function',
       },
     },
     user: {
