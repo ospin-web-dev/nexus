@@ -145,8 +145,20 @@ describe('nexus', () => {
     user: {
       notifications: {
         putAll: 'function',
+        remove: 'function',
+        deleteManyByTopic: 'function',
+      },
+      device: {
+        get: 'function',
+        list: 'function',
+      },
+      preview: {
+        get: 'function',
       },
       delete: 'function',
+      getChangelog: 'function',
+      setCognitoIdentityId: 'function',
+      acceptDeviceInvitation: 'function',
       get: 'function',
       list: 'function',
       update: 'function',
