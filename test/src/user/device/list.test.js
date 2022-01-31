@@ -13,7 +13,7 @@ describe('list', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s API.get method with the user id', async () => {
+  it('calls amplify\'s API.get', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await list(params)

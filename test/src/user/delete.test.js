@@ -9,7 +9,7 @@ describe('delete', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s API.del method with the user id', async () => {
+  it('calls amplify\'s API.del', async () => {
     jest.spyOn(API, 'del').mockImplementation(args => args)
     const userId = uuidv4()
 
