@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 
 module.exports = (fn, httpVerb, fnParams = []) => {
 

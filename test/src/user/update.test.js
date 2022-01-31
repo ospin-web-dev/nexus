@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
 
 const update = require('user/update')

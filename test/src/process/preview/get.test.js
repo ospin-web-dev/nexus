@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 const get = require('process/preview/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')

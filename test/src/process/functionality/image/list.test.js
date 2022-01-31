@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 

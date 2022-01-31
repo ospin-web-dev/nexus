@@ -1,5 +1,5 @@
 const faker = require('faker')
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const transferOwnership = require('device/transferOwnership')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
