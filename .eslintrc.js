@@ -31,6 +31,7 @@ module.exports = {
 
     // jest rules (all are enabled by default via the extends section above)
     'jest/no-hooks': 'off',
+    'jest/require-hook': 'off',
     'jest/consistent-test-it': 'warn',
     'jest/prefer-expect-assertions': 'off',
   },

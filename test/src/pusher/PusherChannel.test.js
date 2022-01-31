@@ -3,9 +3,9 @@ const {
   DevicePusherChannel,
   OspinPusherClient,
 } = require('pusher')
-const PusherChannel = require('pusher/channels/PusherChannel')
 
 jest.mock('pusher-js', () => {
+  // eslint-disable-next-line
   const { PusherMock } = require('pusher-js-mock')
   PusherMock.prototype.disconnect = () => {}
   return PusherMock
@@ -36,7 +36,7 @@ describe('the DevicePusherChannel', () => {
 
     describe('when an event is unknown for the channel', () => {
       it('calls console.warn when the event is unknown', () => {
-        const client = connectClient()
+        connectClient()
         const spy = jest.spyOn(console, 'warn').mockImplementation()
         const deviceId = faker.datatype.uuid()
         const eventHandler = { miracle: () => {} }
@@ -50,7 +50,7 @@ describe('the DevicePusherChannel', () => {
 
     describe('when an event handler is NOT a function', () => {
       it('calls console.warn when the event is unknown', () => {
-        const client = connectClient()
+        connectClient()
         const spy = jest.spyOn(console, 'warn').mockImplementation()
         const deviceId = faker.datatype.uuid()
         const eventHandler = { 'device-description-updated': 'notice me senpai' }

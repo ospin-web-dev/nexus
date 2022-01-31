@@ -8,6 +8,7 @@ class PusherChannel {
 
   static subscribe(channelParams, eventHandlers) {
     if (!OspinPusherClient.client) {
+      // eslint-disable-next-line
       console.warn('Connect OspinPusherClient before trying to subscribe')
       return
     }
@@ -19,11 +20,13 @@ class PusherChannel {
     Object.entries(eventHandlers).forEach(([eventName, eventHandler]) => {
 
       if (!(Object.values(events).includes(eventName))) {
+        // eslint-disable-next-line
         console.warn(`event ${eventName} for channel ${channelName} does not exist`)
         return
       }
 
       if (typeof eventHandler !== 'function') {
+        // eslint-disable-next-line
         console.warn(`event handler for pusher event ${eventName} for channel ${channelName} is not a function`)
         return
       }
@@ -34,6 +37,7 @@ class PusherChannel {
 
   static unsubscribe(channelParams) {
     if (!OspinPusherClient.client) {
+      // eslint-disable-next-line
       console.warn('Connect OspinPusherClient before trying to unsubscribe')
       return
     }

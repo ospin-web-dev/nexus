@@ -26,12 +26,18 @@ const getAuthTokens = async (channelNames, socketId, userId) => {
     .filter(isDeviceProcessChannel)
 
   if (!nonDeviceProcessChannelNames.length) {
-    const { data: { tokens } } = await authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId })
+    const { data: { tokens } } = await authorizeDeviceProcessSubscriptions(
+      userId,
+      { channelNames: deviceProcessChannelNames, socketId },
+    )
     return tokens
   }
 
   if (!deviceProcessChannelNames.length) {
-    const { data: { tokens } } = await authorizeDeviceSubscriptions(userId, { channelNames: nonDeviceProcessChannelNames, socketId })
+    const { data: { tokens } } = await authorizeDeviceSubscriptions(
+      userId,
+      { channelNames: nonDeviceProcessChannelNames, socketId },
+    )
     return tokens
   }
 
@@ -40,7 +46,10 @@ const getAuthTokens = async (channelNames, socketId, userId) => {
     { data: { tokens: nonDeviceProcessChannelTokens } },
   ] = await Promise.all([
     authorizeDeviceSubscriptions(userId, { channelNames: nonDeviceProcessChannelNames, socketId }),
-    authorizeDeviceProcessSubscriptions(userId, { channelNames: deviceProcessChannelNames, socketId }),
+    authorizeDeviceProcessSubscriptions(
+      userId,
+      { channelNames: deviceProcessChannelNames, socketId },
+    ),
   ])
 
   return [ ...deviceProcessChannelTokens, ...nonDeviceProcessChannelTokens ]
@@ -56,7 +65,7 @@ const authorizeChannels = async () => {
   const channelNames = requests.map(req => req.channelName)
 
   const tokens = await getAuthTokens(channelNames, socketId, userId)
-
+  // eslint-disable-next-line
   for (const channelTokenResponse of tokens) {
     const { token, channelName } = channelTokenResponse
     const { callback } = requests.find(req => channelName === req.channelName)

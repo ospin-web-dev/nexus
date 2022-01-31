@@ -17,6 +17,7 @@ class OspinPusherClient {
 
   static registerConnectionEvent(eventName, eventHandler) {
     if (!OspinPusherClient.client) {
+      // eslint-disable-next-line
       console.warn('Connect OspinPusherClient before trying to register connection events')
       return
     }

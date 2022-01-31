@@ -1,5 +1,6 @@
 const { default: API } = require('@aws-amplify/api-rest')
 
+// eslint-disable-next-line
 module.exports = (fn, httpVerb, fnParams = []) => {
 
   describe(`on API.${httpVerb} success`, () => {
