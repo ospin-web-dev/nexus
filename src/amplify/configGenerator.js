@@ -1,11 +1,7 @@
 /* ********************************************************* */
 /*                          COMMON                           */
 /* ********************************************************* */
-const getCommonConfig = ({ AWS_REGION }) => ({
-  PubSub: {
-    region: AWS_REGION,
-    endPoint: 'wss://a2q06p6h18ey04-ats.iot.eu-central-1.amazonaws.com/mqtt',
-  },
+const getCommonConfig = () => ({
   Analytics: { disabled: true },
 })
 

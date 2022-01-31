@@ -8,10 +8,6 @@ describe('createConfig', () => {
   ENVS.forEach(ENV => {
     test(`returns a config object with values that reflect the ${ENV} ENV`, () => {
       const expected = {
-        PubSub: {
-          region: AWS_REGION,
-          endPoint: 'wss://a2q06p6h18ey04-ats.iot.eu-central-1.amazonaws.com/mqtt',
-        },
         Analytics: { disabled: true },
         ...getAuthConfig({ ENV, AWS_REGION }),
         API: {
