@@ -5,7 +5,7 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 const clone = require('process/clone')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
-describe('post', () => {
+describe('clone process', () => {
   const processId = faker.datatype.uuid()
   const processName = faker.company.bs()
 

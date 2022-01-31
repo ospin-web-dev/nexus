@@ -106,16 +106,24 @@ describe('nexus', () => {
       list: 'function',
     },
     process: {
+      create: 'function',
+      clone: 'function',
+      deleteMany: 'function',
       functionality: {
         image: {
           create: 'function',
           list: 'function',
         },
       },
-      list: 'function',
       get: 'function',
-      clone: 'function',
-      deleteMany: 'function',
+      grantAccess: 'function',
+      list: 'function',
+      modifyAccess: 'function',
+      preview: {
+        get: 'function',
+      },
+      revokeAccess: 'function',
+      update: 'function',
     },
     pusher: {
       OspinPusherClient: 'function',
