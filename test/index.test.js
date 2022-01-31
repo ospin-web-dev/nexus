@@ -51,7 +51,23 @@ describe('nexus', () => {
         get: 'function',
       },
       create: 'function',
+      functionality: {
+        calibration: {
+          remove: 'function',
+          update: 'function',
+        },
+      },
+      functionalityConfiguration: {
+        updateMany: 'function',
+      },
+      get: 'function',
+      grantAccess: 'function',
+      modifyAccess: 'function',
+      revokeAccess: 'function',
+      transferOwnership: 'function',
       list: 'function',
+      remove: 'function',
+      update: 'function',
     },
     deviceAPI: {
       authentication: {
@@ -76,6 +92,12 @@ describe('nexus', () => {
       configuration: {
         update: 'function',
       },
+    },
+    event: {
+      device: {
+        removeAll: 'function',
+      },
+      remove: 'function',
     },
     log: {
       device: {
