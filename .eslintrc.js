@@ -5,9 +5,6 @@ module.exports = {
     'plugin:jest/style',
     'plugin:jest/all',
   ],
-  parser: {
-    parserOptions: { "ecmaVersion": 13 },
-  },
   plugins: ['jest', 'jsdoc'],
   env: { jest: true },
   rules: {

@@ -18,9 +18,14 @@ describe('nexus', () => {
     connect: 'function',
     createConfig: 'function',
     auth: {
+      changePassword: 'function',
+      confirmSignUp: 'function',
+      forgotPassword: 'function',
+      forgotPasswordSubmit: 'function',
       getCurrentSession: 'function',
       signIn: 'function',
       signOut: 'function',
+      signUp: 'function',
     },
     command: {
       device: {
