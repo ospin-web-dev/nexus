@@ -5,5 +5,5 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 module.exports = serializeAxiosResponse(
   ({ deviceId, params }) => API
-    .post('device', `${deviceId}`, { body: params, ...DEFAULT_REQ_OPTS }),
+    .put('device', `${deviceId}`, { body: params, ...DEFAULT_REQ_OPTS }),
 )
