@@ -1,9 +1,9 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 const deleteMany = require('process/deleteMany')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 describe('deleteMany', () => {
   it('calls amplify\'s API.patch method', async () => {

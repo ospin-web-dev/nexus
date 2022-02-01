@@ -30,7 +30,6 @@ describe('get Process', () => {
     it('should respond with the data ,the status code and success=true', async () => {
       const resp = await nexus.deviceAPI.process.get(processId)
 
-
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
         data: 'success!',

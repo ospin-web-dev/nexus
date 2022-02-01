@@ -3,6 +3,7 @@ const faker = require('faker')
 const { OspinPusherClient } = require('pusher')
 
 jest.mock('pusher-js', () => {
+  // eslint-disable-next-line
   const { PusherMock } = require('pusher-js-mock')
   PusherMock.prototype.disconnect = () => {}
   return PusherMock

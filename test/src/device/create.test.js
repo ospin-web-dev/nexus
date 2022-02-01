@@ -1,9 +1,9 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 const create = require('device/create')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
 describe('create device', () => {
 

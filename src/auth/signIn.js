@@ -1,9 +1,9 @@
-const {default: Auth} = require('@aws-amplify/auth')
+const { default: Auth } = require('@aws-amplify/auth')
 
 const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
 
 module.exports = serializeAxiosResponse(
-  async (userName, password) => (
-    Auth.signIn(userName, password)
+  async (usernameOrEmail, password) => (
+    Auth.signIn(usernameOrEmail, password)
   ),
 )

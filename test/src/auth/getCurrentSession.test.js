@@ -1,4 +1,4 @@
-const {default: Auth} = require('@aws-amplify/auth')
+const { default: Auth } = require('@aws-amplify/auth')
 
 const getCurrentSession = require('auth/getCurrentSession')
 

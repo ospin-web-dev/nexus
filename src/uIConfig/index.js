@@ -1,3 +1,7 @@
 const userFctGraphUIConfig = require('./userFctGraphUIConfig')
+const device = require('./device')
 
-module.exports = { userFctGraphUIConfig }
+module.exports = {
+  userFctGraphUIConfig,
+  device,
+}

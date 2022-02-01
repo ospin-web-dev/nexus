@@ -1,7 +1,6 @@
-const faker = require('faker')
-const nexus = require('../../../../../index')
 const AuthenticatedDeviceAPI = require('deviceAPI/AuthorizedDeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const nexus = require('../../../../../index')
 const setUpAuthenticatedDeviceAPI = require('../../../../testHelpers/setUpAuthenticatedDeviceAPI')
 
 describe('update Configuration', () => {
@@ -14,7 +13,7 @@ describe('update Configuration', () => {
 
   const body = {
     fctGraph: {
-      name: 'graph'
+      name: 'graph',
     },
     supportedVirtualFunctionalities: [ 'fct1', 'fct2']
     ,
@@ -22,7 +21,6 @@ describe('update Configuration', () => {
 
   it('calls amplifys API.post with the expected args', async () => {
     setUpAuthenticatedDeviceAPI()
-
 
     await nexus.deviceAPI.configuration.update(body)
 
@@ -41,7 +39,6 @@ describe('update Configuration', () => {
 
     it('should respond with the data ,the status code and success=true', async () => {
       setUpAuthenticatedDeviceAPI()
-
 
       const resp = await nexus.deviceAPI.configuration.update(body)
 

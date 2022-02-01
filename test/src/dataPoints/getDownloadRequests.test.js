@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 
 const getDownloadRequests = require('dataPoints/getDownloadRequests')
@@ -10,6 +10,7 @@ describe('getDownloadRequests', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const processId = faker.datatype.uuid()
+
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 

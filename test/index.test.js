@@ -18,16 +18,26 @@ describe('nexus', () => {
     connect: 'function',
     createConfig: 'function',
     auth: {
+      changePassword: 'function',
+      confirmSignUp: 'function',
+      forgotPassword: 'function',
+      forgotPasswordSubmit: 'function',
       getCurrentSession: 'function',
       signIn: 'function',
       signOut: 'function',
+      signUp: 'function',
     },
     command: {
       device: {
         process: {
+          endProcess: 'function',
+          nextPhase: 'function',
+          pauseProcess: 'function',
+          resumeProcess: 'function',
           startProcess: 'function',
           updateRunningProcess: 'function',
         },
+        openSsh: 'function',
       },
     },
     dataPoints: {
@@ -41,7 +51,23 @@ describe('nexus', () => {
         get: 'function',
       },
       create: 'function',
+      functionality: {
+        calibration: {
+          remove: 'function',
+          update: 'function',
+        },
+      },
+      functionalityConfiguration: {
+        updateMany: 'function',
+      },
+      get: 'function',
+      grantAccess: 'function',
+      modifyAccess: 'function',
+      revokeAccess: 'function',
+      transferOwnership: 'function',
       list: 'function',
+      remove: 'function',
+      update: 'function',
     },
     deviceAPI: {
       authentication: {
@@ -67,22 +93,37 @@ describe('nexus', () => {
         update: 'function',
       },
     },
+    event: {
+      device: {
+        removeAll: 'function',
+      },
+      remove: 'function',
+    },
     log: {
       device: {
         deleteMany: 'function',
       },
+      list: 'function',
     },
     process: {
+      create: 'function',
+      clone: 'function',
+      deleteMany: 'function',
       functionality: {
         image: {
           create: 'function',
           list: 'function',
         },
       },
-      list: 'function',
       get: 'function',
-      clone: 'function',
-      deleteMany: 'function',
+      grantAccess: 'function',
+      list: 'function',
+      modifyAccess: 'function',
+      preview: {
+        get: 'function',
+      },
+      revokeAccess: 'function',
+      update: 'function',
     },
     pusher: {
       OspinPusherClient: 'function',
@@ -95,13 +136,29 @@ describe('nexus', () => {
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
+        get: 'function',
+      },
+      device: {
+        put: 'function',
       },
     },
     user: {
       notifications: {
         putAll: 'function',
+        remove: 'function',
+        deleteManyByTopic: 'function',
+      },
+      device: {
+        get: 'function',
+        list: 'function',
+      },
+      preview: {
+        get: 'function',
       },
       delete: 'function',
+      getChangelog: 'function',
+      setCognitoIdentityId: 'function',
+      acceptDeviceInvitation: 'function',
       get: 'function',
       list: 'function',
       update: 'function',
@@ -115,6 +172,9 @@ describe('nexus', () => {
           },
         },
       },
+    },
+    utils: {
+      logClientError: 'function',
     },
   }
 

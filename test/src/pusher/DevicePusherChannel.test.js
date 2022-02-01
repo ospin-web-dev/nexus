@@ -2,6 +2,7 @@ const faker = require('faker')
 const { DevicePusherChannel, OspinPusherClient } = require('pusher')
 
 jest.mock('pusher-js', () => {
+  // eslint-disable-next-line
   const { PusherMock } = require('pusher-js-mock')
   PusherMock.prototype.disconnect = () => {}
   return PusherMock
@@ -13,9 +14,7 @@ describe('the DevicePusherChannel', () => {
     jest.clearAllMocks()
   })
 
-  const connectClient = () => {
-    return OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
-  }
+  const connectClient = () => OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
 
   describe('the getter for EVENTS', () => {
 
@@ -27,7 +26,7 @@ describe('the DevicePusherChannel', () => {
         DEVICE_CONNECTION_UPDATED: 'device-connection-updated',
         DEVICE_STATE_UPDATED: 'device-state-updated',
         DEVICE_DEFAULT_FCT_GRAPH_UPDATED: 'device-default-fct-graph-updated',
-        DEVICE_EVENT_CREATED: 'device-event-created'
+        DEVICE_EVENT_CREATED: 'device-event-created',
       })
     })
   })
@@ -36,7 +35,7 @@ describe('the DevicePusherChannel', () => {
     it('calls client.subscribe with the correct parameters', () => {
       const client = connectClient()
       const spy = jest.spyOn(client, 'subscribe').mockImplementation(() => ({
-        bind: () => {}
+        bind: () => {},
       }))
       const deviceId = faker.datatype.uuid()
       const eventHandler = { 'device-description-updated': () => {} }

@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
 
 const get = require('user/get')
@@ -9,7 +9,7 @@ describe('get', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s API.get method with the user id', async () => {
+  it('calls amplify\'s API.get', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
     const userId = uuidv4()
 

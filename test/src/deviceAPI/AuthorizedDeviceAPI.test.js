@@ -1,6 +1,6 @@
 const faker = require('faker')
 const crypto = require('crypto')
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 
 const AuthorizedDeviceAPI = require('../../../src/deviceAPI/AuthorizedDeviceAPI')
 const DeviceAPI = require('../../../src/deviceAPI/DeviceAPI')

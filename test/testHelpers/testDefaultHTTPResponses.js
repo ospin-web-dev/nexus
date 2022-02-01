@@ -1,6 +1,7 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 
-module.exports = (fn, httpVerb) => {
+// eslint-disable-next-line
+module.exports = (fn, httpVerb, fnParams = []) => {
 
   describe(`on API.${httpVerb} success`, () => {
     beforeAll(() => {
@@ -9,7 +10,7 @@ module.exports = (fn, httpVerb) => {
     })
 
     it('returns the serialized result', async () => {
-      const resp = await fn()
+      const resp = await fn(...fnParams)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: true,
@@ -30,7 +31,7 @@ module.exports = (fn, httpVerb) => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await fn()
+      const resp = await fn(...fnParams)
 
       expect(resp).toStrictEqual(expect.objectContaining({
         success: false,

@@ -20,14 +20,12 @@ const failingMock = (userId, { channelNames } = {}) => ({
 jest.mock('user/pusher/subscriptions/device/authorizeMany.js', () => jest.fn()
   .mockImplementationOnce(successfulMock)
   .mockImplementationOnce(failingMock)
-  .mockImplementationOnce(successfulMock)
-)
+  .mockImplementationOnce(successfulMock))
 
 jest.mock('user/pusher/subscriptions/device/process/authorizeMany.js', () => jest.fn()
   .mockImplementationOnce(successfulMock)
   .mockImplementationOnce(failingMock)
-  .mockImplementationOnce(successfulMock)
-)
+  .mockImplementationOnce(successfulMock))
 
 describe('batchAuthorizer', () => {
 

@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 
 const list = require('process/list')
@@ -8,7 +8,6 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 describe('list', () => {
   const userId = faker.datatype.uuid()
   const deviceId = faker.datatype.uuid()
-
 
   afterAll(() => { jest.restoreAllMocks() })
 
@@ -26,7 +25,7 @@ describe('list', () => {
     await list(queryStringParameters)
     expect(API.get).toHaveBeenCalledWith('process', '', { ...DEFAULT_REQ_OPTS, queryStringParameters })
 
-  });
+  })
 
   testDefaultHTTPResponses(list, 'get')
 })

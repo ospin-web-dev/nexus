@@ -1,4 +1,4 @@
-const {default: API} = require('@aws-amplify/api-rest')
+const { default: API } = require('@aws-amplify/api-rest')
 const uuidv4 = require('uuid').v4
 
 const deleteUser = require('user/delete')
@@ -9,7 +9,7 @@ describe('delete', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s API.del method with the user id', async () => {
+  it('calls amplify\'s API.del', async () => {
     jest.spyOn(API, 'del').mockImplementation(args => args)
     const userId = uuidv4()
 
