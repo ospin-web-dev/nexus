@@ -1,3 +1,4 @@
+const faker = require('faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const list = require('user/list')
@@ -6,14 +7,22 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 
 describe('list', () => {
 
+  const params = {
+    deviceId: faker.datatype.uuid(),
+    processId: undefined,
+  }
+
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
-    await list()
-    expect(API.get).toHaveBeenCalledWith('user', '', { ...DEFAULT_REQ_OPTS })
+    await list(params)
+    expect(API.get).toHaveBeenCalledWith('user', '', {
+      queryStringParameters: params,
+      ...DEFAULT_REQ_OPTS,
+    })
   })
 
-  testDefaultHTTPResponses(list, 'get')
+  testDefaultHTTPResponses(list, 'get', [ params ])
 })
