@@ -18,7 +18,7 @@ describe('the DevicePusherChannel', () => {
     OspinPusherClient.resetOspinPusherClient()
   })
 
-  const connectClient = () => OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
+  const connectClient = () => OspinPusherClient.connect({ env: 'dev', userId: faker.datatype.uuid() })
 
   describe('subscribe', () => {
     describe('when the client is not connected', () => {

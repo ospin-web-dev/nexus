@@ -17,10 +17,10 @@ describe('the OspinPusherClient', () => {
   })
 
   const initDefaultClient = () => {
-    const apiKey = '123'
+    const env = 'dev'
     const userId = faker.datatype.uuid()
     const cluster = 'us'
-    const initData = { apiKey, userId, cluster }
+    const initData = { env, userId, cluster }
 
     return OspinPusherClient.connect(initData)
   }
@@ -28,10 +28,10 @@ describe('the OspinPusherClient', () => {
   describe('connect', () => {
     describe('when NOT already initialized', () => {
       it('returns an instance of the pusher client', () => {
-        const apiKey = '123'
+        const env = 'dev'
         const userId = faker.datatype.uuid()
         const cluster = 'us'
-        const initData = { apiKey, userId, cluster }
+        const initData = { env, userId, cluster }
 
         const client = OspinPusherClient.connect(initData)
 
@@ -39,9 +39,9 @@ describe('the OspinPusherClient', () => {
       })
 
       it('sets the default value for the cluster to eu', () => {
-        const apiKey = '123'
+        const env = 'dev'
         const userId = faker.datatype.uuid()
-        const initData = { apiKey, userId }
+        const initData = { env, userId }
 
         const client = OspinPusherClient.connect(initData)
 
@@ -51,10 +51,10 @@ describe('the OspinPusherClient', () => {
 
     describe('when initialized beforehand', () => {
       it('returns the existing client', () => {
-        const apiKey = '123'
+        const env = 'dev'
         const userId = faker.datatype.uuid()
         const cluster = 'us'
-        const initData = { apiKey, userId, cluster }
+        const initData = { env, userId, cluster }
         const existingClient = initDefaultClient()
 
         const client = OspinPusherClient.connect(initData)

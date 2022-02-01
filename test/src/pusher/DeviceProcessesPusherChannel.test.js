@@ -14,7 +14,7 @@ describe('the DeviceProcessesPusherChannel', () => {
     jest.clearAllMocks()
   })
 
-  const connectClient = () => OspinPusherClient.connect({ apiKey: '123', userId: faker.datatype.uuid() })
+  const connectClient = () => OspinPusherClient.connect({ env: 'dev', userId: faker.datatype.uuid() })
 
   describe('the getter for EVENTS', () => {
 
