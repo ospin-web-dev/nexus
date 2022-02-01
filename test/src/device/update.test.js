@@ -11,12 +11,12 @@ describe('update', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  it('calls amplify\'s API.post method', async () => {
-    jest.spyOn(API, 'post').mockImplementation(args => args)
+  it('calls amplify\'s API.put method', async () => {
+    jest.spyOn(API, 'put').mockImplementation(args => args)
 
     await update(params)
-    expect(API.post).toHaveBeenCalledWith('device', `${params.deviceId}`, { ...DEFAULT_REQ_OPTS })
+    expect(API.put).toHaveBeenCalledWith('device', `${params.deviceId}`, { ...DEFAULT_REQ_OPTS })
   })
 
-  testDefaultHTTPResponses(update, 'post', [ params ])
+  testDefaultHTTPResponses(update, 'put', [ params ])
 })

@@ -1,5 +1,6 @@
 const Pusher = require('pusher-js')
 const batchAuthorizer = require('./batchAuthorizer')
+const getAPIKey = require('./getAPIKey')
 
 let client = null
 
@@ -9,7 +10,8 @@ class OspinPusherClient {
 
   static set client(value) { client = value }
 
-  static connect({ apiKey, cluster = 'eu', userId }) {
+  static connect({ env, cluster = 'eu', userId }) {
+    const apiKey = getAPIKey(env)
     if (OspinPusherClient.client) return OspinPusherClient.client
     OspinPusherClient.client = new Pusher(apiKey, { cluster, authorizer: batchAuthorizer(userId) })
     return OspinPusherClient.client
