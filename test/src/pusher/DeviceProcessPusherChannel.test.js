@@ -21,7 +21,7 @@ describe('the DeviceProcessPusherChannel', () => {
     it('returns the map of device events', () => {
       const map = DeviceProcessPusherChannel.EVENTS
 
-      expect(map).toStrictEqual({})
+      expect(map).toStrictEqual({ PROCESS_UPDATE: 'process-update' })
     })
   })
 

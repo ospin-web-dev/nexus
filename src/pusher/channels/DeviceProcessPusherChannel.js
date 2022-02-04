@@ -5,7 +5,9 @@ class DeviceProcessPusherChannel extends DeviceProcessSpecificPusherChannel {
   static get CHANNEL_NAME_SUFFIX() { return '' }
 
   static get EVENTS() {
-    return {}
+    return {
+      PROCESS_UPDATE: 'process-update',
+    }
   }
 
 }
