@@ -62,6 +62,12 @@ describe('nexus', () => {
       },
       get: 'function',
       grantAccess: 'function',
+      manufacturer: {
+        list: 'function',
+        deviceType: {
+          list: 'function',
+        },
+      },
       modifyAccess: 'function',
       revokeAccess: 'function',
       transferOwnership: 'function',

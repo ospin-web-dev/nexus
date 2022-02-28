@@ -10,6 +10,7 @@ const remove = require('./remove')
 const revokeAccess = require('./revokeAccess')
 const transferOwnership = require('./transferOwnership')
 const update = require('./update')
+const manufacturer = require('./manufacturer')
 
 module.exports = {
   certificate,
@@ -24,4 +25,5 @@ module.exports = {
   revokeAccess,
   transferOwnership,
   update,
+  manufacturer,
 }
