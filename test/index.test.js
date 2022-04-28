@@ -38,6 +38,7 @@ describe('nexus', () => {
           updateRunningProcess: 'function',
         },
         openSsh: 'function',
+        updateFirmware: 'function',
       },
     },
     dataPoints: {
