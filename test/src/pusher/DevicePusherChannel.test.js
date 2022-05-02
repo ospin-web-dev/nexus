@@ -27,6 +27,7 @@ describe('the DevicePusherChannel', () => {
         DEVICE_STATE_UPDATED: 'device-state-updated',
         DEVICE_DEFAULT_FCT_GRAPH_UPDATED: 'device-default-fct-graph-updated',
         DEVICE_EVENT_CREATED: 'device-event-created',
+        DEVICE_FIRMWARE_UPDATED: 'device-firmware-updated',
       })
     })
   })
