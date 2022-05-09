@@ -13,6 +13,7 @@ permissions:
   statuses: read
 
 on:
+  push:
   pull_request:
     types:
       - opened
@@ -21,6 +22,7 @@ on:
       - reopened
       - labeled
       - unlabeled
+
 jobs:
   check-Label:
     runs-on: ubuntu-latest
