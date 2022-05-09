@@ -22,7 +22,7 @@ on:
       - labeled
       - unlabeled
 jobs:
-  comment:
+  check-Label:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v5.1.0
@@ -36,5 +36,9 @@ jobs:
             })
             const labels = data.map(label => label.name)
             if (!data || !(labels.some(item => acceptableLabels.includes(item)))) {
-              core.setFailed(`No Release Tag Detected`);
+              core.setFailed(`No Release Labels Detected`)
+            }
+            const releaseLabels = labels.filter(label => acceptableLabels.includes(label))
+            if(releaseLabels.length > 1 ) {
+              core.setFailed(`Multiple Release Labels Detected`)
             }
