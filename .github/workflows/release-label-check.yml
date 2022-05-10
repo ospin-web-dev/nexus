@@ -36,10 +36,6 @@ jobs:
               repo: context.repo.repo,
             })
             const labels = data.map(label => label.name)
-            if (!data || !(labels.some(item => acceptableLabels.includes(item)))) {
-              core.setFailed(`No Release Labels Detected`)
-            }
             const releaseLabels = labels.filter(label => acceptableLabels.includes(label))
-            if(releaseLabels.length > 1 ) {
-              core.setFailed(`Multiple Release Labels Detected`)
-            }
+            if (releaseLabels.length < 1) { core.setFailed(`No Release Labels Detected`)}
+            if (releaseLabels.length > 1) { core.setFailed(`Multiple Release Labels Detected`) }
