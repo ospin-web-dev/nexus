@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "GPL-3.0-or-later",
   "engines": {
-    "node": "16.x",
+    "node": "12.x - 16.x",
     "npm": ">=6"
   },
   "publishConfig": {
@@ -30,26 +30,26 @@
     "src/"
   ],
   "dependencies": {
-    "@aws-amplify/core": "4.5.3",
-    "@aws-amplify/auth": "4.5.3",
-    "@aws-amplify/api-rest": "2.0.39",
-    "joi": "^17.6.0",
+    "@aws-amplify/core": "4.3.12",
+    "@aws-amplify/auth": "4.3.20",
+    "@aws-amplify/api-rest": "2.0.30",
+    "joi": "^17.4.0",
     "pusher-js": "^7.0.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "eslint": "^8.15.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.1.5",
-    "eslint-plugin-jest-formatting": "^3.1.0",
-    "eslint-plugin-jsdoc": "^39.2.9",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jest-formatting": "^3.0.0",
+    "eslint-plugin-jsdoc": "^35.4.3",
     "faker": "^5.5.3",
-    "jest": "^28.1.0",
+    "jest": "^27.0.1",
     "pusher-js-mock": "^0.3.8",
-    "semantic-release": "^19.0.2"
+    "semantic-release": "^17.4.3"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
