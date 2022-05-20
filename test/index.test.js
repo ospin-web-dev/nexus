@@ -113,6 +113,11 @@ describe('nexus', () => {
       list: 'function',
     },
     process: {
+      annotation: {
+        create: 'function',
+        remove: 'function',
+        update: 'function',
+      },
       create: 'function',
       clone: 'function',
       deleteMany: 'function',
