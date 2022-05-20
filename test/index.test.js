@@ -52,6 +52,7 @@ describe('nexus', () => {
         get: 'function',
       },
       create: 'function',
+      createHeidolphCoreGateway: 'function',
       functionality: {
         calibration: {
           remove: 'function',

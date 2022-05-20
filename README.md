@@ -100,6 +100,7 @@ nexus
 ├── device
 │    ├── list()
 │    ├── create(<deviceParamsObj>)
+│    ├── createHeidolphCoreGateway(<deviceParamsObj>)
 │    └── certificate
 │         └── get(<deviceId>)
 ├── log

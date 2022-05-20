@@ -1,5 +1,7 @@
 const certificate = require('./certificate')
 const create = require('./create')
+const createHeidolphCoreGateway = require('./createHeidolphCoreGateway')
+
 const functionality = require('./functionality')
 const functionalityConfiguration = require('./functionalityConfiguration')
 const get = require('./get')
@@ -15,6 +17,7 @@ const manufacturer = require('./manufacturer')
 module.exports = {
   certificate,
   create,
+  createHeidolphCoreGateway,
   functionality,
   functionalityConfiguration,
   get,
