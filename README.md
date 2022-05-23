@@ -107,10 +107,14 @@ nexus
 |    └── device
 |         └── deleteMany(<deviceId>)
 ├── process
-|    └── functionality
-|         └── image
-|              ├── create(<processId>, <fctId>, <body>)
-|              └── list(<processId>, <fctId>, <opts>)
+|    ├── functionality
+|    │    └── image
+|    │          ├── create(<processId>, <fctId>, <body>)
+|    │          └── list(<processId>, <fctId>, <opts>)
+|    └── annotation
+│         ├── create({ processId: <processId>, data: <dataObject> })
+│         ├── delete({ processId: <processId>, annotationId: <annotationId> })
+│         └── update({ processId: <processId>, annotationId: <annotationId>, data: <dataObject> })
 └── deviceAPI
      ├── authentication
      |    ├── setCredentials({ deviceId, pathToCert })
