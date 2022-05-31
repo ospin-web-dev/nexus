@@ -1,3 +1,4 @@
+const annotation = require('./annotation')
 const clone = require('./clone')
 const create = require('./create')
 const deleteMany = require('./deleteMany')
@@ -11,6 +12,7 @@ const revokeAccess = require('./revokeAccess')
 const update = require('./update')
 
 module.exports = {
+  annotation,
   clone,
   create,
   list,
