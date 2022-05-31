@@ -25,6 +25,7 @@ describe('nexus', () => {
       getCurrentSession: 'function',
       signIn: 'function',
       signOut: 'function',
+      globalSignOut: 'function',
       signUp: 'function',
     },
     command: {
