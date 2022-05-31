@@ -83,6 +83,7 @@ nexus
 ├── auth
 │    ├── signIn(<username>, <password>) // may require 2FA
 │    ├── signOut()
+│    ├── globalSignOut()
 │    └── getCurrentSession()
 ├── user
 │    ├── get(<userId>) // may require 2FA
