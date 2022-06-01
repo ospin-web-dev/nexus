@@ -5,14 +5,14 @@ const get = require('./get')
 const getChangelog = require('./getChangelog')
 const list = require('./list')
 const update = require('./update')
-const deleteUser = require('./delete')
+const createDeletionRequest = require('./createDeletionRequest')
 const notifications = require('./notifications')
 const preview = require('./preview')
 const pusher = require('./pusher')
 
 module.exports = {
   acceptDeviceInvitation,
-  delete: deleteUser,
+  createDeletionRequest,
   device,
   get,
   getChangelog,

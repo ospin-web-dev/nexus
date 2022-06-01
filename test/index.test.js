@@ -169,7 +169,7 @@ describe('nexus', () => {
       preview: {
         get: 'function',
       },
-      delete: 'function',
+      createDeletionRequest: 'function',
       getChangelog: 'function',
       setCognitoIdentityId: 'function',
       acceptDeviceInvitation: 'function',
