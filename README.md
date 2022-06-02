@@ -83,11 +83,12 @@ nexus
 ├── auth
 │    ├── signIn(<username>, <password>) // may require 2FA
 │    ├── signOut()
+│    ├── globalSignOut()
 │    └── getCurrentSession()
 ├── user
 │    ├── get(<userId>) // may require 2FA
 │    ├── list()
-│    ├── delete(<userId>)
+│    ├── createDeletionRequest(<userId>)
 │    ├── update(<userId>, <userParamsObj>)
 │    └── notifications
 │         └── putAll(<notificationObj>)
