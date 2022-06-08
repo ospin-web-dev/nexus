@@ -22,7 +22,7 @@ describe('the DeviceProcessesPusherChannel', () => {
       const map = DeviceProcessesPusherChannel.EVENTS
 
       expect(map).toStrictEqual({
-        PROCESS_PHASE_CHANGED: 'process-phase-changed',
+        RUNNING_PROCESS_STATE_UPDATE: 'running-process-state-update',
         PROCESS_DOWNLOAD_REQUEST_UPDATED: 'process-download-request-updated',
       })
     })
@@ -35,7 +35,7 @@ describe('the DeviceProcessesPusherChannel', () => {
         bind: () => {},
       }))
       const deviceId = faker.datatype.uuid()
-      const eventHandler = { 'process-phase-changed': () => {} }
+      const eventHandler = { 'running-process-state-update': () => {} }
 
       DeviceProcessesPusherChannel.subscribe({ deviceId }, eventHandler)
 
