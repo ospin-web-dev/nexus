@@ -6,7 +6,7 @@ class DeviceProcessesPusherChannel extends DeviceSpecificPusherChannel {
 
   static get EVENTS() {
     return {
-      PROCESS_PHASE_CHANGED: 'process-phase-changed',
+      RUNNING_PROCESS_STATE_UPDATE: 'running-process-state-update',
       PROCESS_DOWNLOAD_REQUEST_UPDATED: 'process-download-request-updated',
     }
   }
