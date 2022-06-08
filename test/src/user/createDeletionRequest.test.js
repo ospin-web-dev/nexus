@@ -14,7 +14,7 @@ describe('createDeletionRequest', () => {
     const userId = uuidv4()
 
     await createDeletionRequest(userId)
-    expect(API.post).toHaveBeenCalledWith('user', `users/${userId}/deletion-requests`, { body: {}, ...DEFAULT_REQ_OPTS })
+    expect(API.post).toHaveBeenCalledWith('user', `${userId}/deletion-requests`, { body: {}, ...DEFAULT_REQ_OPTS })
   })
 
   testDefaultHTTPResponses(createDeletionRequest, 'post')
