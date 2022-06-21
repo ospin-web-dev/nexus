@@ -1,11 +1,11 @@
 const faker = require('faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
-const get = require('device/get')
+const getUserInvitations = require('device/getUserInvitations')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
-describe('get', () => {
+describe('getUserInvitations', () => {
 
   const params = { deviceId: faker.datatype.uuid() }
 
@@ -14,9 +14,9 @@ describe('get', () => {
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
-    await get(params)
-    expect(API.get).toHaveBeenCalledWith('device', `${params.deviceId}`, { ...DEFAULT_REQ_OPTS })
+    await getUserInvitations(params)
+    expect(API.get).toHaveBeenCalledWith('device', `${params.deviceId}/user-invitations`, { ...DEFAULT_REQ_OPTS })
   })
 
-  testDefaultHTTPResponses(get, 'get', [ params ])
+  testDefaultHTTPResponses(getUserInvitations, 'get', [ params ])
 })

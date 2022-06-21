@@ -64,6 +64,7 @@ describe('nexus', () => {
         updateMany: 'function',
       },
       get: 'function',
+      getUserInvitations: 'function',
       grantAccess: 'function',
       manufacturer: {
         list: 'function',
