@@ -64,6 +64,7 @@ describe('nexus', () => {
         updateMany: 'function',
       },
       get: 'function',
+      getUserInvitations: 'function',
       grantAccess: 'function',
       manufacturer: {
         list: 'function',
@@ -174,6 +175,7 @@ describe('nexus', () => {
       setCognitoIdentityId: 'function',
       acceptDeviceInvitation: 'function',
       get: 'function',
+      getDeviceInvitations: 'function',
       list: 'function',
       update: 'function',
       pusher: {
