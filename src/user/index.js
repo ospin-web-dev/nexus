@@ -2,6 +2,7 @@ const acceptDeviceInvitation = require('./acceptDeviceInvitation')
 const setCognitoIdentityId = require('./setCognitoIdentityId')
 const device = require('./device')
 const get = require('./get')
+const getDeviceInvitations = require('./getDeviceInvitations')
 const getChangelog = require('./getChangelog')
 const list = require('./list')
 const update = require('./update')
@@ -15,6 +16,7 @@ module.exports = {
   createDeletionRequest,
   device,
   get,
+  getDeviceInvitations,
   getChangelog,
   list,
   setCognitoIdentityId,

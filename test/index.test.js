@@ -175,6 +175,7 @@ describe('nexus', () => {
       setCognitoIdentityId: 'function',
       acceptDeviceInvitation: 'function',
       get: 'function',
+      getDeviceInvitations: 'function',
       list: 'function',
       update: 'function',
       pusher: {
