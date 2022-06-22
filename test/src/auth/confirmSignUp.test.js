@@ -4,10 +4,10 @@ const confirmSignUp = require('auth/confirmSignUp')
 
 describe('confirmSignUp', () => {
 
-  afterAll(() => { jest.restoreAllMocks() })
+  afterEach(() => { jest.restoreAllMocks() })
 
   const params = {
-    usernameOrEmail: 'paterson',
+    username: 'Paterson',
     code: '398127',
   }
 
@@ -15,7 +15,7 @@ describe('confirmSignUp', () => {
     jest.spyOn(Auth, 'confirmSignUp').mockImplementation()
 
     await confirmSignUp(params)
-    expect(Auth.confirmSignUp).toHaveBeenCalledWith(params.usernameOrEmail, params.code)
+    expect(Auth.confirmSignUp).toHaveBeenCalledWith(params.username, params.code)
   })
 
   describe('on Auth.confirmSignUp success', () => {
