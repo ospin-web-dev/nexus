@@ -4,14 +4,30 @@ const signIn = require('auth/signIn')
 
 describe('signIn', () => {
 
-  afterAll(() => { jest.restoreAllMocks() })
+  afterEach(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.signIn method with the username and password', async () => {
     jest.spyOn(Auth, 'signIn').mockImplementation(args => args)
-    const [ username, password ] = [ 'dich', 'verzaubert' ]
+    const [ username, password ] = [ 'Dich', 'verzaubert' ]
 
     await signIn(username, password)
     expect(Auth.signIn).toHaveBeenCalledWith(username, password)
+  })
+
+  describe('when an email is used', () => {
+    it('calls amplify\'s Auth.signIn with the lower cased email', async () => {
+      jest.spyOn(Auth, 'signIn').mockImplementation()
+      const paramsWithEmail = {
+        usernameOrEmail: 'Paterson@paterson.us',
+        password: 'verzaubert',
+      }
+
+      await signIn(paramsWithEmail.usernameOrEmail, paramsWithEmail.password)
+      expect(Auth.signIn).toHaveBeenCalledWith(
+        paramsWithEmail.usernameOrEmail.toLowerCase(),
+        paramsWithEmail.password,
+      )
+    })
   })
 
   describe('on Auth.signIn success', () => {

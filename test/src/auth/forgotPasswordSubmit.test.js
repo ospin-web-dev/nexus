@@ -5,12 +5,12 @@ const forgotPasswordSubmit = require('auth/forgotPasswordSubmit')
 describe('forgotPasswordSubmit', () => {
 
   const params = {
-    usernameOrEmail: 'paterson',
+    usernameOrEmail: 'Paterson',
     code: '873819',
     newPassword: 'OhioBlueMatches1111',
   }
 
-  afterAll(() => { jest.restoreAllMocks() })
+  afterEach(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.forgotPasswordSubmit method', async () => {
     jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation()
@@ -18,6 +18,24 @@ describe('forgotPasswordSubmit', () => {
     await forgotPasswordSubmit(params)
     expect(Auth.forgotPasswordSubmit).toHaveBeenCalledTimes(1)
     expect(Auth.forgotPasswordSubmit).toHaveBeenCalledTimes(1)
+  })
+
+  describe('when an email is used', () => {
+    it('calls amplify\'s Auth.forgotPasswordSubmit method with the lower cased email', async () => {
+      jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation()
+      const paramsWithEmail = {
+        usernameOrEmail: 'Paterson@paterson.us',
+        code: '873819',
+        newPassword: 'OhioBlueMatches1111',
+      }
+
+      await forgotPasswordSubmit(paramsWithEmail)
+      expect(Auth.forgotPasswordSubmit).toHaveBeenCalledWith(
+        paramsWithEmail.usernameOrEmail.toLowerCase(),
+        paramsWithEmail.code,
+        paramsWithEmail.newPassword,
+      )
+    })
   })
 
   describe('on Auth.forgotPasswordSubmit success', () => {

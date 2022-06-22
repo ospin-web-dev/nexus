@@ -4,10 +4,10 @@ const confirmSignUp = require('auth/confirmSignUp')
 
 describe('confirmSignUp', () => {
 
-  afterAll(() => { jest.restoreAllMocks() })
+  afterEach(() => { jest.restoreAllMocks() })
 
   const params = {
-    usernameOrEmail: 'paterson',
+    usernameOrEmail: 'Paterson',
     code: '398127',
   }
 
@@ -16,6 +16,22 @@ describe('confirmSignUp', () => {
 
     await confirmSignUp(params)
     expect(Auth.confirmSignUp).toHaveBeenCalledWith(params.usernameOrEmail, params.code)
+  })
+
+  describe('when an email is used', () => {
+    it('calls amplify\'s Auth.confirmSignUp method with the lower cased email', async () => {
+      jest.spyOn(Auth, 'confirmSignUp').mockImplementation()
+      const paramsWithEmail = {
+        usernameOrEmail: 'Paterson@paterson.us',
+        code: '398127',
+      }
+
+      await confirmSignUp(paramsWithEmail)
+      expect(Auth.confirmSignUp).toHaveBeenCalledWith(
+        paramsWithEmail.usernameOrEmail.toLowerCase(),
+        paramsWithEmail.code,
+      )
+    })
   })
 
   describe('on Auth.confirmSignUp success', () => {

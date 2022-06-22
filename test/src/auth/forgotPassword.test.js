@@ -4,9 +4,9 @@ const forgotPassword = require('auth/forgotPassword')
 
 describe('forgotPassword', () => {
 
-  const params = { usernameOrEmail: 'paterson' }
+  const params = { usernameOrEmail: 'Paterson' }
 
-  afterAll(() => { jest.restoreAllMocks() })
+  afterEach(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.forgotPassword method', async () => {
     jest.spyOn(Auth, 'forgotPassword').mockImplementation()
@@ -14,6 +14,20 @@ describe('forgotPassword', () => {
     await forgotPassword(params)
     expect(Auth.forgotPassword).toHaveBeenCalledTimes(1)
     expect(Auth.forgotPassword).toHaveBeenCalledWith(params.usernameOrEmail)
+  })
+
+  describe('when an email is used', () => {
+    it('calls amplify\'s Auth.forgotPassword method with the lower cased email', async () => {
+      jest.spyOn(Auth, 'forgotPassword').mockImplementation()
+      const paramsWithEmail = {
+        usernameOrEmail: 'Paterson@paterson.us',
+      }
+
+      await forgotPassword(paramsWithEmail)
+      expect(Auth.forgotPassword).toHaveBeenCalledWith(
+        paramsWithEmail.usernameOrEmail.toLowerCase(),
+      )
+    })
   })
 
   describe('on Auth.forgotPassword success', () => {
