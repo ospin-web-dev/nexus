@@ -9,6 +9,7 @@ const list = require('./list')
 const modifyAccess = require('./modifyAccess')
 const preview = require('./preview')
 const revokeAccess = require('./revokeAccess')
+const snapshot = require('./snapshot')
 const update = require('./update')
 
 module.exports = {
@@ -23,5 +24,6 @@ module.exports = {
   modifyAccess,
   preview,
   revokeAccess,
+  snapshot,
   update,
 }

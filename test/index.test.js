@@ -138,6 +138,9 @@ describe('nexus', () => {
         get: 'function',
       },
       revokeAccess: 'function',
+      snapshot: {
+        list: 'function',
+      },
       update: 'function',
     },
     pusher: {
