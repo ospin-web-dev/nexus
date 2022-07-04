@@ -1,10 +1,11 @@
-const list = require('licence/list')
+const listTypes = require('licence/listTypes')
 const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
 testHTTPEndpoint({
   name: 'listTypes',
-  handler: list,
+  handler: listTypes,
   httpVerb: 'get',
   serviceName: 'licence',
   params: [],
+  expectedURLSegment: 'types',
 })

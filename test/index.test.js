@@ -110,8 +110,9 @@ describe('nexus', () => {
       remove: 'function',
     },
     licence: {
-      list: 'function',
       create: 'function',
+      list: 'function',
+      listTypes: 'function',
     },
     log: {
       device: {
