@@ -109,6 +109,10 @@ describe('nexus', () => {
       },
       remove: 'function',
     },
+    licence: {
+      list: 'function',
+      create: 'function',
+    },
     log: {
       device: {
         deleteMany: 'function',

@@ -10,6 +10,7 @@ const deviceAPI = require('./src/deviceAPI')
 const uIConfig = require('./src/uIConfig')
 const dataPoints = require('./src/dataPoints')
 const utils = require('./src/utilsService')
+const licence = require('./src/licence')
 const pusher = require('./src/pusher')
 const { createConfig } = require('./src/amplify/configGenerator')
 
@@ -44,4 +45,5 @@ module.exports = {
   connect,
   createConfig,
   utils,
+  licence,
 }
