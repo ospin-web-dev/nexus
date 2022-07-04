@@ -62,6 +62,11 @@ const getAPIEndPointsConfig = ({ ENV, AWS_REGION }) => ({
         endpoint: `https://api-${ENV}.ospin-services.com/device-api/`,
         region: AWS_REGION,
       },
+      {
+        name: 'licence',
+        endpoint: `https://api-${ENV}.ospin-services.com/licences/`,
+        region: AWS_REGION,
+      },
     ],
   },
 })

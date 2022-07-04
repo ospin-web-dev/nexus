@@ -109,6 +109,10 @@ describe('nexus', () => {
       },
       remove: 'function',
     },
+    licence: {
+      list: 'function',
+      create: 'function',
+    },
     log: {
       device: {
         deleteMany: 'function',
@@ -179,6 +183,10 @@ describe('nexus', () => {
       acceptDeviceInvitation: 'function',
       get: 'function',
       getDeviceInvitations: 'function',
+      licence: {
+        list: 'function',
+        add: 'function',
+      },
       list: 'function',
       update: 'function',
       pusher: {
