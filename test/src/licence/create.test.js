@@ -15,7 +15,7 @@ describe('create', () => {
 
     await create({ params })
     expect(API.post).toHaveBeenCalledWith(
-      'licence', '', { body: { params }, ...DEFAULT_REQ_OPTS },
+      'licence', '', { body: params, ...DEFAULT_REQ_OPTS },
     )
   })
 

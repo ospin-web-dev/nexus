@@ -8,6 +8,7 @@ const list = require('./list')
 const update = require('./update')
 const createDeletionRequest = require('./createDeletionRequest')
 const notifications = require('./notifications')
+const licence = require('./licence')
 const preview = require('./preview')
 const pusher = require('./pusher')
 
@@ -18,6 +19,7 @@ module.exports = {
   get,
   getDeviceInvitations,
   getChangelog,
+  licence,
   list,
   setCognitoIdentityId,
   update,

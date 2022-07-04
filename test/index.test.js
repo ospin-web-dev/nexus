@@ -183,6 +183,11 @@ describe('nexus', () => {
       acceptDeviceInvitation: 'function',
       get: 'function',
       getDeviceInvitations: 'function',
+      licence: {
+        list: 'function',
+        add: 'function',
+        associateDevice: 'function',
+      },
       list: 'function',
       update: 'function',
       pusher: {
