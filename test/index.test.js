@@ -186,7 +186,6 @@ describe('nexus', () => {
       licence: {
         list: 'function',
         add: 'function',
-        associateDevice: 'function',
       },
       list: 'function',
       update: 'function',

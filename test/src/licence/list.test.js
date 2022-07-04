@@ -1,20 +1,10 @@
-const { default: API } = require('@aws-amplify/api-rest')
 const list = require('licence/list')
-const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
-
-describe('list', () => {
-
-  afterAll(() => { jest.restoreAllMocks() })
-
-  it('calls amplify\'s API.get method', async () => {
-    jest.spyOn(API, 'get').mockImplementation(args => args)
-
-    await list()
-    expect(API.get)
-      .toHaveBeenCalledWith('licence', '', DEFAULT_REQ_OPTS)
-  })
-
-  testDefaultHTTPResponses(list, 'get')
+testHTTPEndpoint({
+  name: 'list',
+  handler: list,
+  httpVerb: 'get',
+  serviceName: 'licence',
+  params: [],
 })
