@@ -113,6 +113,7 @@ describe('nexus', () => {
       create: 'function',
       list: 'function',
       listTypes: 'function',
+      update: 'function',
     },
     log: {
       device: {
