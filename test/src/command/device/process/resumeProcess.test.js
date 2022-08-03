@@ -9,15 +9,16 @@ describe('resumeProcess', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const deviceId = faker.datatype.uuid()
+  const processId = faker.datatype.uuid()
 
   it('calls amplifys API.post with the expected args', async () => {
 
     jest.spyOn(API, 'post').mockImplementation(args => args)
-    resumeProcess(deviceId)
+    resumeProcess(deviceId, processId)
 
     expect(API.post).toHaveBeenCalledWith(
       'command',
-      `devices/${deviceId}/resume-process`,
+      `devices/${deviceId}/processes/${processId}/resume-process`,
       { body: {}, ...DEFAULT_REQ_OPTS },
     )
   })
