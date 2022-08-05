@@ -1,3 +1,4 @@
 const logClientError = require('./logClientError')
+const getDocumentation = require('./getDocs')
 
-module.exports = { logClientError }
+module.exports = { logClientError, getDocumentation }
