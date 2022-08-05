@@ -4,9 +4,9 @@ const serializeAxiosResponse = require('../../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
 
 module.exports = serializeAxiosResponse(
-  deviceId => API.post(
+  (deviceId, processId) => API.post(
     'command',
-    `devices/${deviceId}/resume-process`,
+    `devices/${deviceId}/processes/${processId}/resume-process`,
     { body: {}, ...DEFAULT_REQ_OPTS },
   ),
 )
