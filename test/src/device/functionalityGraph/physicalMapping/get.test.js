@@ -1,7 +1,7 @@
 const faker = require('faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
-const get = require('device/functionalityGraph/configuration/get')
+const get = require('device/functionalityGraph/physicalMapping/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 
@@ -17,7 +17,7 @@ describe('device.functionalityGraph.configuration.get', () => {
     await get(params)
     expect(API.get).toHaveBeenCalledWith(
       'device',
-      `${params.deviceId}/functionality-graphs/${params.fctGraphId}/configurations`,
+      `${params.deviceId}/functionality-graphs/${params.fctGraphId}/physical-mappings`,
       { ...DEFAULT_REQ_OPTS }
     )
   })
