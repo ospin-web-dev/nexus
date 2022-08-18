@@ -63,6 +63,11 @@ describe('nexus', () => {
       functionalityConfiguration: {
         updateMany: 'function',
       },
+      functionalityGraph: {
+        configuration: {
+          get: 'function',
+        },
+      },
       get: 'function',
       getUserInvitations: 'function',
       grantAccess: 'function',
