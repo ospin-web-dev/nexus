@@ -110,6 +110,8 @@ describe('nexus', () => {
       configuration: {
         update: 'function',
       },
+      functionality: 'function',
+      registration: 'function'
     },
     event: {
       device: {

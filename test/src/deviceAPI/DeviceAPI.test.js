@@ -62,36 +62,23 @@ describe('the DeviceAPI class', () => {
       DeviceAPI.setIdentity(deviceId)
     })
 
-    describe('the get method', () => {
-      it('should call to API.get with the API-prefix, the path and default opts', async () => {
-        const APISpy = jest.spyOn(API, 'get').mockImplementation()
-        const fakeResource = faker.random.word()
+    describe.each(['post', 'put', 'patch', 'put', 'del'])(
+      'the %p method',
+      method => {
 
-        await DeviceAPI.get(fakeResource)
+        it(`should call to API ${method} with the API-prefix, the path and default opts`, async () => {
+          const APISpy = jest.spyOn(API, method).mockImplementation()
+          const fakeResource = faker.random.word()
 
-        expect(APISpy).toHaveBeenCalledWith(
-          DeviceAPI.DEVICE_API_PREFIX,
-          `devices/${deviceId}/${fakeResource}`,
-          DEFAULT_REQ_OPTS,
-        )
-      })
-    })
+          await DeviceAPI[method](fakeResource)
 
-    describe('the post method', () => {
-      it('should call to API.post with the API-prefix, the path, default opts and the body', async () => {
-        const APISpy = jest.spyOn(API, 'post').mockImplementation()
-        const fakeResource = faker.random.word()
-        const fakeBody = { message: 'this is a test' }
-
-        await DeviceAPI.post(fakeResource, fakeBody)
-
-        expect(APISpy).toHaveBeenCalledWith(
-          DeviceAPI.DEVICE_API_PREFIX,
-          `devices/${deviceId}/${fakeResource}`,
-          { body: fakeBody,
-            ...DEFAULT_REQ_OPTS },
-        )
-      })
-    })
+          expect(APISpy).toHaveBeenCalledWith(
+            DeviceAPI.DEVICE_API_PREFIX,
+            `devices/${deviceId}/${fakeResource}`,
+            DEFAULT_REQ_OPTS,
+          )
+        })
+      },
+    )
   })
 })
