@@ -1,25 +1,24 @@
 const AuthenticatedDeviceAPI = require('deviceAPI/AuthorizedDeviceAPI')
-const functionality = require('../../../src/deviceAPI/functionality')
-const setUpAuthenticatedDeviceAPI = require('../../testHelpers/setUpAuthenticatedDeviceAPI')
-const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
+const nexus = require('../../../../index')
+const setUpAuthenticatedDeviceAPI = require('../../../testHelpers/setUpAuthenticatedDeviceAPI')
+const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-describe('update functionalities', () => {
-   const params = {
+describe('update Configuration', () => {
+  const params = {
     fctGraph: {
       name: 'graph',
     },
     supportedVirtualFunctionalities: [ 'fct1', 'fct2']
     ,
   }
-
   const { deviceId } = setUpAuthenticatedDeviceAPI()
 
   testHTTPEndpoint({
     name: 'registration',
-    handler: functionality,
-    httpVerb: 'put',
+    handler: nexus.deviceAPI.configuration.update,
+    httpVerb: 'post',
     serviceName: 'device-api',
-    expectedURLSegment: `devices/${deviceId}/functionalities`,
+    expectedURLSegment: `devices/${deviceId}/configuration`,
     params: [params],
     expectedPayload: { body: params, ...AuthenticatedDeviceAPI.authorizationHeaders },
   })
