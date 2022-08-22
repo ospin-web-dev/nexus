@@ -1,26 +1,19 @@
 const faker = require('faker')
-const { default: API } = require('@aws-amplify/api-rest')
 
 const get = require('device/functionalityGraph/configuration/get')
-const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
-const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
+const testHTTPEndpoint = require('../../../../testHelpers/testHTTPEndpoint')
 
 describe('device.functionalityGraph.configuration.get', () => {
 
   const params = { deviceId: faker.datatype.uuid(), fctGraphId: faker.datatype.uuid() }
 
-  afterAll(() => { jest.restoreAllMocks() })
-
-  it('calls amplify\'s API.get method', async () => {
-    jest.spyOn(API, 'get').mockImplementation(args => args)
-
-    await get(params)
-    expect(API.get).toHaveBeenCalledWith(
-      'device',
-      `${params.deviceId}/functionality-graphs/${params.fctGraphId}/configurations`,
-      { ...DEFAULT_REQ_OPTS }
-    )
+  testHTTPEndpoint({
+    name: 'get configuration',
+    handler: get,
+    httpVerb: 'get',
+    serviceName: 'device',
+    params: [{ ...params }],
+    expectedURLSegment: `${params.deviceId}/functionality-graphs/${params.fctGraphId}/configurations`,
   })
 
-  testDefaultHTTPResponses(get, 'get', [ params ])
 })
