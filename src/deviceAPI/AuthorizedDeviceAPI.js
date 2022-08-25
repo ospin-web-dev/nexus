@@ -65,6 +65,30 @@ class AuthorizedDeviceAPI extends DeviceAPI {
     )
   }
 
+  static async put(resourcePath, body, opts) {
+    return super.put(
+      resourcePath,
+      body,
+      { ...AuthorizedDeviceAPI.authorizationHeaders, ...opts },
+    )
+  }
+
+  static async patch(resourcePath, body, opts) {
+    return super.patch(
+      resourcePath,
+      body,
+      { ...AuthorizedDeviceAPI.authorizationHeaders, ...opts },
+    )
+  }
+
+  static async del(resourcePath, body, opts) {
+    return super.del(
+      resourcePath,
+      body,
+      { ...AuthorizedDeviceAPI.authorizationHeaders, ...opts },
+    )
+  }
+
 }
 
 module.exports = AuthorizedDeviceAPI

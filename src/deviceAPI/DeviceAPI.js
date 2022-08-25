@@ -51,6 +51,30 @@ class DeviceAPI {
     )
   }
 
+  static async put(path, body, opts) {
+    return API.put(
+      DeviceAPI.DEVICE_API_PREFIX,
+      DeviceAPI._prefixResource(path),
+      { ...DEFAULT_REQ_OPTS, body, ...opts },
+    )
+  }
+
+  static async patch(path, body, opts) {
+    return API.patch(
+      DeviceAPI.DEVICE_API_PREFIX,
+      DeviceAPI._prefixResource(path),
+      { ...DEFAULT_REQ_OPTS, body, ...opts },
+    )
+  }
+
+  static async del(path, body, opts) {
+    return API.del(
+      DeviceAPI.DEVICE_API_PREFIX,
+      DeviceAPI._prefixResource(path),
+      { ...DEFAULT_REQ_OPTS, body, ...opts },
+    )
+  }
+
 }
 
 module.exports = DeviceAPI

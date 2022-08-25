@@ -63,6 +63,14 @@ describe('nexus', () => {
       functionalityConfiguration: {
         updateMany: 'function',
       },
+      functionalityGraph: {
+        configuration: {
+          get: 'function',
+        },
+        physicalMapping: {
+          get: 'function',
+        },
+      },
       get: 'function',
       getUserInvitations: 'function',
       grantAccess: 'function',
@@ -102,6 +110,8 @@ describe('nexus', () => {
       configuration: {
         update: 'function',
       },
+      functionality: 'function',
+      registration: 'function'
     },
     event: {
       device: {

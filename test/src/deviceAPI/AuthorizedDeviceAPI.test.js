@@ -143,38 +143,42 @@ describe('the AuthorizedDeviceAPI', () => {
       })
     })
 
-    describe('post', () => {
-      const fakeBody = {
-        message: faker.random.words(10),
-      }
+    describe.each(['post', 'put', 'patch', 'put', 'del'])(
+      'the %p method',
+      method => {
 
-      it('should call on the parent method', async () => {
-        const APISpy = jest.spyOn(DeviceAPI, 'post').mockImplementation()
+        const fakeBody = {
+          message: faker.random.words(10),
+        }
 
-        await AuthorizedDeviceAPI.post(fakeResource, fakeBody)
+        it('should call on the parent method', async () => {
+          const APISpy = jest.spyOn(DeviceAPI, method).mockImplementation()
 
-        expect(APISpy).toHaveBeenCalledWith(
-          fakeResource,
-          fakeBody,
-          { headers: { Authorization },
-          },
-        )
-      })
+          await AuthorizedDeviceAPI[method](fakeResource, fakeBody)
 
-      it('should call the API.get method with passed trough opts', async () => {
-        const APISpy = jest.spyOn(API, 'post').mockImplementation()
+          expect(APISpy).toHaveBeenCalledWith(
+            fakeResource,
+            fakeBody,
+            { headers: { Authorization },
+            },
+          )
+        })
 
-        await AuthorizedDeviceAPI.post(fakeResource, fakeBody)
+        it(`should call the API ${method} method with passed trough opts`, async () => {
+          const APISpy = jest.spyOn(API, method).mockImplementation()
 
-        expect(APISpy).toHaveBeenCalledWith(
-          DeviceAPI.DEVICE_API_PREFIX,
-          `devices/${deviceId}/${fakeResource}`,
-          { headers: { Authorization },
-            body: fakeBody,
-            ...DEFAULT_REQ_OPTS,
-          },
-        )
-      })
-    })
+          await AuthorizedDeviceAPI[method](fakeResource, fakeBody)
+
+          expect(APISpy).toHaveBeenCalledWith(
+            DeviceAPI.DEVICE_API_PREFIX,
+            `devices/${deviceId}/${fakeResource}`,
+            { headers: { Authorization },
+              body: fakeBody,
+              ...DEFAULT_REQ_OPTS,
+            },
+          )
+        })
+      },
+    )
   })
 })
