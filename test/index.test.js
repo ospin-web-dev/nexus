@@ -111,7 +111,7 @@ describe('nexus', () => {
         update: 'function',
       },
       functionality: 'function',
-      registration: 'function'
+      registration: 'function',
     },
     event: {
       device: {
@@ -132,6 +132,11 @@ describe('nexus', () => {
       list: 'function',
     },
     process: {
+      access: {
+        grant: 'function',
+        modify: 'function',
+        revoke: 'function',
+      },
       annotation: {
         create: 'function',
         remove: 'function',
@@ -147,13 +152,10 @@ describe('nexus', () => {
         },
       },
       get: 'function',
-      grantAccess: 'function',
       list: 'function',
-      modifyAccess: 'function',
       preview: {
         get: 'function',
       },
-      revokeAccess: 'function',
       snapshot: {
         list: 'function',
       },
