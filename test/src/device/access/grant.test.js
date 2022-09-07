@@ -1,9 +1,9 @@
 const faker = require('faker')
 const { default: API } = require('@aws-amplify/api-rest')
-const grantAccess = require('device/grantAccess')
+const grantAccess = require('device/access/grant')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
+const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 
 describe('grantAccess device', () => {
 

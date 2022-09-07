@@ -49,6 +49,11 @@ describe('nexus', () => {
       getDownloadRequests: 'function',
     },
     device: {
+      access: {
+        grant: 'function',
+        revoke: 'function',
+        modify: 'function',
+      },
       certificate: {
         get: 'function',
       },
@@ -73,15 +78,12 @@ describe('nexus', () => {
       },
       get: 'function',
       getUserInvitations: 'function',
-      grantAccess: 'function',
       manufacturer: {
         list: 'function',
         deviceType: {
           list: 'function',
         },
       },
-      modifyAccess: 'function',
-      revokeAccess: 'function',
       transferOwnership: 'function',
       list: 'function',
       remove: 'function',

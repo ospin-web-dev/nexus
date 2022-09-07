@@ -1,3 +1,4 @@
+const access = require('./access')
 const certificate = require('./certificate')
 const create = require('./create')
 const createHeidolphCoreGateway = require('./createHeidolphCoreGateway')
@@ -7,16 +8,14 @@ const functionalityGraph = require('./functionalityGraph')
 const functionalityConfiguration = require('./functionalityConfiguration')
 const get = require('./get')
 const getUserInvitations = require('./getUserInvitations')
-const grantAccess = require('./grantAccess')
 const list = require('./list')
-const modifyAccess = require('./modifyAccess')
 const remove = require('./remove')
-const revokeAccess = require('./revokeAccess')
 const transferOwnership = require('./transferOwnership')
 const update = require('./update')
 const manufacturer = require('./manufacturer')
 
 module.exports = {
+  access,
   certificate,
   create,
   createHeidolphCoreGateway,
@@ -25,11 +24,8 @@ module.exports = {
   functionalityGraph,
   get,
   getUserInvitations,
-  grantAccess,
   list,
-  modifyAccess,
   remove,
-  revokeAccess,
   transferOwnership,
   update,
   manufacturer,
