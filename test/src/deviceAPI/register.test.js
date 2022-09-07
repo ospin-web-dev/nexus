@@ -1,10 +1,10 @@
 const AuthenticatedDeviceAPI = require('deviceAPI/AuthorizedDeviceAPI')
-const functionality = require('../../../src/deviceAPI/functionality')
+const nexus = require('../../../index')
 const setUpAuthenticatedDeviceAPI = require('../../testHelpers/setUpAuthenticatedDeviceAPI')
 const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
-describe('update functionalities', () => {
-   const params = {
+describe('register', () => {
+  const params = {
     fctGraph: {
       name: 'graph',
     },
@@ -16,10 +16,10 @@ describe('update functionalities', () => {
 
   testHTTPEndpoint({
     name: 'registration',
-    handler: functionality,
-    httpVerb: 'put',
+    handler: nexus.deviceAPI.register,
+    httpVerb: 'post',
     serviceName: 'device-api',
-    expectedURLSegment: `devices/${deviceId}/functionalities`,
+    expectedURLSegment: `devices/${deviceId}/registrations`,
     params: [params],
     expectedPayload: { body: params, ...AuthenticatedDeviceAPI.authorizationHeaders },
   })

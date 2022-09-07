@@ -114,8 +114,10 @@ describe('nexus', () => {
       configuration: {
         update: 'function',
       },
-      functionality: 'function',
-      registration: 'function',
+      functionality: {
+        updateMany: 'function',
+      },
+      register: 'function',
     },
     event: {
       device: {
