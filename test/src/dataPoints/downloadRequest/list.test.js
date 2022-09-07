@@ -1,11 +1,11 @@
 const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 
-const getDownloadRequests = require('dataPoints/getDownloadRequests')
+const list = require('dataPoints/downloadRequest/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
+const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 
-describe('getDownloadRequests', () => {
+describe('list download requests', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
@@ -14,9 +14,9 @@ describe('getDownloadRequests', () => {
   it('calls amplify\'s API.get method', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
-    await getDownloadRequests(processId)
+    await list(processId)
     expect(API.get).toHaveBeenCalledWith('datapoints', `processes/${processId}/downloadrequests`, { ...DEFAULT_REQ_OPTS })
   })
 
-  testDefaultHTTPResponses(getDownloadRequests, 'get')
+  testDefaultHTTPResponses(list, 'get')
 })

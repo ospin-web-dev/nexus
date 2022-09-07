@@ -1,11 +1,11 @@
 const { default: API } = require('@aws-amplify/api-rest')
 const faker = require('faker')
 
-const requestAllReporterFctData = require('dataPoints/requestAllReporterFctData')
+const createForProcess = require('dataPoints/downloadRequest/createForProcess')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
-const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
+const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 
-describe('requestAllReporterFctData', () => {
+describe('createForProcess', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
@@ -14,9 +14,9 @@ describe('requestAllReporterFctData', () => {
   it('calls amplify\'s API.post method', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
-    await requestAllReporterFctData(processId)
+    await createForProcess(processId)
     expect(API.post).toHaveBeenCalledWith('datapoints', `processes/${processId}/downloadrequests`, { ...DEFAULT_REQ_OPTS })
   })
 
-  testDefaultHTTPResponses(requestAllReporterFctData, 'post')
+  testDefaultHTTPResponses(createForProcess, 'post')
 })

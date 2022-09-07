@@ -1,11 +1,7 @@
+const downloadRequest = require('./downloadRequest')
 const get = require('./get')
-const requestReporterFctData = require('./requestReporterFctData')
-const requestAllReporterFctData = require('./requestAllReporterFctData')
-const getDownloadRequests = require('./getDownloadRequests')
 
 module.exports = {
+  downloadRequest,
   get,
-  requestReporterFctData,
-  requestAllReporterFctData,
-  getDownloadRequests,
 }

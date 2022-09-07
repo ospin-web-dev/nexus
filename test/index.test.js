@@ -44,9 +44,11 @@ describe('nexus', () => {
     },
     dataPoints: {
       get: 'function',
-      requestReporterFctData: 'function',
-      requestAllReporterFctData: 'function',
-      getDownloadRequests: 'function',
+      downloadRequest: {
+        createForReporter: 'function',
+        createForProcess: 'function',
+        list: 'function',
+      },
     },
     device: {
       access: {
