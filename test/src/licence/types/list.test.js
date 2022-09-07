@@ -1,5 +1,5 @@
-const listTypes = require('licence/listTypes')
-const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
+const listTypes = require('licence/type/list')
+const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
 testHTTPEndpoint({
   name: 'listTypes',

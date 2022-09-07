@@ -1,9 +1,12 @@
 const AuthorizedDeviceAPI = require('../AuthorizedDeviceAPI')
 const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
+
 /**
- * Check if the device can authenticate with the given credentials
+ * @desc validates the authorization of a device
+ * @memberof nexus.deviceAPI.authentication
+ * @function validateAuthorization
  * @async
- * @returns {Promise <object>} Promise resolving a serialized response
+ * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

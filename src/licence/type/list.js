@@ -4,14 +4,13 @@ const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 
 /**
- * @desc list all download request for a process
- * @memberof nexus.dataPoints.downloadRequest
+ * @desc lists all licence types
+ * @memberof nexus.licence.type
  * @function list
  * @async
- * @param {string} processId
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  processId => API.get('datapoints', `processes/${processId}/downloadrequests`, { ...DEFAULT_REQ_OPTS }),
+  () => API.get('licence', 'types', DEFAULT_REQ_OPTS),
 )

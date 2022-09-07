@@ -4,7 +4,9 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
 const { createDataUriFromFile } = require('../../../../utils/imageUtils')
 
 /**
- * Uploads a process image
+ * @desc uploads a process image
+ * @memberof nexus.deviceAPI.functionality.image
+ * @function createFromFile
  * @async
  * @param processId the process Id
  * @param functionalityId the process Id
@@ -15,7 +17,7 @@ const { createDataUriFromFile } = require('../../../../utils/imageUtils')
  * processId: 9588c1cc-9c39-4ddb-bb7d-bd3a2e9b26cf,
  * functionalityId:df78c050-4dc6-47d4-910e-812c175e05d9,
  * params: { pathToImage: './image.jpeg',imageCreatedAt: 13463458943  }
- * @returns {Promise <object>} Promise resolving with the createdImageRef
+ * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

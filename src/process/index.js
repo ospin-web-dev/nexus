@@ -10,6 +10,10 @@ const preview = require('./preview')
 const snapshot = require('./snapshot')
 const update = require('./update')
 
+/**
+ * @namespace nexus.process
+ */
+
 module.exports = {
   access,
   annotation,

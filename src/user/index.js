@@ -12,6 +12,10 @@ const licence = require('./licence')
 const preview = require('./preview')
 const pusher = require('./pusher')
 
+/**
+ * @namespace nexus.user
+ */
+
 module.exports = {
   acceptDeviceInvitation,
   createDeletionRequest,

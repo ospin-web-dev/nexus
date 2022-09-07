@@ -128,7 +128,9 @@ describe('nexus', () => {
     licence: {
       create: 'function',
       list: 'function',
-      listTypes: 'function',
+      type: {
+        list: 'function',
+      },
       update: 'function',
     },
     log: {

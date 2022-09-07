@@ -2,10 +2,12 @@ const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 const AuthorizedDeviceAPI = require('../AuthorizedDeviceAPI')
 /**
- * Fetches information for a specific process
- * @param processId the Id of the process to be fetched
+ * @desc returns a process
+ * @function get
+ * @memberof nexus.deviceAPI.process
  * @async
- * @returns {Promise <object>} Promise resolving to a serialized process object
+ * @param {string} processId Id of the process to be fetched
+ * @returns {Promise<ApiResponse>}
  */
 module.exports = serializeAxiosResponse(
   processId => AuthorizedDeviceAPI.get(`processes/${processId}`, { ...DEFAULT_REQ_OPTS }),

@@ -4,9 +4,9 @@ const { DEFAULT_REQ_OPTS } = require('../../../../utils/defaultReqOpts')
 const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
 
 /**
- * Uploads a process image based given filen path
- * for information on the necessary
- * parameters check the api documentation in the readme *
+ * @desc uploads a process image based given filen path
+ * @function createFromFile
+ * @memberof nexus.deviceAPI.stream.image
  * @async
  * @param processId the process Id
  * @param streamId the stream Id
@@ -17,7 +17,7 @@ const AuthorizedDeviceAPI = require('../../../AuthorizedDeviceAPI')
  * processId: 9588c1cc-9c39-4ddb-bb7d-bd3a2e9b26cf,
  * streamId:1345526,
  * params: { pathToImage: './image.jpeg',imageCreatedAt: 13463458943  }
- * @returns {Promise <object>} Promise resolving with the createdImageRef
+ * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

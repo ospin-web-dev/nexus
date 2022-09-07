@@ -1,5 +1,11 @@
 const HTTPError = require('./HTTPError')
 
+/**
+ * @typedef ApiResponse
+ * @property {object} data contains the server response
+ * @property {number} status contains the server status code
+ */
+
 const extractErrorMsg = error => (
   (
     error

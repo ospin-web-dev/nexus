@@ -1,11 +1,9 @@
-const device = require('./device')
 const list = require('./list')
 
 /**
- * @namespace nexus.log
+ * @namespace nexus.licence.type
  */
 
 module.exports = {
-  device,
   list,
 }

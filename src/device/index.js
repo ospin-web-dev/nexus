@@ -14,6 +14,10 @@ const transferOwnership = require('./transferOwnership')
 const update = require('./update')
 const manufacturer = require('./manufacturer')
 
+/**
+ * @namespace nexus.device
+ */
+
 module.exports = {
   access,
   certificate,

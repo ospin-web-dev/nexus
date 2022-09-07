@@ -5,6 +5,10 @@ const resume = require('./resume')
 const start = require('./start')
 const updateRunning = require('./updateRunning')
 
+/**
+ * @namespace nexus.command.device.process
+ */
+
 module.exports = {
   end,
   goToNextPhase,

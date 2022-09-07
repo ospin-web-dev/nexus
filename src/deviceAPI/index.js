@@ -4,6 +4,10 @@ const configuration = require('./configuration')
 const functionality = require('./functionality')
 const register = require('./register')
 
+/**
+ * @namespace nexus.deviceAPI
+ */
+
 module.exports = {
   authentication,
   process,

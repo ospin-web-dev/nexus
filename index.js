@@ -30,6 +30,10 @@ const connect = customConnectionOpts => {
   return { result, config }
 }
 
+/**
+ * @namespace nexus
+ */
+
 module.exports = {
   auth,
   user,
