@@ -9,7 +9,7 @@ describe('create Process Functionality Image', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   beforeEach(() => {
-    jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(args => args)
+    jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation((args = {}) => args)
     setUpAuthenticatedDeviceAPI()
   })
 
@@ -29,7 +29,6 @@ describe('create Process Functionality Image', () => {
     expect(AuthenticatedDeviceAPI.post).toHaveBeenCalledWith(
       `processes/${processId}/functionalities/${functionalityId}/images`,
       body, DEFAULT_REQ_OPTS,
-
     )
   })
 
@@ -45,34 +44,21 @@ describe('create Process Functionality Image', () => {
       )
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: 'success!',
-        error: null,
-        errorMsg: null,
         status: 200,
       }))
     })
+  })
 
-    describe('on failure', () => {
+  describe('on failure', () => {
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
-      beforeEach(() => {
-        jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw new Error() })
-      })
+    it('should throw an error', async () => {
+      jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw error })
 
-      it('should repond with the error message,the status code and success=false', async () => {
-
-        const resp = await nexus.deviceAPI.process.functionality.image.createFromURI(
-          processId, functionalityId, body,
-        )
-
-        expect(resp).toStrictEqual(expect.objectContaining({
-          success: false,
-          data: null,
-          error: new Error(),
-          errorMsg: '',
-          status: null,
-        }))
-      })
+      await expect(nexus.deviceAPI.process.functionality.image.createFromURI(processId, functionalityId, body))
+        .rejects.toThrow(ERROR_TEXT)
     })
   })
 })

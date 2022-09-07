@@ -45,34 +45,27 @@ describe('create Process stream Image', () => {
       )
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: 'success!',
-        error: null,
-        errorMsg: null,
         status: 200,
       }))
     })
 
-    describe('on failure', () => {
+  })
 
-      beforeEach(() => {
-        jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw new Error() })
-      })
+  describe('on failure', () => {
 
-      it('should repond with the error message,the status code and success=false', async () => {
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
-        const resp = await nexus.deviceAPI.process.stream.image.createFromURI(
-          processId, streamId, body,
-        )
+    beforeEach(() => {
+      jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw new Error() })
+    })
 
-        expect(resp).toStrictEqual(expect.objectContaining({
-          success: false,
-          data: null,
-          error: new Error(),
-          errorMsg: '',
-          status: null,
-        }))
-      })
+    it('should throw an error', async () => {
+      jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw error })
+
+      await expect(nexus.deviceAPI.process.stream.image.createFromURI(processId, streamId, body))
+        .rejects.toThrow(ERROR_TEXT)
     })
   })
 })

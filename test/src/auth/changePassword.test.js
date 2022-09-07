@@ -14,7 +14,7 @@ describe('changePassword', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.changePassword method', async () => {
-    jest.spyOn(Auth, 'changePassword').mockImplementation()
+    jest.spyOn(Auth, 'changePassword').mockImplementation(() => Promise.resolve({}))
     await changePassword(params)
     expect(Auth.changePassword).toHaveBeenCalledTimes(1)
     expect(Auth.changePassword)
@@ -32,10 +32,7 @@ describe('changePassword', () => {
       const resp = await changePassword(params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: res.data,
-        errorMsg: null,
-        error: null,
         status: 200,
       }))
     })
@@ -46,20 +43,11 @@ describe('changePassword', () => {
     const error = new Error(ERROR_TEXT)
 
     beforeAll(() => {
-      jest.spyOn(Auth, 'changePassword')
-        .mockImplementation(() => { throw error })
+      jest.spyOn(Auth, 'changePassword').mockImplementation(() => { throw error })
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await changePassword(params)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: ERROR_TEXT,
-        error,
-        status: null,
-      }))
+      await expect(changePassword(params)).rejects.toThrow(ERROR_TEXT)
     })
   })
 })

@@ -1,6 +1,7 @@
 const faker = require('faker')
 const AuthenticatedDeviceAPI = require('deviceAPI/AuthorizedDeviceAPI')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
+const imageUtils = require('utils/imageUtils')
 const setUpAuthenticatedDeviceAPI = require('../../../../../testHelpers/setUpAuthenticatedDeviceAPI')
 const nexus = require('../../../../../..')
 
@@ -10,7 +11,7 @@ describe('create Process Functionality Image', () => {
 
   beforeEach(() => {
     setUpAuthenticatedDeviceAPI()
-    jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(args => args)
+    jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation((args = {}) => args)
   })
 
   const processId = faker.datatype.uuid()
@@ -39,10 +40,9 @@ describe('create Process Functionality Image', () => {
   })
 
   it('should show an error message when the file could not be found', async () => {
-    const resp = await nexus.deviceAPI.process.functionality.image.createFromFile(
-      processId, functionalityId, { imageCreatedAt, pathToImage: 'notAFile.jpeg' },
-    )
-    expect(resp.errorMsg).toBe(`No file found at location ${'notAFile.jpeg'}`)
+    await expect(nexus.deviceAPI.process.functionality.image.createFromFile(
+      processId, functionalityId, { imageCreatedAt, pathToImage: 'notAFile.jpeg' }))
+      .rejects.toThrow(`No file found at location ${'notAFile.jpeg'}`)
   })
 
   describe('on success', () => {
@@ -52,39 +52,27 @@ describe('create Process Functionality Image', () => {
     })
 
     it('should respond with the data ,the status code and success=true', async () => {
+      jest.spyOn(imageUtils, 'createDataUriFromFile').mockImplementation(() => 'some_uri')
       const resp = await nexus.deviceAPI.process.functionality.image.createFromURI(
         processId, functionalityId, body,
       )
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: 'success!',
-        error: null,
-        errorMsg: null,
         status: 200,
       }))
     })
+  })
 
-    describe('on failure', () => {
+  describe('on failure', () => {
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
-      beforeEach(() => {
-        jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw new Error() })
-      })
+    it('should throw an error', async () => {
+      jest.spyOn(AuthenticatedDeviceAPI, 'post').mockImplementation(() => { throw error })
 
-      it('should repond with the error message,the status code and success=false', async () => {
-
-        const resp = await nexus.deviceAPI.process.functionality.image.createFromURI(
-          processId, functionalityId, body,
-        )
-
-        expect(resp).toStrictEqual(expect.objectContaining({
-          success: false,
-          data: null,
-          error: new Error(),
-          errorMsg: '',
-          status: null,
-        }))
-      })
+      await expect(nexus.deviceAPI.process.functionality.image.createFromFile(processId, functionalityId, body))
+        .rejects.toThrow(ERROR_TEXT)
     })
   })
 })
