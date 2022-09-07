@@ -31,12 +31,12 @@ describe('nexus', () => {
     command: {
       device: {
         process: {
-          endProcess: 'function',
-          nextPhase: 'function',
-          pauseProcess: 'function',
-          resumeProcess: 'function',
-          startProcess: 'function',
-          updateRunningProcess: 'function',
+          end: 'function',
+          goToNextPhase: 'function',
+          pause: 'function',
+          resume: 'function',
+          start: 'function',
+          updateRunning: 'function',
         },
         openSsh: 'function',
         updateFirmware: 'function',
