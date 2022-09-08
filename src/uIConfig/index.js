@@ -1,5 +1,4 @@
 const userFctGraphUIConfig = require('./userFctGraphUIConfig')
-const device = require('./device')
 
 /**
  * @namespace nexus.uIConfig
@@ -7,5 +6,4 @@ const device = require('./device')
 
 module.exports = {
   userFctGraphUIConfig,
-  device,
 }

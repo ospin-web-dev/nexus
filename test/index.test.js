@@ -182,9 +182,6 @@ describe('nexus', () => {
         put: 'function',
         get: 'function',
       },
-      device: {
-        put: 'function',
-      },
     },
     user: {
       notifications: {
