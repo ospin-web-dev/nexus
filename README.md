@@ -1,96 +1,54 @@
 [![codecov](https://codecov.io/gh/ospin-web-dev/nexus/branch/main/graph/badge.svg?token=Js7X2xLEwB)](https://codecov.io/gh/ospin-web-dev/nexus)
 
-Documentation can be found [here](https://ospin-web-dev.github.io/nexus/)
+Documentation can be found [here](https://ospin-web-dev.github.io/nexus/).
 
 ---
 
 ## Table of Contents
 
-- [Use Overview](#UseOverview)
+- [Use Overview](#Overview)
   - [Configuration](#Configuration)
-  - [Authenticating as a User](#Authenticating-as-a-User)
-  - [Authenticating as a Device](#Authenticating-as-a-Device)
-- [API Documentation](#API-documentation)
-  - [Modules and their Methods](#modules-and-their-methods)
-  - [Helper Methods](#helper-methods)
+  - [Authenticating](#Authenticating-as-a-User)
 - [Use Examples](#Use-Examples)
 - [Contributing](#Contributing)
-- [Upcoming](#Upcoming)
-
 ---
 
-## <a name="UseOverview">Use Overview</a>
+## <a name="Overview">Overview</a>
 
-The @ospin/nexus exposes a set of conveniences methods wrapping calls to the OSPIN AWS backend, JSON serving, rest-like, API. Unless a method is explicitly labeled as using a public endpoint, or otherwise stated, all nexus consumers must do the following before using the methods provided:
-  - [configure the nexus for their environment](#Configuration)
-  - authenticate [as a User](#Authenticating-as-a-User) or [as a Device](#Authenticating-as-a-Device)
+The @ospin/nexus is a JavaScript SDK to communicate to Ospin's HTTP API. It is build on top of @aws-amplify. To use it, the user has to be registered at OSPIN.
+
+  - [configure nexus for the environment](#Configuration)
+  - [Authentication](#Authenticating-as-a-User)
 
 #### <a name="Configuration">Configuration</a>
 ```js
-const nexus = require('@ospin/nexus') // or import
+const nexus = require('@ospin/nexus')
 
 nexus.configure() // set up the SDK for default usage
 ```
 
-#### <a name="Authenticating-as-a-User">Authenticating as a User</a>
+#### <a name="Authenticating-as-a-User">Authenticating</a>
 
 With the nexus configured, a user can authenticate as their OSPIN AWS Cognito user:
-```js
-const nexus = require('@ospin/nexus')
 
+```js
+const username = 'Nero'
+const password = 'BurnRome'
 nexus.auth.signIn(username, password) // may require 2FA
 ```
 
-#### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
-
-With the nexus configured, a device can authenticate using its certificate:
-```js
-nexus.deviceAPI.authentication.setCredentials({
-  deviceId: <deviceId>,
-  pathToCert: <pathToCert>
-})
-
-
-nexus.deviceAPI.validateAuthorization()
-// -> { sucess, status, data, errorMsg }
-
-```
----
-
 ## <a name="Use-Examples">Use Example</a>
 ```js
-// getting the list representation of all devices (that the authenticated consumer is privileged to)
-const nexus = require('@ospin/nexus')
+// loading a process
 
-nexus.connect()
-
-const username = 'Nero Claudius Caesar Augustus Germanicus'
-const password = 'BurnRomeToMakeANewPalace@Good-Plan-&-Ok-Password',
-
-nexus.auth.signIn(username, password)
-
+const processId = "a3339d89-345b-4baf-9859-46a4542a505a"
 const {
-  success: listDevicesWasSuccessful,
-  data: devicesList,
-  errorMsg: listDevicesErrorMsg,
-  error: listDevicesError
-} = nexus.device.list()
+  status: 200,
+  data: process,
+} = await nexus.process.get(processId)
 
-if (listDevicesWasSuccessful) {
-  console.log(deviceList)
-  // -> [ { ...deviceObj }, { ...deviceObj }, ... ]
-} else {
-  // kindly find out why...
-  console.error(errorMsg)
-
-  // ..or live up to the username and be an unforgiving and unyielding tyrant
-  throw listDevicesError
-  // -> 💣
-}
 
 ```
-
----
 
 ## <a name="Contributing">Contributing</a>
 
@@ -112,6 +70,3 @@ Available types:
  - revert: Reverts a previous commit
 
 Add BREAKING CHANGE into the commit message body (!) to indicate a major version release.
-
----
-
