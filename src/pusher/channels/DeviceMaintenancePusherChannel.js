@@ -1,6 +1,28 @@
 const DeviceSpecificPusherChannel = require('./DeviceSpecificPusherChannel')
 
+/**
+ * @namespace nexus.pusher.DeviceMaintenancePusherChannel
+ */
+
 class DeviceMaintenancePusherChannel extends DeviceSpecificPusherChannel {
+
+  /**
+   * @desc subscribes to the channel
+   * @memberof nexus.pusher.DeviceMaintenancePusherChannel
+   * @function subscribe
+   * @param {Object} channelParams
+   * @param {string} channelParams.deviceId
+   * @param {Object} eventHandlers a map that maps event names to their handlers.
+   * Current events: `device-ssh-connection-opened`
+   */
+
+  /**
+   * @desc unsubscribe from the channel
+   * @memberof nexus.pusher.DeviceMaintenancePusherChannel
+   * @function unsubscribe
+   * @param {Object} channelParams
+   * @param {string} channelParams.deviceId
+   */
 
   static get CHANNEL_NAME_SUFFIX() { return '_maintenance' }
 

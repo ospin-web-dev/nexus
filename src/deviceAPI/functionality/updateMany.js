@@ -9,7 +9,7 @@ const AuthorizedDeviceAPI = require('../AuthorizedDeviceAPI')
  * @async
  * @param {Object} params
  * @param {Array} params.connectedPhysicalFunctionalities
- * @param {Array} params.supportedVirtualFunctionalities
+ * @param {Array} [params.supportedVirtualFunctionalities]
  * @returns {Promise<ApiResponse>}
  */
 

@@ -4,11 +4,6 @@ const path = require('path')
 
 const DeviceAPI = require('./DeviceAPI')
 
-/**
-* Stores information required for the secure authentication of the device
-* @param {Object}  {deviceId: **** ,pathToCertificate: ****}
-* @memberof AuthorizedDeviceAPI
-*/
 class AuthorizedDeviceAPI extends DeviceAPI {
 
   static get HASHLENGTH() {

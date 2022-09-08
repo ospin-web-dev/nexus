@@ -20,15 +20,9 @@ const DEFAULT_OPTS = {
 }
 
 /**
- * @typedef ConfigResult
- *
- */
-
-/**
  * @desc sets the environement and region for the API
  * @memberof nexus
  * @function configure
- * @async
  * @param {Object} [customOptions]
  * @param {string} [customOptions.ENV = 'dev']
  * @param {string} [customOptions.AWS_REGION = 'eu-central-1']

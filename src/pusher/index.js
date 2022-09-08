@@ -5,6 +5,10 @@ const DeviceProcessesPusherChannel = require('./channels/DeviceProcessesPusherCh
 const DeviceProcessPusherChannel = require('./channels/DeviceProcessPusherChannel')
 const DeviceProcessStreamingDataPusherChannel = require('./channels/DeviceProcessStreamingDataPusherChannel')
 
+/**
+ * @namespace nexus.pusher
+ */
+
 module.exports = {
   OspinPusherClient,
   DevicePusherChannel,

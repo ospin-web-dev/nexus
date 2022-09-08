@@ -1,6 +1,28 @@
 const DeviceSpecificPusherChannel = require('./DeviceSpecificPusherChannel')
 
+/**
+ * @namespace nexus.pusher.DeviceProcessesPusherChannel
+ */
+
 class DeviceProcessesPusherChannel extends DeviceSpecificPusherChannel {
+
+  /**
+   * @desc subscribes to the channel
+   * @memberof nexus.pusher.DeviceProcessesPusherChannel
+   * @function subscribe
+   * @param {Object} channelParams
+   * @param {string} channelParams.deviceId
+   * @param {Object} eventHandlers a map that maps event names to their handlers.
+   * Current events: `running-process-state-update, process-download-request-updated`
+   */
+
+  /**
+   * @desc unsubscribe from the channel
+   * @memberof nexus.pusher.DeviceProcessesPusherChannel
+   * @function unsubscribe
+   * @param {Object} channelParams
+   * @param {string} channelParams.deviceId
+   */
 
   static get CHANNEL_NAME_SUFFIX() { return '_processes' }
 
