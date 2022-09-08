@@ -34,7 +34,15 @@ jobs:
         run: npm ci
 
       - name: Test with Coverage
-        run: npm run test-with-coverage
+      - run: npm run test-with-coverage
 
       - name: Upload to codecov
-        run: npm i -g codecov && codecov
+      - run: npm i -g codecov && codecov
+
+      - name: Build docs
+        run: npm run generate-docs
+
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs
