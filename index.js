@@ -6,7 +6,6 @@ const device = require('./src/device')
 const event = require('./src/event')
 const log = require('./src/log')
 const process = require('./src/process')
-const deviceAPI = require('./src/deviceAPI')
 const uIConfig = require('./src/uIConfig')
 const dataPoints = require('./src/dataPoints')
 const utils = require('./src/utilsService')
@@ -55,7 +54,6 @@ module.exports = {
   uIConfig,
   dataPoints,
   pusher,
-  deviceAPI,
   configure,
   utils,
   licence,

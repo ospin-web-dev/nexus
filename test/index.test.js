@@ -90,34 +90,6 @@ describe('nexus', () => {
       remove: 'function',
       update: 'function',
     },
-    deviceAPI: {
-      authentication: {
-        validateAuthorization: 'function',
-        setCredentials: 'function',
-      },
-      process: {
-        get: 'function',
-        functionality: {
-          image: {
-            createFromFile: 'function',
-            createFromURI: 'function',
-          },
-        },
-        stream: {
-          image: {
-            createFromFile: 'function',
-            createFromURI: 'function',
-          },
-        },
-      },
-      configuration: {
-        update: 'function',
-      },
-      functionality: {
-        updateMany: 'function',
-      },
-      register: 'function',
-    },
     event: {
       device: {
         removeAll: 'function',
