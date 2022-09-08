@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const uuidv4 = require('uuid').v4
+const faker = require('faker')
 
 const deleteMany = require('process/deleteMany')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -8,7 +8,7 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 describe('deleteMany', () => {
   it('calls amplify\'s API.patch method', async () => {
     jest.spyOn(API, 'patch').mockImplementation(args => args)
-    const processId = [uuidv4(), uuidv4()]
+    const processId = [faker.datatype.uuid(), faker.datatype.uuid()]
 
     await deleteMany(processId)
     expect(API.patch).toHaveBeenCalledWith('process', '', { body: { processesIds: processId }, ...DEFAULT_REQ_OPTS })
