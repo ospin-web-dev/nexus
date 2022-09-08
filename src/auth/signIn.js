@@ -10,7 +10,7 @@ const lowerCaseEmail = require('./helper/lowerCaseEmail')
  * @async
  * @param {string} usernameOrEmail
  * @param {string} password
- * @returns {Promise<ApiResponse>}
+ * @returns {Promise<AuthApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

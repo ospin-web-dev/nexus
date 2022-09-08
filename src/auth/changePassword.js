@@ -10,7 +10,7 @@ const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
  * @param {Object} params
  * @param {string} params.oldPassword
  * @param {string} params.newPassword
- * @returns {Promise<ApiResponse>}
+ * @returns {Promise<AuthApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

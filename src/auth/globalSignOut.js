@@ -7,7 +7,7 @@ const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
  * @memberof nexus.auth
  * @function globalSignOut
  * @async
- * @returns {Promise<ApiResponse>}
+ * @returns {Promise<AuthApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(

@@ -1,9 +1,17 @@
 const HTTPError = require('./HTTPError')
 
 /**
+ * @desc API response in case of a successful API call
  * @typedef ApiResponse
+ * @memberOf nexus
  * @property {object} data contains the server response
  * @property {number} status contains the server status code
+ */
+
+/**
+ * @desc API response for the auth service; for responses check {@link https://aws-amplify.github.io/amplify-js/api/classes/authclass.html | the amplify auth module documentation}
+ * @typedef AuthApiResponse
+ * @memberOf nexus
  */
 
 const extractErrorMsg = error => (
