@@ -15,8 +15,7 @@ describe('nexus', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const MODULE_STRUCTURE = {
-    connect: 'function',
-    createConfig: 'function',
+    configure: 'function',
     auth: {
       changePassword: 'function',
       confirmSignUp: 'function',
@@ -295,7 +294,7 @@ describe('nexus', () => {
 
   describe('connect', () => {
     it('calls createConfig with the expected default connection options if none are provided', () => {
-      nexus.connect()
+      nexus.configure()
 
       expect(configGenerator.createConfig).toHaveBeenCalledWith({
         ENV: 'dev',
@@ -312,7 +311,7 @@ describe('nexus', () => {
         ENV: 'test',
         AWS_REGION: 'its-all-merkels-realm-now',
       }
-      nexus.connect(connectionOpts)
+      nexus.configure(connectionOpts)
 
       expect(Amplify.configure).toHaveBeenCalledWith(
         injectMerkelIntoArgObjectAndReturn(connectionOpts),

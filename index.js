@@ -14,20 +14,36 @@ const licence = require('./src/licence')
 const pusher = require('./src/pusher')
 const { createConfig } = require('./src/amplify/configGenerator')
 
-const DEFAULT_CONNECTION_OPTS = {
+const DEFAULT_OPTS = {
   ENV: 'dev',
   AWS_REGION: 'eu-central-1',
 }
 
-const connect = customConnectionOpts => {
+/**
+ * @typedef ConfigResult
+ *
+ */
+
+/**
+ * @desc sets the environement and region for the API
+ * @memberof nexus
+ * @function configure
+ * @async
+ * @param {Object} [customOptions]
+ * @param {string} [customOptions.ENV = 'dev']
+ * @param {string} [customOptions.AWS_REGION = 'eu-central-1']
+ * @returns {Object} the generated configuration for the given options
+ */
+
+const configure = customOptions => {
   const connectionOpts = {
-    ...DEFAULT_CONNECTION_OPTS,
-    ...customConnectionOpts,
+    ...DEFAULT_OPTS,
+    ...customOptions,
   }
   const config = createConfig(connectionOpts)
-  const result = Amplify.configure(config)
+  Amplify.configure(config)
 
-  return { result, config }
+  return config
 }
 
 /**
@@ -46,8 +62,7 @@ module.exports = {
   dataPoints,
   pusher,
   deviceAPI,
-  connect,
-  createConfig,
+  configure,
   utils,
   licence,
 }

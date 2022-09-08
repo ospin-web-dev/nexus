@@ -5,7 +5,7 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 /**
  * @desc returns a device
-e* @memberof nexus.device
+ * @memberof nexus.device
  * @function get
  * @async
  * @param {Object} params
