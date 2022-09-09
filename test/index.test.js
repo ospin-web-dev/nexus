@@ -140,14 +140,6 @@ describe('nexus', () => {
       },
       update: 'function',
     },
-    pusher: {
-      OspinPusherClient: 'function',
-      DevicePusherChannel: 'function',
-      DeviceMaintenancePusherChannel: 'function',
-      DeviceProcessesPusherChannel: 'function',
-      DeviceProcessPusherChannel: 'function',
-      DeviceProcessStreamingDataPusherChannel: 'function',
-    },
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',

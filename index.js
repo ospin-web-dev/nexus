@@ -10,7 +10,6 @@ const uIConfig = require('./src/uIConfig')
 const dataPoints = require('./src/dataPoints')
 const utils = require('./src/utilsService')
 const licence = require('./src/licence')
-const pusher = require('./src/pusher')
 const { createConfig } = require('./src/amplify/configGenerator')
 
 const DEFAULT_OPTS = {
@@ -53,7 +52,6 @@ module.exports = {
   process,
   uIConfig,
   dataPoints,
-  pusher,
   configure,
   utils,
   licence,
