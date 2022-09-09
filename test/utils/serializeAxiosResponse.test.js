@@ -4,7 +4,7 @@ const serializeAxiosResponse = require('utils/serializeAxiosResponse')
 describe('serializeAxiosResponse', () => {
 
   it('returns a function that, when invoked, calls the function with the passed args', async () => {
-    const fn = jest.fn()
+    const fn = jest.fn(() => Promise.resolve({}))
     const res = serializeAxiosResponse(fn)
 
     const args = [ 'a', 'b' ]
@@ -14,14 +14,15 @@ describe('serializeAxiosResponse', () => {
   })
 
   it('awaits async functions', async () => {
-    const fn = serializeAxiosResponse(() => Promise.resolve('<3 u angelo M.'))
+    const data = '<3 u angelo M.'
+    const fn = serializeAxiosResponse(() => Promise.resolve({ data }))
 
     const res = await fn()
-    expect(res.success).toBe(true)
+    expect(res.data).toBe(data)
   })
 
   describe('when calling its wrapped method', () => {
-    const endpointMock = jest.fn()
+    const endpointMock = jest.fn(() => Promise.resolve({}))
     const wrappedMock = serializeAxiosResponse(endpointMock)
     const expectedRessource = 'user'
     const expectedPath = '/'
@@ -71,9 +72,7 @@ describe('serializeAxiosResponse', () => {
       const res = await fn()
 
       expect(res).toStrictEqual(expect.objectContaining({
-        success: true,
         data: response.data,
-        error: null,
       }))
     })
   })
@@ -104,29 +103,21 @@ describe('serializeAxiosResponse', () => {
 
     }
 
-    it('returns a serialized object with the error message and status fields parsed out to reflect a not found error', async () => {
+    it('throws the error with the correct message and status', async () => {
       const serverError = new ServerError()
       const fnA = serializeAxiosResponse(() => Promise.reject(serverError))
-      const resA = await fnA()
-
-      expect(resA).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: serverError.response.data.message,
+      await expect(fnA()).rejects.toThrow(expect.objectContaining({
+        message: serverError.response.data.message,
+        status: serverError.response.status,
         error: serverError,
-        status: 500,
       }))
 
       const notFoundError = new NotFoundError()
       const fnB = serializeAxiosResponse(() => Promise.reject(notFoundError))
-      const resB = await fnB()
-
-      expect(resB).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
+      await expect(fnB()).rejects.toThrow(expect.objectContaining({
+        message: notFoundError.response.data.message,
+        status: notFoundError.response.status,
         error: notFoundError,
-        errorMsg: notFoundError.response.data.message,
-        status: 400,
       }))
     })
 
@@ -147,18 +138,12 @@ describe('serializeAxiosResponse', () => {
       it('returns a serialized object with the error message and status fields parsed out to reflect and auth error', async () => {
         const authError = new AuthError()
         const fn = serializeAxiosResponse(() => Promise.reject(authError))
-        const res = await fn()
-
-        expect(res).toStrictEqual(expect.objectContaining({
-          success: false,
-          data: null,
-          error: authError,
-          errorMsg: authError.message,
+        await expect(fn()).rejects.toThrow(expect.objectContaining({
+          message: authError.message,
           status: 401,
+          error: authError,
         }))
       })
     })
-
   })
-
 })

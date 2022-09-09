@@ -7,7 +7,7 @@ describe('signIn', () => {
   afterEach(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.signIn method with the username and password', async () => {
-    jest.spyOn(Auth, 'signIn').mockImplementation(args => args)
+    jest.spyOn(Auth, 'signIn').mockImplementation((args = {}) => args)
     const [ username, password ] = [ 'Dich', 'verzaubert' ]
 
     await signIn(username, password)
@@ -16,7 +16,7 @@ describe('signIn', () => {
 
   describe('when an email is used', () => {
     it('calls amplify\'s Auth.signIn with the lower cased email', async () => {
-      jest.spyOn(Auth, 'signIn').mockImplementation()
+      jest.spyOn(Auth, 'signIn').mockImplementation(() => Promise.resolve({}))
       const paramsWithEmail = {
         usernameOrEmail: 'Paterson@paterson.us',
         password: 'verzaubert',
@@ -41,17 +41,15 @@ describe('signIn', () => {
 
       const resp = await signIn(username, password)
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: 'MERK!',
-        error: null,
-        errorMsg: null,
         status: 200,
       }))
     })
   })
 
   describe('on Auth.signIn error', () => {
-    const error = new Error()
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
     beforeAll(() => {
       jest.spyOn(Auth, 'signIn')
@@ -59,16 +57,8 @@ describe('signIn', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const [ username, password ] = [ 'was hat er....mich?', 'achso' ]
-
-      const resp = await signIn(username, password)
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: '',
-        error,
-        status: null,
-      }))
+      await expect(signIn()).rejects.toThrow(ERROR_TEXT)
     })
+
   })
 })

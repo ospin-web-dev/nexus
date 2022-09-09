@@ -16,7 +16,21 @@ jobs:
         with:
           node-version: 16
 
+      - name: Cache node modules
+        id: cache-nodemodules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: Install dependencies
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Test with Coverage
@@ -24,3 +38,11 @@ jobs:
 
       - name: Upload to codecov
         run: npm i -g codecov && codecov
+
+      - name: Build docs
+        run: npm run generate-docs
+
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs

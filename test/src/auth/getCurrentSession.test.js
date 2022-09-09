@@ -7,7 +7,7 @@ describe('getCurrentSession', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.currentSession method', async () => {
-    jest.spyOn(Auth, 'currentSession').mockImplementation(args => args)
+    jest.spyOn(Auth, 'currentSession').mockImplementation((args = {}) => args)
 
     await getCurrentSession()
     expect(Auth.currentSession).toHaveBeenCalledTimes(1)
@@ -24,10 +24,7 @@ describe('getCurrentSession', () => {
       const resp = await getCurrentSession()
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: SESSION.data,
-        errorMsg: null,
-        error: null,
         status: 200,
       }))
     })
@@ -43,15 +40,7 @@ describe('getCurrentSession', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await getCurrentSession()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: ERROR_TEXT,
-        error,
-        status: null,
-      }))
+      await expect(getCurrentSession()).rejects.toThrow(ERROR_TEXT)
     })
   })
 })

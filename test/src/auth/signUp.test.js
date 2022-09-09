@@ -16,7 +16,7 @@ describe('signUp', () => {
   }
 
   it('calls amplify\'s Auth.signUp method', async () => {
-    jest.spyOn(Auth, 'signUp').mockImplementation()
+    jest.spyOn(Auth, 'signUp').mockImplementation(() => Promise.resolve({}))
 
     await signUp(params)
     expect(Auth.signUp).toHaveBeenCalledWith(params)
@@ -36,17 +36,15 @@ describe('signUp', () => {
       const resp = await signUp(params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: CANNED_RESPONSE,
-        error: null,
-        errorMsg: null,
         status: 200,
       }))
     })
   })
 
   describe('on Auth.signUp error', () => {
-    const error = new Error()
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
     beforeAll(() => {
       jest.spyOn(Auth, 'signUp')
@@ -54,15 +52,8 @@ describe('signUp', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await signUp(params)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        error,
-        errorMsg: '',
-        status: null,
-      }))
+      await expect(signUp(params)).rejects.toThrow(ERROR_TEXT)
     })
+
   })
 })

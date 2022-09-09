@@ -1,11 +1,15 @@
 const create = require('./create')
 const list = require('./list')
-const listTypes = require('./listTypes')
+const type = require('./type')
 const update = require('./update')
+
+/**
+ * @namespace nexus.licence
+ */
 
 module.exports = {
   create,
   list,
-  listTypes,
+  type,
   update,
 }
