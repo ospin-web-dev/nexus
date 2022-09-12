@@ -2,34 +2,26 @@ const { default: Auth } = require('@aws-amplify/auth')
 
 const globalSignOut = require('auth/globalSignOut')
 
-describe('signOut', () => {
+describe('globalSignOut', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.signOut method', async () => {
-    jest.spyOn(Auth, 'signOut').mockImplementation(() => Promise.resolve({}))
+    jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
 
     await globalSignOut()
     expect(Auth.signOut).toHaveBeenCalledWith({ global: true })
   })
 
   describe('on Auth.signOut success', () => {
-    const CANNED_RESPONSE = {
-      jeff: 'goldblum',
-      my: 'hero',
-    }
-
     beforeAll(() => {
-      jest.spyOn(Auth, 'signOut').mockImplementation(() => ({ status: 200, ...CANNED_RESPONSE }))
+      jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
     })
 
     it('returns the serialized result, with non-status properties in data', async () => {
       const resp = await globalSignOut()
 
-      expect(resp).toStrictEqual(expect.objectContaining({
-        data: CANNED_RESPONSE,
-        status: 200,
-      }))
+      expect(resp).toBeUndefined()
     })
   })
 
@@ -43,7 +35,7 @@ describe('signOut', () => {
     })
 
     it('returns a serialized error response', async () => {
-      await expect(globalSignOut()).rejects.toThrow(ERROR_TEXT)
+      expect(globalSignOut).toThrow(ERROR_TEXT)
     })
   })
 })

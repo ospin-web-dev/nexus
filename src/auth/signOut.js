@@ -1,15 +1,11 @@
 const { default: Auth } = require('@aws-amplify/auth')
 
-const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
-
 /**
  * @desc signs out a user
  * @memberof nexus.auth
  * @function signOut
  * @async
- * @returns {Promise<AuthApiResponse>}
+ * @returns {undefined}
  */
 
-module.exports = serializeAxiosResponse(
-  () => Auth.signOut(),
-)
+module.exports = () => Auth.signOut()

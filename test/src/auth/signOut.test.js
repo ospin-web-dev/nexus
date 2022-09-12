@@ -7,29 +7,20 @@ describe('signOut', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.signOut method', async () => {
-    jest.spyOn(Auth, 'signOut').mockImplementation(() => Promise.resolve({}))
+    jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
 
     await signOut()
     expect(Auth.signOut).toHaveBeenCalledWith()
   })
 
   describe('on Auth.signOut success', () => {
-    const CANNED_RESPONSE = {
-      jeff: 'goldblum',
-      my: 'hero',
-    }
-
     beforeAll(() => {
-      jest.spyOn(Auth, 'signOut').mockImplementation(() => ({ status: 200, ...CANNED_RESPONSE }))
+      jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
     })
 
     it('returns the serialized result, with non-status properties in data', async () => {
       const resp = await signOut()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        data: CANNED_RESPONSE,
-        status: 200,
-      }))
+      expect(resp).toBeUndefined()
     })
   })
 
@@ -43,7 +34,7 @@ describe('signOut', () => {
     })
 
     it('returns a serialized error response', async () => {
-      await expect(signOut()).rejects.toThrow(ERROR_TEXT)
+      expect(signOut).toThrow(ERROR_TEXT)
     })
   })
 })
