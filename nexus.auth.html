@@ -26,7 +26,7 @@
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">namespace</span>&nbsp;<span class="label label-static">static</span></div>
             <h1><small><a href="nexus.html">nexus</a>.<wbr></small><span class="symbol-name">auth</span></h1>
-            <p class="source-link">Source: <a href="src_auth_index.js.html#source-line-11">src/<wbr>auth/<wbr>index.<wbr>js:11</a></p>
+            <p class="source-link">Source: <a href="src_auth_index.js.html#source-line-10">src/<wbr>auth/<wbr>index.<wbr>js:10</a></p>
             <div class="symbol-description">
             </div>
             <dl class="dl-compact">
@@ -57,17 +57,14 @@
                     <dt><a href="nexus.auth.html#.getCurrentSesssion">getCurrentSesssion()</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="nexus.auth.html#.globalSignOut">globalSignOut()</a></dt>
+                    <dt><a href="nexus.auth.html#.signIn">signIn(usernameOrEmail, password)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="nexus.auth.html#.signIn">signIn(usernameOrEmail, password)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="nexus.auth.html#.signOut">signOut()</a></dt>
+                    <dt><a href="nexus.auth.html#.signOut">signOut([params])</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="nexus.auth.html#.signUp">signUp(params)</a></dt>
@@ -395,16 +392,6 @@
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-async">async</span>&nbsp;<span class="label label-static">static</span></div>
-              <h3 id=".globalSignOut"><span class="symbol-name">globalSignOut</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> undefined</span></span></h3>
-              <p>signs out a user globally - the user remains logged on
-                other devices until the cognito session expires (1 hour)</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>undefined</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-async">async</span>&nbsp;<span class="label label-static">static</span></div>
               <h3 id=".signIn"><span class="symbol-name">signIn</span><span class="signature"><span class="signature-params">(usernameOrEmail, password)</span>&nbsp;&rarr; <span class="signature-returns"> Promise containing AuthApiResponse</span></span></h3>
               <p>signs in a user</p>
               <section>
@@ -455,8 +442,65 @@
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-async">async</span>&nbsp;<span class="label label-static">static</span></div>
-              <h3 id=".signOut"><span class="symbol-name">signOut</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> undefined</span></span></h3>
-              <p>signs out a user</p>
+              <h3 id=".signOut"><span class="symbol-name">signOut</span><span class="signature"><span class="signature-params">([params])</span>&nbsp;&rarr; <span class="signature-returns"> undefined</span></span></h3>
+              <p>signs out a user by invalidating their access token; when the global flag is set,
+                any access tokens on other machines are not refreshed anymore, i.e. they
+                expire within one hour</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>Values in <code>params</code> have the following properties:</p>
+                        <table class="jsdoc-details-table">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Type</th>
+                              <th>Optional</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <p>global</p>
+                              </td>
+                              <td>
+                                <p>boolean</p>
+                              </td>
+                              <td>
+                                <p>Yes</p>
+                              </td>
+                              <td>
+                                <p>Defaults to <code>false</code>.</p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>

@@ -32,14 +32,18 @@
             <pre class="prettyprint linenums"><code>const { default: Auth } &#x3D; require(&#x27;@aws-amplify/auth&#x27;)
 
 /**
- * @desc signs out a user
+ * @desc signs out a user by invalidating their access token; when the global flag is set,
+ * any access tokens on other machines are not refreshed anymore, i.e. they
+ * expire within one hour
  * @memberof nexus.auth
  * @function signOut
+ * @param {Object} [params]
+ * @param {boolean} [params.global&#x3D;false]
  * @async
  * @returns {undefined}
  */
 
-module.exports &#x3D; () &#x3D;&gt; Auth.signOut()
+module.exports &#x3D; ({ global &#x3D; false } &#x3D; {}) &#x3D;&gt; Auth.signOut({ global })
 </code></pre>
           </article>
         </div>
