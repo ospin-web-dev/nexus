@@ -1,15 +1,15 @@
 const { default: Auth } = require('@aws-amplify/auth')
 
-const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
-
 /**
- * @desc signs out a user
+ * @desc signs out a user by invalidating their access token; when the global flag is set,
+ * any access tokens on other machines are not refreshed anymore, i.e. they
+ * expire within one hour
  * @memberof nexus.auth
  * @function signOut
+ * @param {Object} [params]
+ * @param {boolean} [params.global=false]
  * @async
- * @returns {Promise<AuthApiResponse>}
+ * @returns {undefined}
  */
 
-module.exports = serializeAxiosResponse(
-  () => Auth.signOut(),
-)
+module.exports = ({ global = false } = {}) => Auth.signOut({ global })
