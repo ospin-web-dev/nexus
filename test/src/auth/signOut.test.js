@@ -10,7 +10,14 @@ describe('signOut', () => {
     jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
 
     await signOut()
-    expect(Auth.signOut).toHaveBeenCalledWith()
+    expect(Auth.signOut).toHaveBeenCalledWith({ global: false })
+  })
+
+  it('calls amplify\'s Auth.signOut method with gobal true when passed', async () => {
+    jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
+
+    await signOut({ global: true })
+    expect(Auth.signOut).toHaveBeenCalledWith({ global: true })
   })
 
   describe('on Auth.signOut success', () => {
