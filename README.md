@@ -1,192 +1,54 @@
 [![codecov](https://codecov.io/gh/ospin-web-dev/nexus/branch/main/graph/badge.svg?token=Js7X2xLEwB)](https://codecov.io/gh/ospin-web-dev/nexus)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a404fb8a258e6f46b81f/maintainability)](https://codeclimate.com/github/ospin-web-dev/nexus/maintainability)
 
-This documentation is likely to remain sparse, as it is for internal use and under development!
-
-[For additional documentation see our endpoint documentation](https://app.swaggerhub.com/apis-docs/OSPIN-Webapp/ospin-rest_api/latest)
-
+Documentation can be found [here](https://ospin-web-dev.github.io/nexus/).
 
 ---
 
 ## Table of Contents
 
-- [Use Overview](#UseOverview)
+- [Use Overview](#Overview)
   - [Configuration](#Configuration)
-  - [Authenticating as a User](#Authenticating-as-a-User)
-  - [Authenticating as a Device](#Authenticating-as-a-Device)
-- [API Documentation](#API-documentation)
-  - [Modules and their Methods](#modules-and-their-methods)
-  - [Helper Methods](#helper-methods)
+  - [Authenticating](#Authenticating-as-a-User)
 - [Use Examples](#Use-Examples)
 - [Contributing](#Contributing)
-- [Upcoming](#Upcoming)
-
 ---
 
-## <a name="UseOverview">Use Overview</a>
+## <a name="Overview">Overview</a>
 
-The @ospin/nexus exposes a set of conveniences methods wrapping calls to the OSPIN AWS backend, JSON serving, rest-like, API. Unless a method is explicitly labeled as using a public endpoint, or otherwise stated, all nexus consumers must do the following before using the methods provided:
-  - [configure the nexus for their environment](#Configuration)
-  - authenticate [as a User](#Authenticating-as-a-User) or [as a Device](#Authenticating-as-a-Device)
+The @ospin/nexus is a JavaScript SDK to communicate to Ospin's HTTP API. It is build on top of @aws-amplify. To use it, the user has to be registered at OSPIN.
+
+  - [configure nexus for the environment](#Configuration)
+  - [Authentication](#Authenticating-as-a-User)
 
 #### <a name="Configuration">Configuration</a>
 ```js
-const nexus = require('@ospin/nexus') // or import
+const nexus = require('@ospin/nexus')
 
-nexus.connect({
-  ENV: <oneOf['dev', 'staging', 'prod']>), // default: 'prod'
-  AWS_REGION, // default: 'eu-central-1'
-})
-// -> { result, config }
-
-// if you'd like to inspect the configuration object that `connect` is ultimately using:
-nexus.createConfig() // <- returns the default configuration
-nexus.createConfig({ ENV, AWS_REGION }) // <- returns a custom configuration
+nexus.configure() // set up the SDK for default usage
 ```
 
-#### <a name="Authenticating-as-a-User">Authenticating as a User</a>
+#### <a name="Authenticating-as-a-User">Authenticating</a>
 
 With the nexus configured, a user can authenticate as their OSPIN AWS Cognito user:
-```js
-const nexus = require('@ospin/nexus')
-
-nexus.auth.signIn(<username>, <password>) // may require 2FA
-```
-
-#### <a name="Authenticating-as-a-Device">Authenticating as a Device</a>
-
-With the nexus configured, a device can authenticate using its certificate:
-```js
-const nexus = require('@ospin/nexus')
-
-nexus.createConfig()
-nexus.connect()
-
-nexus.deviceAPI.authentication.setCredentials({
-  deviceId: <deviceId>,
-  pathToCert: <pathToCert>
-})
-
-
-nexus.deviceAPI.validateAuthorization()
-// -> { sucess, status, data, errorMsg }
-
-```
----
-
-## <a name="API-documentation">API Documentation</a>
-
-#### <a name="modules-and-their-methods">Modules and their Methods</a>
 
 ```js
-nexus
-├── auth
-│    ├── signIn(<username>, <password>) // may require 2FA
-│    ├── signOut()
-│    ├── globalSignOut()
-│    └── getCurrentSession()
-├── user
-│    ├── get(<userId>) // may require 2FA
-│    ├── list()
-│    ├── createDeletionRequest(<userId>)
-│    ├── update(<userId>, <userParamsObj>)
-│    └── notifications
-│         └── putAll(<notificationObj>)
-├── command
-│    └── device
-│         └── process
-│               └── startProcess(<deviceId>, <processId>)
-├── datapoints
-│    └── get(<processId>, <reporterFctId>, <params>)
-├── device
-│    ├── list()
-│    ├── create(<deviceParamsObj>)
-│    ├── createHeidolphCoreGateway(<deviceParamsObj>)
-│    └── certificate
-│         └── get(<deviceId>)
-├── log
-|    └── device
-|         └── deleteMany(<deviceId>)
-├── process
-|    ├── functionality
-|    │    └── image
-|    │          ├── create(<processId>, <fctId>, <body>)
-|    │          └── list(<processId>, <fctId>, <opts>)
-|    └── annotation
-│         ├── create({ processId: <processId>, data: <dataObject> })
-│         ├── delete({ processId: <processId>, annotationId: <annotationId> })
-│         └── update({ processId: <processId>, annotationId: <annotationId>, data: <dataObject> })
-└── deviceAPI
-     ├── authentication
-     |    ├── setCredentials({ deviceId, pathToCert })
-     |    └── validateAuthorization()
-     └── process
-          ├── get(<processId>)
-          └── functionality
-               └── image
-                    ├── createFromUri(<processId>, <fctId>, <body>)
-                    └── createFromFile(<processId>, <fctId>, <body>)
+const username = 'Nero'
+const password = 'BurnRome'
+nexus.auth.signIn(username, password) // may require 2FA
 ```
-
-
-##### **All methods above return a standardized response object, e.g.:**
-```js
-const nexus = require('@ospin/nexus')
-
-const {
-  success: <boolean>,
-  status: <100 - 500>, // HTTP response status code
-  data: {}, // JSON safe object
-  error: <errObj>, // the error if the request failed
-  errorMsg: <string>, // a conveniently parsed error message
-} = nexus.user.list()
-
-```
-
-#### <a name="helper-methods">Helper Methods</a>
-
-```js
-nexus
-├── createConfig(connectionOpts) // See the #Configuration section above
-└── connect(connectionOpts) // uses createConfig's returned object - sets the configuration to the nexus
-```
-
----
 
 ## <a name="Use-Examples">Use Example</a>
 ```js
-// getting the list representation of all devices (that the authenticated consumer is privileged to)
-const nexus = require('@ospin/nexus')
+// loading a process
 
-nexus.connect()
-
-const username = 'Nero Claudius Caesar Augustus Germanicus'
-const password = 'BurnRomeToMakeANewPalace@Good-Plan-&-Ok-Password',
-
-nexus.auth.signIn(username, password)
-
+const processId = "a3339d89-345b-4baf-9859-46a4542a505a"
 const {
-  success: listDevicesWasSuccessful,
-  data: devicesList,
-  errorMsg: listDevicesErrorMsg,
-  error: listDevicesError
-} = nexus.device.list()
+  status: 200,
+  data: process,
+} = await nexus.process.get(processId)
 
-if (listDevicesWasSuccessful) {
-  console.log(deviceList)
-  // -> [ { ...deviceObj }, { ...deviceObj }, ... ]
-} else {
-  // kindly find out why...
-  console.error(errorMsg)
-
-  // ..or live up to the username and be an unforgiving and unyielding tyrant
-  throw listDevicesError
-  // -> 💣
-}
 
 ```
-
----
 
 ## <a name="Contributing">Contributing</a>
 
@@ -207,5 +69,4 @@ Available types:
  - chore: Other changes that don't modify src or test files
  - revert: Reverts a previous commit
 
----
-
+Add BREAKING CHANGE into the commit message body (!) to indicate a major version release.

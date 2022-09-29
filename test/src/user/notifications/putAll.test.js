@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const uuidv4 = require('uuid').v4
+const faker = require('faker')
 
 const putAll = require('user/notifications/putAll')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -10,7 +10,7 @@ describe('putAll user notifications', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const body = {
-    originId: uuidv4(),
+    originId: faker.datatype.uuid(),
     sourceName: 'macrophage',
     sourceType: 'user',
     topic: 'changelog',

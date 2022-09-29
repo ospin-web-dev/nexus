@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const uuidv4 = require('uuid').v4
+const faker = require('faker')
 
 const deleteMany = require('log/device/deleteMany')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -11,7 +11,7 @@ describe('deleteMany', () => {
 
   it('calls amplify\'s API.del method', async () => {
     jest.spyOn(API, 'del').mockImplementation(args => args)
-    const deviceId = uuidv4()
+    const deviceId = faker.datatype.uuid()
 
     await deleteMany(deviceId)
     expect(API.del).toHaveBeenCalledWith('log', `devices/${deviceId}`, { ...DEFAULT_REQ_OPTS })

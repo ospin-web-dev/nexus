@@ -13,7 +13,7 @@ describe('forgotPasswordSubmit', () => {
   afterEach(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.forgotPasswordSubmit method', async () => {
-    jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation()
+    jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation(() => Promise.resolve({}))
 
     await forgotPasswordSubmit(params)
     expect(Auth.forgotPasswordSubmit).toHaveBeenCalledTimes(1)
@@ -22,7 +22,7 @@ describe('forgotPasswordSubmit', () => {
 
   describe('when an email is used', () => {
     it('calls amplify\'s Auth.forgotPasswordSubmit method with the lower cased email', async () => {
-      jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation()
+      jest.spyOn(Auth, 'forgotPasswordSubmit').mockImplementation(() => Promise.resolve({}))
       const paramsWithEmail = {
         usernameOrEmail: 'Paterson@paterson.us',
         code: '873819',
@@ -49,10 +49,7 @@ describe('forgotPasswordSubmit', () => {
       const resp = await forgotPasswordSubmit(params)
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: res.data,
-        errorMsg: null,
-        error: null,
         status: 200,
       }))
     })
@@ -68,15 +65,7 @@ describe('forgotPasswordSubmit', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await forgotPasswordSubmit(params)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: ERROR_TEXT,
-        error,
-        status: null,
-      }))
+      await expect(forgotPasswordSubmit(params)).rejects.toThrow(ERROR_TEXT)
     })
   })
 })

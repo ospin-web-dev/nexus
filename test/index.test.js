@@ -15,8 +15,7 @@ describe('nexus', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const MODULE_STRUCTURE = {
-    connect: 'function',
-    createConfig: 'function',
+    configure: 'function',
     auth: {
       changePassword: 'function',
       confirmSignUp: 'function',
@@ -25,18 +24,17 @@ describe('nexus', () => {
       getCurrentSession: 'function',
       signIn: 'function',
       signOut: 'function',
-      globalSignOut: 'function',
       signUp: 'function',
     },
     command: {
       device: {
         process: {
-          endProcess: 'function',
-          nextPhase: 'function',
-          pauseProcess: 'function',
-          resumeProcess: 'function',
-          startProcess: 'function',
-          updateRunningProcess: 'function',
+          end: 'function',
+          goToNextPhase: 'function',
+          pause: 'function',
+          resume: 'function',
+          start: 'function',
+          updateRunning: 'function',
         },
         openSsh: 'function',
         updateFirmware: 'function',
@@ -44,11 +42,18 @@ describe('nexus', () => {
     },
     dataPoints: {
       get: 'function',
-      requestReporterFctData: 'function',
-      requestAllReporterFctData: 'function',
-      getDownloadRequests: 'function',
+      downloadRequest: {
+        createForReporter: 'function',
+        createForProcess: 'function',
+        list: 'function',
+      },
     },
     device: {
+      access: {
+        grant: 'function',
+        revoke: 'function',
+        modify: 'function',
+      },
       certificate: {
         get: 'function',
       },
@@ -66,47 +71,25 @@ describe('nexus', () => {
       functionalityGraph: {
         ports: {
           update: 'function',
+        configuration: {
+          get: 'function',
+        },
+        physicalMapping: {
+          get: 'function',
         },
       },
       get: 'function',
       getUserInvitations: 'function',
-      grantAccess: 'function',
       manufacturer: {
         list: 'function',
         deviceType: {
           list: 'function',
         },
       },
-      modifyAccess: 'function',
-      revokeAccess: 'function',
       transferOwnership: 'function',
       list: 'function',
       remove: 'function',
       update: 'function',
-    },
-    deviceAPI: {
-      authentication: {
-        validateAuthorization: 'function',
-        setCredentials: 'function',
-      },
-      process: {
-        get: 'function',
-        functionality: {
-          image: {
-            createFromFile: 'function',
-            createFromURI: 'function',
-          },
-        },
-        stream: {
-          image: {
-            createFromFile: 'function',
-            createFromURI: 'function',
-          },
-        },
-      },
-      configuration: {
-        update: 'function',
-      },
     },
     event: {
       device: {
@@ -117,7 +100,9 @@ describe('nexus', () => {
     licence: {
       create: 'function',
       list: 'function',
-      listTypes: 'function',
+      type: {
+        list: 'function',
+      },
       update: 'function',
     },
     log: {
@@ -127,6 +112,11 @@ describe('nexus', () => {
       list: 'function',
     },
     process: {
+      access: {
+        grant: 'function',
+        modify: 'function',
+        revoke: 'function',
+      },
       annotation: {
         create: 'function',
         remove: 'function',
@@ -145,33 +135,19 @@ describe('nexus', () => {
         },
       },
       get: 'function',
-      grantAccess: 'function',
       list: 'function',
-      modifyAccess: 'function',
       preview: {
         get: 'function',
       },
-      revokeAccess: 'function',
       snapshot: {
         list: 'function',
       },
       update: 'function',
     },
-    pusher: {
-      OspinPusherClient: 'function',
-      DevicePusherChannel: 'function',
-      DeviceMaintenancePusherChannel: 'function',
-      DeviceProcessesPusherChannel: 'function',
-      DeviceProcessPusherChannel: 'function',
-      DeviceProcessStreamingDataPusherChannel: 'function',
-    },
     uIConfig: {
       userFctGraphUIConfig: {
         put: 'function',
         get: 'function',
-      },
-      device: {
-        put: 'function',
       },
     },
     user: {
@@ -286,7 +262,7 @@ describe('nexus', () => {
 
   describe('connect', () => {
     it('calls createConfig with the expected default connection options if none are provided', () => {
-      nexus.connect()
+      nexus.configure()
 
       expect(configGenerator.createConfig).toHaveBeenCalledWith({
         ENV: 'dev',
@@ -303,7 +279,7 @@ describe('nexus', () => {
         ENV: 'test',
         AWS_REGION: 'its-all-merkels-realm-now',
       }
-      nexus.connect(connectionOpts)
+      nexus.configure(connectionOpts)
 
       expect(Amplify.configure).toHaveBeenCalledWith(
         injectMerkelIntoArgObjectAndReturn(connectionOpts),

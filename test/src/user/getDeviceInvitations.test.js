@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const uuidv4 = require('uuid').v4
+const faker = require('faker')
 
 const getDeviceInvitations = require('user/getDeviceInvitations')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -9,7 +9,7 @@ describe('get', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const userId = uuidv4()
+  const userId = faker.datatype.uuid()
 
   it('calls amplify\'s API.get', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)

@@ -5,8 +5,11 @@ const forgotPasswordSubmit = require('./forgotPasswordSubmit')
 const getCurrentSession = require('./getCurrentSession')
 const signIn = require('./signIn')
 const signOut = require('./signOut')
-const globalSignOut = require('./globalSignOut')
 const signUp = require('./signUp')
+
+/**
+ * @namespace nexus.auth
+ */
 
 module.exports = {
   changePassword,
@@ -16,6 +19,5 @@ module.exports = {
   getCurrentSession,
   signIn,
   signOut,
-  globalSignOut,
   signUp,
 }

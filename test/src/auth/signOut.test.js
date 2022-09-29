@@ -7,37 +7,33 @@ describe('signOut', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   it('calls amplify\'s Auth.signOut method', async () => {
-    jest.spyOn(Auth, 'signOut').mockImplementation()
+    jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
 
     await signOut()
-    expect(Auth.signOut).toHaveBeenCalledWith()
+    expect(Auth.signOut).toHaveBeenCalledWith({ global: false })
+  })
+
+  it('calls amplify\'s Auth.signOut method with gobal true when passed', async () => {
+    jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
+
+    await signOut({ global: true })
+    expect(Auth.signOut).toHaveBeenCalledWith({ global: true })
   })
 
   describe('on Auth.signOut success', () => {
-    const CANNED_RESPONSE = {
-      jeff: 'goldblum',
-      my: 'hero',
-    }
-
     beforeAll(() => {
-      jest.spyOn(Auth, 'signOut').mockImplementation(() => ({ status: 200, ...CANNED_RESPONSE }))
+      jest.spyOn(Auth, 'signOut').mockImplementation(() => undefined)
     })
 
     it('returns the serialized result, with non-status properties in data', async () => {
       const resp = await signOut()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
-        data: CANNED_RESPONSE,
-        error: null,
-        errorMsg: null,
-        status: 200,
-      }))
+      expect(resp).toBeUndefined()
     })
   })
 
   describe('on Auth.signOut error', () => {
-    const error = new Error()
+    const ERROR_TEXT = 'session error'
+    const error = new Error(ERROR_TEXT)
 
     beforeAll(() => {
       jest.spyOn(Auth, 'signOut')
@@ -45,15 +41,7 @@ describe('signOut', () => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await signOut()
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        error,
-        errorMsg: '',
-        status: null,
-      }))
+      expect(signOut).toThrow(ERROR_TEXT)
     })
   })
 })

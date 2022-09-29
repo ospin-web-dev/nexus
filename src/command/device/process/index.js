@@ -1,15 +1,19 @@
-const endProcess = require('./endProcess')
-const nextPhase = require('./nextPhase')
-const pauseProcess = require('./pauseProcess')
-const resumeProcess = require('./resumeProcess')
-const startProcess = require('./startProcess')
-const updateRunningProcess = require('./updateRunningProcess')
+const end = require('./end')
+const goToNextPhase = require('./goToNextPhase')
+const pause = require('./pause')
+const resume = require('./resume')
+const start = require('./start')
+const updateRunning = require('./updateRunning')
+
+/**
+ * @namespace nexus.command.device.process
+ */
 
 module.exports = {
-  endProcess,
-  nextPhase,
-  pauseProcess,
-  resumeProcess,
-  startProcess,
-  updateRunningProcess,
+  end,
+  goToNextPhase,
+  pause,
+  resume,
+  start,
+  updateRunning,
 }

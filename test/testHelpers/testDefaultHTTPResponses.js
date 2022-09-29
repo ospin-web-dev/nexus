@@ -13,17 +13,15 @@ module.exports = (fn, httpVerb, fnParams = []) => {
       const resp = await fn(...fnParams)
 
       expect(resp).toStrictEqual(expect.objectContaining({
-        success: true,
         data: 'success!',
-        errorMsg: null,
-        error: null,
         status: 200,
       }))
     })
   })
 
   describe(`on API.${httpVerb} error`, () => {
-    const error = new Error()
+    const ERROR_TEXT = 'BAM HTTP ERROR'
+    const error = new Error(ERROR_TEXT)
 
     beforeAll(() => {
       jest.spyOn(API, httpVerb)
@@ -31,15 +29,7 @@ module.exports = (fn, httpVerb, fnParams = []) => {
     })
 
     it('returns a serialized error response', async () => {
-      const resp = await fn(...fnParams)
-
-      expect(resp).toStrictEqual(expect.objectContaining({
-        success: false,
-        data: null,
-        errorMsg: '',
-        error,
-        status: null,
-      }))
+      await expect(fn(...fnParams)).rejects.toThrow(ERROR_TEXT)
     })
   })
 

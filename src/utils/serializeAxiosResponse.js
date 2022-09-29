@@ -1,4 +1,19 @@
-// without ?. these end up rather ugly!
+const HTTPError = require('./HTTPError')
+
+/**
+ * @desc API response in case of a successful API call
+ * @typedef ApiResponse
+ * @memberOf nexus
+ * @property {object} data contains the server response
+ * @property {number} status contains the server status code
+ */
+
+/**
+ * @desc API response for the auth service; for responses check {@link https://aws-amplify.github.io/amplify-js/api/classes/authclass.html | the amplify auth module documentation}
+ * @typedef AuthApiResponse
+ * @memberOf nexus
+ */
+
 const extractErrorMsg = error => (
   (
     error
@@ -16,19 +31,6 @@ const extractStatusCode = error => (
   ) || null
 )
 
-const DEFAULT_RESPONSE = {
-  success: null,
-  status: null,
-  data: null,
-  error: null,
-  errorMsg: null,
-}
-
-const serializeResponse = res => ({
-  ...DEFAULT_RESPONSE,
-  ...res,
-})
-
 /* This can wrap requests from the 'aws-amplify' packages `Auth`and
  * `API` modules.
  *
@@ -42,19 +44,15 @@ module.exports = fn => (
   async (...args) => {
     try {
       const { status, data, ...rest } = await fn(...args)
-
-      return serializeResponse({
-        success: true,
+      return {
         status,
         data: data || rest,
-      })
-
+      }
     } catch (e) {
-      return serializeResponse({
-        success: false,
-        status: extractStatusCode(e),
+      throw new HTTPError({
+        message: extractErrorMsg(e),
         error: e,
-        errorMsg: extractErrorMsg(e),
+        status: extractStatusCode(e),
       })
     }
   }

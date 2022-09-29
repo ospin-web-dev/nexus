@@ -17,11 +17,15 @@ module.exports = ({
     afterAll(() => { jest.restoreAllMocks() })
 
     it(`calls amplify's API.${httpVerb} method`, async () => {
-      jest.spyOn(API, httpVerb).mockImplementation(args => args)
+      jest.spyOn(API, httpVerb).mockImplementation((args = {}) => args)
 
       await handler(...params)
       expect(API[httpVerb])
-        .toHaveBeenCalledWith(serviceName, expectedURLSegment, { ...expectedPayload, ...DEFAULT_REQ_OPTS })
+        .toHaveBeenCalledWith(
+          serviceName,
+          expectedURLSegment,
+          { ...expectedPayload, ...DEFAULT_REQ_OPTS },
+        )
     })
 
     testDefaultHTTPResponses(handler, httpVerb, params)

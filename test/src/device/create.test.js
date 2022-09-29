@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const uuidv4 = require('uuid').v4
+const faker = require('faker')
 
 const create = require('device/create')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -13,7 +13,7 @@ describe('create device', () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
     const body = {
-      ownerId: uuidv4(),
+      ownerId: faker.datatype.uuid(),
       name: 'knuckles',
       isVirtual: false,
     }
