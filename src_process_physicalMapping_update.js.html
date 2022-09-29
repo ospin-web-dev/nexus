@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/dataPoints/index.js</title>
+  <title>Source: src/process/physicalMapping/update.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,20 +26,22 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/dataPoints/index.js</h1>
+            <h1>Source: src/process/physicalMapping/update.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const downloadRequest &#x3D; require(&#x27;./downloadRequest&#x27;)
-const get &#x3D; require(&#x27;./get&#x27;)
+            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
 
 /**
- * @namespace nexus.dataPoints
+ * synchronizes the ports for this process with the currently set ports on the device
+ * @param processId the Id of the process to be updated
+ * @async
+ * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
-
-module.exports &#x3D; {
-  downloadRequest,
-  get,
-}
+module.exports &#x3D; serializeAxiosResponse(
+  processId &#x3D;&gt; API.post(&#x60;processes/${processId}/physical-mappings&#x60;, { body: {}, ...DEFAULT_REQ_OPTS }),
+)
 </code></pre>
           </article>
         </div>
