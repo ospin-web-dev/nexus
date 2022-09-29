@@ -4,6 +4,7 @@ const createHeidolphCoreGateway = require('./createHeidolphCoreGateway')
 
 const functionality = require('./functionality')
 const functionalityConfiguration = require('./functionalityConfiguration')
+const functionalityGraph = require('./functionalityGraph')
 const get = require('./get')
 const getUserInvitations = require('./getUserInvitations')
 const grantAccess = require('./grantAccess')
@@ -21,6 +22,7 @@ module.exports = {
   createHeidolphCoreGateway,
   functionality,
   functionalityConfiguration,
+  functionalityGraph,
   get,
   getUserInvitations,
   grantAccess,

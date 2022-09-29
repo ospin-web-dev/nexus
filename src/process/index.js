@@ -3,6 +3,7 @@ const clone = require('./clone')
 const create = require('./create')
 const deleteMany = require('./deleteMany')
 const functionality = require('./functionality')
+const physicalMapping = require('./physicalMapping')
 const get = require('./get')
 const grantAccess = require('./grantAccess')
 const list = require('./list')
@@ -21,6 +22,7 @@ module.exports = {
   deleteMany,
   grantAccess,
   functionality,
+  physicalMapping,
   modifyAccess,
   preview,
   revokeAccess,

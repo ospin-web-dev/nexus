@@ -63,6 +63,11 @@ describe('nexus', () => {
       functionalityConfiguration: {
         updateMany: 'function',
       },
+      functionalityGraph: {
+        ports: {
+          update: 'function',
+        },
+      },
       get: 'function',
       getUserInvitations: 'function',
       grantAccess: 'function',
@@ -126,6 +131,9 @@ describe('nexus', () => {
         create: 'function',
         remove: 'function',
         update: 'function',
+      },
+      physicalMapping: {
+        update: 'function'
       },
       create: 'function',
       clone: 'function',
