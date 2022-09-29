@@ -71,6 +71,7 @@ describe('nexus', () => {
       functionalityGraph: {
         ports: {
           update: 'function',
+        },
         configuration: {
           get: 'function',
         },

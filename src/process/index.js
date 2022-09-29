@@ -25,7 +25,6 @@ module.exports = {
   deleteMany,
   functionality,
   physicalMapping,
-  modifyAccess,
   preview,
   snapshot,
   update,
