@@ -8,7 +8,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @param fctGraphId the Id of the fctGraph to be updated
  * @param body the request body
  * @async
- * @returns {Promise <object>} Promise resolving to a serialized process object
+ * @returns {Promise<ApiResponse>}
  */
 module.exports = serializeAxiosResponse(
   (deviceId, fctGraphId, body) => API
