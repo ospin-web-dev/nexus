@@ -9,5 +9,5 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @returns {Promise<ApiResponse>}
  */
 module.exports = serializeAxiosResponse(
-  processId => API.post(`processes/${processId}/physical-mappings`, { body: {}, ...DEFAULT_REQ_OPTS }),
+  processId => API.post('process', `processes/${processId}/physical-mappings`, { body: {}, ...DEFAULT_REQ_OPTS }),
 )
