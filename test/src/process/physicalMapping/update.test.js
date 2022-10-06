@@ -12,6 +12,6 @@ testHTTPEndpoint({
   httpVerb: 'post',
   serviceName: 'process',
   params: [processId],
-  expectedURLSegment: `processes/${processId}/physical-mappings`,
+  expectedURLSegment: `${processId}/physical-mappings`,
   expectedPayload: { body: {}, ...DEFAULT_REQ_OPTS },
 })
