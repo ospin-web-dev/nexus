@@ -40,7 +40,7 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 module.exports &#x3D; serializeAxiosResponse(
-  processId &#x3D;&gt; API.post(&#x27;process&#x27;, &#x60;processes/${processId}/physical-mappings&#x60;, { body: {}, ...DEFAULT_REQ_OPTS }),
+  processId &#x3D;&gt; API.post(&#x27;process&#x27;, &#x60;${processId}/physical-mappings&#x60;, { body: {}, ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>
