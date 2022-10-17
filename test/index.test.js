@@ -78,6 +78,7 @@ describe('nexus', () => {
         physicalMapping: {
           get: 'function',
         },
+        update: 'function',
       },
       get: 'function',
       getUserInvitations: 'function',
