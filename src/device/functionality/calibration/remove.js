@@ -10,12 +10,17 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @async
  * @param {Object} params
  * @param {string} params.deviceId
+ * @param {string} params.fctGraphId
  * @param {string} params.fctId
  * @param {string} params.slotName
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  ({ deviceId, fctId, slotName }) => API
-    .patch('device', `${deviceId}/functionalities/${fctId}/calibrations`, { body: { slotName }, ...DEFAULT_REQ_OPTS }),
+  ({ deviceId, fctGraphId, fctId, slotName }) => API
+    .patch(
+      'device',
+      `${deviceId}/configurations/${fctGraphId}/functionalities/${fctId}/calibrations`,
+      { body: { slotName }, ...DEFAULT_REQ_OPTS },
+    ),
 )

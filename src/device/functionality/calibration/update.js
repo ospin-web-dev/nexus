@@ -10,6 +10,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @async
  * @param {Object} params
  * @param {string} params.deviceId
+ * @param {string} params.fctGraphId
  * @param {string} params.fctId
  * @param {string} params.slotName
  * @param {Object} params.params
@@ -23,8 +24,8 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  */
 
 module.exports = serializeAxiosResponse(
-  ({ deviceId, fctId, slotName, params }) => API
-    .post('device', `${deviceId}/functionalities/${fctId}/calibrations`, {
+  ({ deviceId, fctGraphId, fctId, slotName, params }) => API
+    .post('device', `${deviceId}/configurations/${fctGraphId}/functionalities/${fctId}/calibrations`, {
       body: {
         slotName,
         calibrationData: params,

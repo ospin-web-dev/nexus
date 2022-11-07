@@ -12,6 +12,7 @@ describe('update calibration', () => {
   const params = {
     deviceId: faker.datatype.uuid(),
     fctId: faker.datatype.uuid(),
+    fctGraphId: faker.datatype.uuid(),
     slotName: 'notebook',
     params: [],
   }
@@ -22,7 +23,7 @@ describe('update calibration', () => {
     await update(params)
     expect(API.post).toHaveBeenCalledWith(
       'device',
-      `${params.deviceId}/functionalities/${params.fctId}/calibrations`,
+      `${params.deviceId}/configurations/${params.fctGraphId}/functionalities/${params.fctId}/calibrations`,
       { body: { slotName: params.slotName, calibrationData: params.params }, ...DEFAULT_REQ_OPTS },
     )
   })

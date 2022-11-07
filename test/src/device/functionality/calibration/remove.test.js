@@ -12,6 +12,7 @@ describe('remove calibration', () => {
   const params = {
     deviceId: faker.datatype.uuid(),
     fctId: faker.datatype.uuid(),
+    fctGraphId: faker.datatype.uuid(),
     slotName: 'notebook',
   }
 
@@ -21,7 +22,7 @@ describe('remove calibration', () => {
     await remove(params)
     expect(API.patch).toHaveBeenCalledWith(
       'device',
-      `${params.deviceId}/functionalities/${params.fctId}/calibrations`,
+      `${params.deviceId}/configurations/${params.fctGraphId}/functionalities/${params.fctId}/calibrations`,
       { body: { slotName: params.slotName }, ...DEFAULT_REQ_OPTS },
     )
   })
