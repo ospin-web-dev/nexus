@@ -11,8 +11,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @param {string} deviceId
  * @param {string} fctGraphId
  * @param {string} fctId
- * @param {string} slotName
- * @param {Object} payload
+ * @param {Object} body
 
  * @returns {Promise<ApiResponse>}
  */
