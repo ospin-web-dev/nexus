@@ -8,27 +8,15 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @memberof nexus.device.functionality.calibration
  * @function update
  * @async
- * @param {Object} params
- * @param {string} params.deviceId
- * @param {string} params.fctId
- * @param {string} params.slotName
- * @param {Object} params.params
- * @param {Object} params.params.offset
- * @param {Object} params.params.slope
- * @param {number} params.params.offset.value
- * @param {boolean} params.params.offset.locked
- * @param {number} params.params.slope.value
- * @param {boolean} params.params.slope.locked
+ * @param {string} deviceId
+ * @param {string} fctGraphId
+ * @param {string} fctId
+ * @param {Object} body
+
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  ({ deviceId, fctId, slotName, params }) => API
-    .post('device', `${deviceId}/functionalities/${fctId}/calibrations`, {
-      body: {
-        slotName,
-        calibrationData: params,
-      },
-      ...DEFAULT_REQ_OPTS,
-    }),
+  (deviceId, fctGraphId, fctId, body) => API
+    .post('device', `${deviceId}/configurations/${fctGraphId}/functionalities/${fctId}/calibrations`, { body, ...DEFAULT_REQ_OPTS }),
 )
