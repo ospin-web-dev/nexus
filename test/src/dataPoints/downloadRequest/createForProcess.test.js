@@ -10,12 +10,13 @@ describe('createForProcess', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const processId = faker.datatype.uuid()
+  const body = { reporterFctIds: [faker.datatype.uuid()] }
 
   it('calls amplify\'s API.post method', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
-    await createForProcess(processId)
-    expect(API.post).toHaveBeenCalledWith('datapoints', `processes/${processId}/downloadrequests`, { ...DEFAULT_REQ_OPTS })
+    await createForProcess(processId, body)
+    expect(API.post).toHaveBeenCalledWith('datapoints', `processes/${processId}/downloadrequests`, { body, ...DEFAULT_REQ_OPTS })
   })
 
   testDefaultHTTPResponses(createForProcess, 'post')
