@@ -9,10 +9,11 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @function createForProcess
  * @async
  * @param {string} processId
+ * @param {object} the request body
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  processId => API
-    .post('datapoints', `processes/${processId}/downloadrequests`, { ...DEFAULT_REQ_OPTS }),
+  (processId, body) => API
+    .post('datapoints', `processes/${processId}/downloadrequests`, { body,...DEFAULT_REQ_OPTS }),
 )
