@@ -12,7 +12,10 @@ describe('list', () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
 
     await list()
-    expect(API.get).toHaveBeenCalledWith('device', '', { ...DEFAULT_REQ_OPTS })
+    expect(API.get).toHaveBeenCalledWith('device', '', {
+      queryStringParameters: {},
+      ...DEFAULT_REQ_OPTS,
+    })
   })
 
   testDefaultHTTPResponses(list, 'get')
