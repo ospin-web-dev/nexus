@@ -92,6 +92,7 @@ describe('nexus', () => {
       list: 'function',
       remove: 'function',
       update: 'function',
+      validate: 'function',
     },
     event: {
       device: {
