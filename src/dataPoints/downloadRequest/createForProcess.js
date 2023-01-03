@@ -8,7 +8,7 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @memberof nexus.dataPoints.downloadRequest
  * @function createForProcess
  * @async
- * @param {string} processId the id of the process
+ * @param {string} processId
  * @param {object} the request body
  * @returns {Promise<ApiResponse>}
  */
