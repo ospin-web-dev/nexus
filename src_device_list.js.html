@@ -33,30 +33,17 @@
 
 const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
 const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
-const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
 
 /**
- * @desc queries the devices collection
+ * @desc returns all devices
  * @memberof nexus.device
  * @function list
  * @async
- * @param {Object} params
- * @param {string} params.textQuery
- * @param {string} params.textQueryField
- * @param {string} params.sortBy
- * @param {string} params.sortOrder
- * @param {boolean} params.embedOwners
- * @param {boolean} params.embedManufacturers
- * @param {number} params.skip
- * @param {number} params.limit
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  (queryStringParameters &#x3D; {}) &#x3D;&gt; API.get(&#x27;device&#x27;, &#x27;&#x27;, {
-    queryStringParameters: removeUndefinedKeys(queryStringParameters),
-    ...DEFAULT_REQ_OPTS,
-  }),
+  () &#x3D;&gt; API.get(&#x27;device&#x27;, &#x27;&#x27;, { ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>
