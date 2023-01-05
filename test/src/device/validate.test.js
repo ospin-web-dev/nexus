@@ -5,7 +5,7 @@ const validate = require('device/validate')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPResponses')
 
-describe('get', () => {
+describe('validate', () => {
 
   const deviceId = faker.datatype.uuid()
 

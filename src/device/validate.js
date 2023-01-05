@@ -4,7 +4,7 @@ const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 /**
- * @desc returns limited information to validate a device after installation
+ * @desc returns limited device data 
  * @memberof nexus.device
  * @function validate
  * @async
