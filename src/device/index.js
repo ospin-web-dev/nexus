@@ -13,6 +13,7 @@ const remove = require('./remove')
 const transferOwnership = require('./transferOwnership')
 const update = require('./update')
 const manufacturer = require('./manufacturer')
+const validate = require('./validate')
 
 /**
  * @namespace nexus.device
@@ -33,4 +34,5 @@ module.exports = {
   transferOwnership,
   update,
   manufacturer,
+  validate,
 }
