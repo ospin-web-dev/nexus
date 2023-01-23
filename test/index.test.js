@@ -101,6 +101,7 @@ describe('nexus', () => {
       remove: 'function',
     },
     licence: {
+      preAssign: 'function',
       create: 'function',
       list: 'function',
       type: {
