@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/auth/confirmSignUp.js</title>
+  <title>Source: src/process/reports/list.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,27 +26,25 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/auth/confirmSignUp.js</h1>
+            <h1>Source: src/process/reports/list.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const { default: Auth } &#x3D; require(&#x27;@aws-amplify/auth&#x27;)
+            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
 
-const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
 
 /**
- * @desc confirms the sign up of a user
- * @memberof nexus.auth
- * @function confirmSignUp
+ * @desc list all download request for a process
+ * @memberof nexus.process.reports
+ * @function list
  * @async
- * @param {Object} params
- * @param {string} params.username
- * @param {string} params.code
- * @returns {Promise&amp;lt;AuthApiResponse&gt;}
+ * @param {string} processId
+ * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  async ({ username, code }) &#x3D;&gt; Auth
-    .confirmSignUp(username, code),
+  processId &#x3D;&gt; API.get(&#x27;process&#x27;, &#x60;${processId}/report-requests&#x60;, { ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>
