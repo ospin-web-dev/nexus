@@ -143,6 +143,10 @@ describe('nexus', () => {
       preview: {
         get: 'function',
       },
+      reports: {
+        create: 'function',
+        list: 'function',
+      },
       snapshot: {
         list: 'function',
       },

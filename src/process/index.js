@@ -8,6 +8,7 @@ const physicalMapping = require('./physicalMapping')
 const get = require('./get')
 const list = require('./list')
 const preview = require('./preview')
+const reports = require('./reports')
 const snapshot = require('./snapshot')
 const update = require('./update')
 
@@ -26,6 +27,7 @@ module.exports = {
   functionality,
   physicalMapping,
   preview,
+  reports,
   snapshot,
   update,
 }
