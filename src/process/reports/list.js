@@ -4,7 +4,7 @@ const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 
 /**
- * @desc list all download request for a process
+ * @desc list all process report requests for a process
  * @memberof nexus.process.reports
  * @function list
  * @async
