@@ -10,6 +10,7 @@ const { DEFAULT_REQ_OPTS } = require('../../../utils/defaultReqOpts')
  * @async
  * @param {Object} params
  * @param {string} params.deviceId
+ * @param {string} params.fctGraphId
  * @param {Array} params.updates
  * @returns {Promise<ApiResponse>}
  */
