@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/device/list.js</title>
+  <title>Namespace: physicalMapping</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -22,44 +22,20 @@
   <div id="jsdoc-body-container">
     <div id="jsdoc-content">
       <div id="jsdoc-content-container">
-        <div id="jsdoc-banner" role="banner">
-        </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/device/list.js</h1>
+            <div class="symbol-detail-labels"><span class="label label-kind">namespace</span>&nbsp;<span class="label label-static">static</span></div>
+            <h1><small><a href="nexus.html">nexus</a>.<wbr><a href="nexus.process.html">process</a>.<wbr></small><span class="symbol-name">physicalMapping</span></h1>
+            <p class="source-link">Source: <a href="src_process_physicalMapping_index.js.html#source-line-3">src/<wbr>process/<wbr>physicalMapping/<wbr>index.<wbr>js:3</a></p>
+            <div class="symbol-description">
+            </div>
+            <dl class="dl-compact">
+            </dl>
           </header>
-          <article>
-            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
-
-const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
-const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
-
-/**
- * @desc queries the devices collection
- * @memberof nexus.device
- * @function list
- * @async
- * @param {Object} params
- * @param {string} params.textQuery
- * @param {string} params.textQueryField
- * @param {string} params.sortBy
- * @param {string} params.sortOrder
- * @param {boolean} params.embedOwners
- * @param {boolean} params.embedManufacturers
- * @param {number} params.skip
- * @param {number} params.limit
- * @returns {Promise&amp;lt;ApiResponse&gt;}
- */
-
-module.exports &#x3D; serializeAxiosResponse(
-  (queryStringParameters &#x3D; {}) &#x3D;&gt; API.get(&#x27;device&#x27;, &#x27;&#x27;, {
-    queryStringParameters: removeUndefinedKeys(queryStringParameters),
-    ...DEFAULT_REQ_OPTS,
-  }),
-)
-</code></pre>
-          </article>
+          <section id="summary">
+          </section>
+          <section>
+          </section>
         </div>
       </div>
       <nav id="jsdoc-toc-nav" role="navigation"></nav>

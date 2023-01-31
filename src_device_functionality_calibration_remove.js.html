@@ -39,16 +39,20 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../../utils/defaultReqOpts&#x
  * @memberof nexus.device.functionality.calibration
  * @function remove
  * @async
- * @param {Object} params
- * @param {string} params.deviceId
- * @param {string} params.fctId
- * @param {string} params.slotName
+ * @param {string} deviceId
+ * @param {string} fctGraphId
+ * @param {string} fctId
+ * @param {object} body
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  ({ deviceId, fctId, slotName }) &#x3D;&gt; API
-    .patch(&#x27;device&#x27;, &#x60;${deviceId}/functionalities/${fctId}/calibrations&#x60;, { body: { slotName }, ...DEFAULT_REQ_OPTS }),
+  (deviceId, fctGraphId, fctId, body) &#x3D;&gt; API
+    .patch(
+      &#x27;device&#x27;,
+      &#x60;${deviceId}/configurations/${fctGraphId}/functionalities/${fctId}/calibrations&#x60;,
+      { body, ...DEFAULT_REQ_OPTS },
+    ),
 )
 </code></pre>
           </article>

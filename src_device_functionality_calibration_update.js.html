@@ -39,29 +39,17 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../../utils/defaultReqOpts&#x
  * @memberof nexus.device.functionality.calibration
  * @function update
  * @async
- * @param {Object} params
- * @param {string} params.deviceId
- * @param {string} params.fctId
- * @param {string} params.slotName
- * @param {Object} params.params
- * @param {Object} params.params.offset
- * @param {Object} params.params.slope
- * @param {number} params.params.offset.value
- * @param {boolean} params.params.offset.locked
- * @param {number} params.params.slope.value
- * @param {boolean} params.params.slope.locked
+ * @param {string} deviceId
+ * @param {string} fctGraphId
+ * @param {string} fctId
+ * @param {Object} body
+
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  ({ deviceId, fctId, slotName, params }) &#x3D;&gt; API
-    .post(&#x27;device&#x27;, &#x60;${deviceId}/functionalities/${fctId}/calibrations&#x60;, {
-      body: {
-        slotName,
-        calibrationData: params,
-      },
-      ...DEFAULT_REQ_OPTS,
-    }),
+  (deviceId, fctGraphId, fctId, body) &#x3D;&gt; API
+    .post(&#x27;device&#x27;, &#x60;${deviceId}/configurations/${fctGraphId}/functionalities/${fctId}/calibrations&#x60;, { body, ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>

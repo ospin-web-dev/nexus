@@ -31,6 +31,8 @@
           <article>
             <pre class="prettyprint linenums"><code>const configuration &#x3D; require(&#x27;./configuration&#x27;)
 const physicalMapping &#x3D; require(&#x27;./physicalMapping&#x27;)
+const ports &#x3D; require(&#x27;./ports&#x27;)
+const update &#x3D; require(&#x27;./update&#x27;)
 const functionalityConfiguration &#x3D; require(&#x27;./functionalityConfiguration&#x27;)
 
 /**
@@ -38,6 +40,8 @@ const functionalityConfiguration &#x3D; require(&#x27;./functionalityConfigurati
  */
 
 module.exports &#x3D; {
+  update,
+  ports,
   configuration,
   physicalMapping,
   functionalityConfiguration,

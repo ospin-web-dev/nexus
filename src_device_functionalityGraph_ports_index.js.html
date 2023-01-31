@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/device/list.js</title>
+  <title>Source: src/device/functionalityGraph/ports/index.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,38 +26,17 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/device/list.js</h1>
+            <h1>Source: src/device/functionalityGraph/ports/index.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
-
-const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
-const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
+            <pre class="prettyprint linenums"><code>const update &#x3D; require(&#x27;./update&#x27;)
 
 /**
- * @desc queries the devices collection
- * @memberof nexus.device
- * @function list
- * @async
- * @param {Object} params
- * @param {string} params.textQuery
- * @param {string} params.textQueryField
- * @param {string} params.sortBy
- * @param {string} params.sortOrder
- * @param {boolean} params.embedOwners
- * @param {boolean} params.embedManufacturers
- * @param {number} params.skip
- * @param {number} params.limit
- * @returns {Promise&amp;lt;ApiResponse&gt;}
+ * @namespace nexus.device.functionalityGraph.ports
  */
-
-module.exports &#x3D; serializeAxiosResponse(
-  (queryStringParameters &#x3D; {}) &#x3D;&gt; API.get(&#x27;device&#x27;, &#x27;&#x27;, {
-    queryStringParameters: removeUndefinedKeys(queryStringParameters),
-    ...DEFAULT_REQ_OPTS,
-  }),
-)
+module.exports &#x3D; {
+  update
+}
 </code></pre>
           </article>
         </div>
