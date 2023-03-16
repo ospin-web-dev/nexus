@@ -1,0 +1,131 @@
+name: Add Prs to the Kanban Board ,set default values and update the issue
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  AddPRAndLookupIssue:
+    runs-on: ubuntu-latest
+    outputs:
+      RELATED_ISSUE_NUMBER: ${{ env.ISSUE_NUMBER }}
+      VALUE: ${{ env.VALUE }}
+    steps:
+    - name: Assign To Sprint
+      uses:  ospin-web-dev/actions/mutations/addToSprintBoard@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Review Requested'
+
+    - name: Assign Class
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Class'
+        FIELD_VALUE: 'Subtask'
+
+    - name: Assign Type
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Type'
+        FIELD_VALUE: 'Feature'
+
+    - name: Assign Team
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Team'
+        FIELD_VALUE: 'Web'
+
+    - name: Add Assignee
+      uses:  ospin-web-dev/actions/mutations/addAssignee@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        ASSIGNEE_NAME: ${{ github.actor }}
+
+    - name: Add Reviewers
+      uses:  ospin-web-dev/actions/mutations/addReviewers@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        REVIEWER_NAMES: 'FelixMZ2018,vdiezel,lev-leontyev-ospin'
+
+    - name: Look for issue
+      id: lookupIssue
+      uses:  ospin-web-dev/actions/queries/getAssociatedIssueFromBranchName@main
+      with:
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+
+    - name: Get issue type
+      uses:  ospin-web-dev/actions/queries/getSingleFieldValue@main
+      if: ${{ env.ISSUE_NUMBER }}
+      with:
+        NUMBER: ${{ env.ISSUE_NUMBER }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        PROJECT_NUMBER: 65
+        FIELD_NAME: 'Type'
+
+  MoveRelatedIssue:
+    runs-on: ubuntu-latest
+    needs: [AddPRAndLookupIssue]
+    if: ${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}
+    steps:
+    - name: Append PR Body
+      uses:  ospin-web-dev/actions/mutations/appendBody@main
+      with:
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        NUMBER: ${{ github.event.pull_request.number }}
+        TEXT:  "- closes #${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}"
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'In Progress'
+
+    - name: Add Assignee
+      uses:  ospin-web-dev/actions/mutations/addAssignee@main
+      with:
+        NUMBER: ${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        ASSIGNEE_NAME: ${{ github.actor }}
+
+  AssignLabelToPullRequest:
+    runs-on: ubuntu-latest
+    needs: [AddPRAndLookupIssue]
+    if: ${{ needs.AddPRAndLookupIssue.outputs.VALUE }}
+    steps:
+      - name: Set pull request label
+        uses: ospin-web-dev/actions/mutations/addLabel@main
+        with:
+          NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+          LABEL: ${{ needs.AddPRAndLookupIssue.outputs.VALUE }}
