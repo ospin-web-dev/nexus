@@ -1,14 +1,15 @@
 const faker = require('faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
-const updateMany = require('device/functionalityConfiguration/updateMany')
+const updateMany = require('device/functionalityGraph/functionalityConfiguration/updateMany')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
-const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
+const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTTPResponses')
 
 describe('updateMany', () => {
 
   const params = {
     deviceId: faker.datatype.uuid(),
+    fctGraphId: faker.datatype.uuid(),
     updates: [],
   }
 
@@ -21,7 +22,7 @@ describe('updateMany', () => {
     expect(API.patch)
       .toHaveBeenCalledWith(
         'device',
-        `${params.deviceId}/functionalities-configurations`,
+        `${params.deviceId}/functionality-graphs/${params.fctGraphId}/configurations`,
         { body: { updates: params.updates }, ...DEFAULT_REQ_OPTS },
       )
   })

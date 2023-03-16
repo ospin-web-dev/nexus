@@ -65,9 +65,6 @@ describe('nexus', () => {
           update: 'function',
         },
       },
-      functionalityConfiguration: {
-        updateMany: 'function',
-      },
       functionalityGraph: {
         ports: {
           update: 'function',
@@ -79,6 +76,9 @@ describe('nexus', () => {
           get: 'function',
         },
         update: 'function',
+        functionalityConfiguration: {
+          updateMany: 'function',
+        },
       },
       get: 'function',
       getUserInvitations: 'function',
@@ -142,6 +142,10 @@ describe('nexus', () => {
       list: 'function',
       preview: {
         get: 'function',
+      },
+      reports: {
+        create: 'function',
+        list: 'function',
       },
       snapshot: {
         list: 'function',
