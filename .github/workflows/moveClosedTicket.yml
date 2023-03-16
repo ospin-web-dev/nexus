@@ -1,0 +1,21 @@
+name: Move Closed Issues to the Right State
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  MoveToRejected:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.stateReason == 'not_planned' }}
+    steps:
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Rejected'

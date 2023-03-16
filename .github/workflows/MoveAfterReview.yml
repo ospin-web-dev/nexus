@@ -1,0 +1,50 @@
+name: Move The PR To the approriate Status after a review has been submitted
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  checkReviewState:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'approved' || github.event.review.state == 'changes_requested'
+    outputs:
+      APPROVED: ${{ env.APPROVED }}
+    steps:
+    - name: Check for Approved
+      uses:  ospin-web-dev/actions/queries/hasOnlyApprovedReviews@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+
+  MoveToChangesNeeded:
+    runs-on: ubuntu-latest
+    needs: [checkReviewState]
+    if: ${{ needs.checkReviewState.outputs.APPROVED == 'false' }}
+    steps:
+    - run: echo ${{needs.checkReviewState.outputs.APPROVED}}
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Changes Needed'
+
+  MoveToReadyForDeploy:
+    runs-on: ubuntu-latest
+    needs: [checkReviewState]
+    if: ${{ needs.checkReviewState.outputs.APPROVED == 'true' }}
+    steps:
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Ready For Deploy'

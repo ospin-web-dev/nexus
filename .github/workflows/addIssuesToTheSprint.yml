@@ -1,0 +1,64 @@
+name: Add Issues to the Kanban Board and set default value
+
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  addIssuesToSprintBoard:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Assign To Sprint
+      uses:  ospin-web-dev/actions/mutations/addToSprintBoard@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+    - name: Assign Status
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Development Backlog'
+    - name: Assign Priority
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Priority'
+        FIELD_VALUE: 'Normal'
+    - name: Assign Type
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Type'
+        FIELD_VALUE: 'Feature'
+    - name: Assign Class
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Class'
+        FIELD_VALUE: 'Subtask'
+    - name: Assign Team
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.issue.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Team'
+        FIELD_VALUE: 'Web'

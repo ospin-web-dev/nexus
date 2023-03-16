@@ -1,0 +1,33 @@
+name: Move The Card back to Review Requested
+
+on:
+  pull_request:
+    types:
+      - review_requested
+
+jobs:
+  MoveOnReRequestedReview:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.sender.login  != 'ospin-webapp' }}
+    outputs:
+      VALUE: ${{ env.VALUE }}
+    steps:
+    - name: Get Current State
+      id: 'getState'
+      uses:  ospin-web-dev/actions/queries/getSingleFieldValue@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        PROJECT_NUMBER: 65
+        FIELD_NAME: 'Status'
+
+    - name: Assign Status
+      if: ${{ steps.getState.outputs.VALUE  != 'Review Requested'}}
+      uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
+      with:
+        NUMBER: ${{ github.event.pull_request.number }}
+        PROJECT_NUMBER: 65
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        OWNER: ${{ github.repository_owner }}
+        FIELD_NAME: 'Status'
+        FIELD_VALUE: 'Review Requested'
