@@ -21,6 +21,7 @@ jobs:
         PROJECT_NUMBER: 65
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         OWNER: ${{ github.repository_owner }}
+      secrets: inherit
 
     - name: Assign Status
       uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
