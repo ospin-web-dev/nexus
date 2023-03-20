@@ -20,7 +20,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         PROJECT_NUMBER: 65
         FIELD_NAME: 'Status'
-      secrets: inherit
 
 
     - name: Assign Status
@@ -33,5 +32,4 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Status'
         FIELD_VALUE: 'Review Requested'
-      secrets: inherit
 
