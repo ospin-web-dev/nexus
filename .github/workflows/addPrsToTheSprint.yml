@@ -12,6 +12,8 @@ jobs:
     outputs:
       RELATED_ISSUE_NUMBER: ${{ env.ISSUE_NUMBER }}
       VALUE: ${{ env.VALUE }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
     steps:
     - name: Assign To Sprint
       uses:  ospin-web-dev/actions/mutations/addToSprintBoard@main
