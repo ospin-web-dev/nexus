@@ -12,15 +12,14 @@ jobs:
     outputs:
       RELATED_ISSUE_NUMBER: ${{ env.ISSUE_NUMBER }}
       VALUE: ${{ env.VALUE }}
-    env:
-      PROJECT_AUTOMATION_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+
     steps:
     - name: Assign To Sprint
       uses:  ospin-web-dev/actions/mutations/addToSprintBoard@main
       with:
         NUMBER: ${{ github.event.pull_request.number }}
         PROJECT_NUMBER: 65
-        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OWNER: ${{ github.repository_owner }}
 
     - name: Assign Status
@@ -28,7 +27,7 @@ jobs:
       with:
         NUMBER: ${{ github.event.pull_request.number }}
         PROJECT_NUMBER: 65
-        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Status'
         FIELD_VALUE: 'Review Requested'
