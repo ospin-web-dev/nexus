@@ -31,7 +31,6 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Status'
         FIELD_VALUE: 'Review Requested'
-      secrets: inherit
 
     - name: Assign Class
       uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
@@ -42,7 +41,6 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Class'
         FIELD_VALUE: 'Subtask'
-      secrets: inherit
 
     - name: Assign Type
       uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
@@ -53,7 +51,6 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Type'
         FIELD_VALUE: 'Feature'
-      secrets: inherit
 
     - name: Assign Team
       uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
@@ -64,7 +61,6 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Team'
         FIELD_VALUE: 'Web'
-      secrets: inherit
 
     - name: Add Assignee
       uses:  ospin-web-dev/actions/mutations/addAssignee@main
@@ -72,7 +68,6 @@ jobs:
         NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         ASSIGNEE_NAME: ${{ github.actor }}
-      secrets: inherit
 
     - name: Add Reviewers
       uses:  ospin-web-dev/actions/mutations/addReviewers@main
@@ -80,14 +75,12 @@ jobs:
         NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         REVIEWER_NAMES: 'FelixMZ2018,vdiezel,lev-leontyev-ospin'
-      secrets: inherit
 
     - name: Look for issue
       id: lookupIssue
       uses:  ospin-web-dev/actions/queries/getAssociatedIssueFromBranchName@main
       with:
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
-      secrets: inherit
 
     - name: Get issue type
       uses:  ospin-web-dev/actions/queries/getSingleFieldValue@main
@@ -97,7 +90,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         PROJECT_NUMBER: 65
         FIELD_NAME: 'Type'
-      secrets: inherit
 
   MoveRelatedIssue:
     runs-on: ubuntu-latest
@@ -110,7 +102,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         NUMBER: ${{ github.event.pull_request.number }}
         TEXT:  "- closes #${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}"
-      secrets: inherit
     - name: Assign Status
       uses:  ospin-web-dev/actions/mutations/setBoardSingleSelectFieldParam@main
       with:
@@ -120,7 +111,6 @@ jobs:
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Status'
         FIELD_VALUE: 'In Progress'
-      secrets: inherit
 
     - name: Add Assignee
       uses:  ospin-web-dev/actions/mutations/addAssignee@main
@@ -128,7 +118,6 @@ jobs:
         NUMBER: ${{ needs.AddPRAndLookupIssue.outputs.RELATED_ISSUE_NUMBER }}
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         ASSIGNEE_NAME: ${{ github.actor }}
-      secrets: inherit
 
   AssignLabelToPullRequest:
     runs-on: ubuntu-latest
@@ -141,4 +130,3 @@ jobs:
           NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
           LABEL: ${{ needs.AddPRAndLookupIssue.outputs.VALUE }}
-        secrets: inherit
