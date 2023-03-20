@@ -19,7 +19,7 @@ jobs:
       with:
         NUMBER: ${{ github.event.pull_request.number }}
         PROJECT_NUMBER: 65
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         OWNER: ${{ github.repository_owner }}
 
     - name: Assign Status
@@ -27,7 +27,7 @@ jobs:
       with:
         NUMBER: ${{ github.event.pull_request.number }}
         PROJECT_NUMBER: 65
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
         OWNER: ${{ github.repository_owner }}
         FIELD_NAME: 'Status'
         FIELD_VALUE: 'Review Requested'
