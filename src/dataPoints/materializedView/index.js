@@ -1,7 +1,7 @@
 const get = require('./get')
 
 /**
- * @namespace nexus.device.functionalityGraph.physicalMapping
+ * @namespace nexus.dataPoints.materializedView
  */
 
 module.exports = {

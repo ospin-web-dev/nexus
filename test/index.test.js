@@ -47,6 +47,9 @@ describe('nexus', () => {
         createForProcess: 'function',
         list: 'function',
       },
+      materializedView: {
+        get: 'function',
+      },
     },
     device: {
       access: {
@@ -72,9 +75,6 @@ describe('nexus', () => {
         configuration: {
           get: 'function',
         },
-        physicalMapping: {
-          get: 'function',
-        },
         update: 'function',
         functionalityConfiguration: {
           updateMany: 'function',
@@ -93,6 +93,14 @@ describe('nexus', () => {
       remove: 'function',
       update: 'function',
       validate: 'function',
+    },
+    deviceDescription: {
+      template: {
+        create: 'function',
+        list: 'function',
+        remove: 'function',
+        update: 'function',
+      },
     },
     event: {
       device: {

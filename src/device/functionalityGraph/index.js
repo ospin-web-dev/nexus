@@ -1,5 +1,4 @@
 const configuration = require('./configuration')
-const physicalMapping = require('./physicalMapping')
 const ports = require('./ports')
 const update = require('./update')
 const functionalityConfiguration = require('./functionalityConfiguration')
@@ -12,6 +11,5 @@ module.exports = {
   update,
   ports,
   configuration,
-  physicalMapping,
   functionalityConfiguration,
 }

@@ -1,4 +1,5 @@
 const downloadRequest = require('./downloadRequest')
+const materializedView = require('./materializedView')
 const get = require('./get')
 
 /**
@@ -7,5 +8,6 @@ const get = require('./get')
 
 module.exports = {
   downloadRequest,
+  materializedView,
   get,
 }
