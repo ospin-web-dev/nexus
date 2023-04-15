@@ -72,9 +72,6 @@ describe('nexus', () => {
         configuration: {
           get: 'function',
         },
-        physicalMapping: {
-          get: 'function',
-        },
         update: 'function',
         functionalityConfiguration: {
           updateMany: 'function',
