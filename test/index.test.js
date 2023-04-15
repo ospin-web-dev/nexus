@@ -47,6 +47,9 @@ describe('nexus', () => {
         createForProcess: 'function',
         list: 'function',
       },
+      materializedView: {
+        get: 'function',
+      },
     },
     device: {
       access: {
