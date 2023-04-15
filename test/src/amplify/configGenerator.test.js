@@ -62,6 +62,11 @@ describe('createConfig', () => {
               name: 'licence',
               region: AWS_REGION,
             },
+            {
+              endpoint: `https://api-${ENV}.ospin-services.com/device-description/`,
+              name: 'device-description',
+              region: AWS_REGION,
+            },
           ],
         },
         stage: ENV,
