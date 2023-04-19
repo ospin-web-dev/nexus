@@ -9,14 +9,15 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @function create
  * @async
  * @param {Object} params
- * @param {string} params.name
- * @param {array} params.functionalities
- * @param {array} params.connections
  * @param {string} [params.deviceId]
- * @param {string} [params.imageURL]
+ * @param {Object} params.template
+ * @param {string} params.template.name
+ * @param {array} params.template.functionalities
+ * @param {array} params.template.connections
+ * @param {string} [params.template.imageURL]
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  (params) => API.post('device-description', 'templates', { body: params, ...DEFAULT_REQ_OPTS }),
+  params => API.post('device-description', 'templates', { body: params, ...DEFAULT_REQ_OPTS }),
 )

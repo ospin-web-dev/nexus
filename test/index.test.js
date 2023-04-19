@@ -101,6 +101,12 @@ describe('nexus', () => {
         remove: 'function',
         update: 'function',
       },
+      functionalityDescription: {
+        create: 'function',
+        list: 'function',
+        remove: 'function',
+        update: 'function',
+      },
     },
     event: {
       device: {
