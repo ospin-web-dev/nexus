@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/deviceDescription/template/index.js</title>
+  <title>Source: src/deviceDescription/functionalityDescription/create.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,24 +26,35 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/deviceDescription/template/index.js</h1>
+            <h1>Source: src/deviceDescription/functionalityDescription/create.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const create &#x3D; require(&#x27;./create&#x27;)
-const list &#x3D; require(&#x27;./list&#x27;)
-const remove &#x3D; require(&#x27;./remove&#x27;)
-const update &#x3D; require(&#x27;./update&#x27;)
+            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
+
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
 
 /**
- * @namespace nexus.deviceDescription.template
+ * @desc creates a new functionality description
+ * @memberof nexus.deviceDescription.functionaltiyDescription
+ * @function create
+ * @async
+ * @param {Object} params
+ * @param {string} params.subType
+ * @param {string} [params.displayName&#x3D;null]
+ * @param {string} [params.description&#x3D;null]
+ * @param {string} [params.iconURL&#x3D;null]
+ * @param {string} [params.inputDescriptionImageURL&#x3D;null]
+ * @param {string} [params.imageURL&#x3D;null]
+ * @param {array} [params.slotRelations&#x3D;[]]
+ * @param {array} [params.slotDescriptions&#x3D;[]]
+ * @param {boolean} [params.safeForCustomerUse&#x3D;false]
+ * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
-module.exports &#x3D; {
-  create,
-  list,
-  remove,
-  update,
-}
+module.exports &#x3D; serializeAxiosResponse(
+  params &#x3D;&gt; API.post(&#x27;device-description&#x27;, &#x27;functionality-descriptions&#x27;, { body: params, ...DEFAULT_REQ_OPTS }),
+)
 </code></pre>
           </article>
         </div>
