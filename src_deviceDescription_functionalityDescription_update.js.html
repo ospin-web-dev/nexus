@@ -39,7 +39,7 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  * @memberof nexus.deviceDescription.functionaltiyDescription
  * @function create
  * @async
- * @param {string} subType
+ * @param {string} functionaltiyDescriptionId
  * @param {Object} params
  * @param {string} [params.displayName]
  * @param {string} [params.description]
@@ -53,7 +53,11 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  (subType, params) &#x3D;&gt; API.post(&#x27;device-description&#x27;, &#x60;functionality-descriptions/${subType}&#x60;, { body: params, ...DEFAULT_REQ_OPTS }),
+  (functionaltiyDescriptionId, params) &#x3D;&gt; API.post(
+    &#x27;device-description&#x27;,
+    &#x60;functionality-descriptions/${functionaltiyDescriptionId}&#x60;,
+    { body: params, ...DEFAULT_REQ_OPTS },
+  ),
 )
 </code></pre>
           </article>
