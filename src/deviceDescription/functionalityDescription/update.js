@@ -9,22 +9,22 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @function update
  * @async
  * @param {string} functionaltiyDescriptionId
- * @param {Object} params
- * @param {string} [params.displayName]
- * @param {string} [params.description]
- * @param {string} [params.iconURL]
- * @param {string} [params.inputDescriptionImageURL]
- * @param {string} [params.imageURL]
- * @param {array} [params.slotRelations]
- * @param {array} [params.slotDescriptions]
- * @param {boolean} [params.safeForCustomerUse]
+ * @param {Object} body
+ * @param {string} [body.updateData.displayName]
+ * @param {string} [body.updateData.description]
+ * @param {string} [body.updateData.iconURL]
+ * @param {string} [body.updateData.inputDescriptionImageURL]
+ * @param {string} [body.updateData.imageURL]
+ * @param {array} [body.updateData.slotRelations]
+ * @param {array} [body.updateData.slotDescriptions]
+ * @param {boolean} [body.updateData.safeForCustomerUse]
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  (functionaltiyDescriptionId, params) => API.post(
+  (functionaltiyDescriptionId, body) => API.post(
     'device-description',
     `functionality-descriptions/${functionaltiyDescriptionId}`,
-    { body: params, ...DEFAULT_REQ_OPTS },
+    { body, ...DEFAULT_REQ_OPTS },
   ),
 )

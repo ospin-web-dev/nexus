@@ -8,19 +8,19 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @memberof nexus.deviceDescription.functionaltiyDescription
  * @function create
  * @async
- * @param {Object} params
- * @param {string} params.subType
- * @param {string} [params.displayName=null]
- * @param {string} [params.description=null]
- * @param {string} [params.iconURL=null]
- * @param {string} [params.inputDescriptionImageURL=null]
- * @param {string} [params.imageURL=null]
- * @param {array} [params.slotRelations=[]]
- * @param {array} [params.slotDescriptions=[]]
- * @param {boolean} [params.safeForCustomerUse=false]
+ * @param {Object} body
+ * @param {string} body.functionaltiyDescription.subType
+ * @param {string} [body.functionaltiyDescription.displayName=null]
+ * @param {string} [body.functionaltiyDescription.description=null]
+ * @param {string} [body.functionaltiyDescription.iconURL=null]
+ * @param {string} [body.functionaltiyDescription.inputDescriptionImageURL=null]
+ * @param {string} [body.functionaltiyDescription.imageURL=null]
+ * @param {array} [body.functionaltiyDescription.slotRelations=[]]
+ * @param {array} [body.functionaltiyDescription.slotDescriptions=[]]
+ * @param {boolean} [body.functionaltiyDescription.safeForCustomerUse=false]
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  params => API.post('device-description', 'functionality-descriptions', { body: params, ...DEFAULT_REQ_OPTS }),
+  body => API.post('device-description', 'functionality-descriptions', { body, ...DEFAULT_REQ_OPTS }),
 )
