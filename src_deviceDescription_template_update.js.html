@@ -40,17 +40,18 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  * @function update
  * @async
  * @param {string} templateId
- * @param {Object} params
- * @param {string} params.name
- * @param {array} [params.functionalities]
- * @param {array} [params.connections]
- * @param {string} [params.deviceId]
- * @param {string} [params.imageURL]
+ * @param {Object} body
+ * @param {Object} body.templateData
+ * @param {string} [body.templateData.name]
+ * @param {array} [body.templateData.functionalities]
+ * @param {array} [body.templateData.connections]
+ * @param {string} [body.templateData.deviceId]
+ * @param {string} [body.templateData.imageURL]
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  (templateId, params) &#x3D;&gt; API.put(&#x27;device-description&#x27;, &#x60;templates/${templateId}&#x60;, { body: params, ...DEFAULT_REQ_OPTS }),
+  (templateId, body) &#x3D;&gt; API.put(&#x27;device-description&#x27;, &#x60;templates/${templateId}&#x60;, { body, ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>

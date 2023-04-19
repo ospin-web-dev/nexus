@@ -40,23 +40,23 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  * @function update
  * @async
  * @param {string} functionaltiyDescriptionId
- * @param {Object} params
- * @param {string} [params.displayName]
- * @param {string} [params.description]
- * @param {string} [params.iconURL]
- * @param {string} [params.inputDescriptionImageURL]
- * @param {string} [params.imageURL]
- * @param {array} [params.slotRelations]
- * @param {array} [params.slotDescriptions]
- * @param {boolean} [params.safeForCustomerUse]
+ * @param {Object} body
+ * @param {string} [body.updateData.displayName]
+ * @param {string} [body.updateData.description]
+ * @param {string} [body.updateData.iconURL]
+ * @param {string} [body.updateData.inputDescriptionImageURL]
+ * @param {string} [body.updateData.imageURL]
+ * @param {array} [body.updateData.slotRelations]
+ * @param {array} [body.updateData.slotDescriptions]
+ * @param {boolean} [body.updateData.safeForCustomerUse]
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  (functionaltiyDescriptionId, params) &#x3D;&gt; API.post(
+  (functionaltiyDescriptionId, body) &#x3D;&gt; API.post(
     &#x27;device-description&#x27;,
     &#x60;functionality-descriptions/${functionaltiyDescriptionId}&#x60;,
-    { body: params, ...DEFAULT_REQ_OPTS },
+    { body, ...DEFAULT_REQ_OPTS },
   ),
 )
 </code></pre>

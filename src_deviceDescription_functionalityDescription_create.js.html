@@ -39,21 +39,21 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;
  * @memberof nexus.deviceDescription.functionaltiyDescription
  * @function create
  * @async
- * @param {Object} params
- * @param {string} params.subType
- * @param {string} [params.displayName&#x3D;null]
- * @param {string} [params.description&#x3D;null]
- * @param {string} [params.iconURL&#x3D;null]
- * @param {string} [params.inputDescriptionImageURL&#x3D;null]
- * @param {string} [params.imageURL&#x3D;null]
- * @param {array} [params.slotRelations&#x3D;[]]
- * @param {array} [params.slotDescriptions&#x3D;[]]
- * @param {boolean} [params.safeForCustomerUse&#x3D;false]
+ * @param {Object} body
+ * @param {string} body.functionaltiyDescription.subType
+ * @param {string} [body.functionaltiyDescription.displayName&#x3D;null]
+ * @param {string} [body.functionaltiyDescription.description&#x3D;null]
+ * @param {string} [body.functionaltiyDescription.iconURL&#x3D;null]
+ * @param {string} [body.functionaltiyDescription.inputDescriptionImageURL&#x3D;null]
+ * @param {string} [body.functionaltiyDescription.imageURL&#x3D;null]
+ * @param {array} [body.functionaltiyDescription.slotRelations&#x3D;[]]
+ * @param {array} [body.functionaltiyDescription.slotDescriptions&#x3D;[]]
+ * @param {boolean} [body.functionaltiyDescription.safeForCustomerUse&#x3D;false]
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  params &#x3D;&gt; API.post(&#x27;device-description&#x27;, &#x27;functionality-descriptions&#x27;, { body: params, ...DEFAULT_REQ_OPTS }),
+  body &#x3D;&gt; API.post(&#x27;device-description&#x27;, &#x27;functionality-descriptions&#x27;, { body, ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>
