@@ -4,13 +4,18 @@ const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 
 /**
- * @desc fetches a list of functionality descriptions
+ * @desc deletes a functionality description
  * @memberof nexus.deviceDescription.functionaltiyDescription
- * @function list
+ * @function remove
  * @async
+ * @param {string} functionaltiyDescriptionId
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  () => API.get('device-description', 'functionality-descriptions', DEFAULT_REQ_OPTS),
+  functionaltiyDescriptionId => API.del(
+    'device-description',
+    `functionality-descriptions/${functionaltiyDescriptionId}`,
+    DEFAULT_REQ_OPTS,
+  ),
 )

@@ -6,7 +6,7 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 /**
  * @desc updates a functionality description
  * @memberof nexus.deviceDescription.functionaltiyDescription
- * @function create
+ * @function update
  * @async
  * @param {string} functionaltiyDescriptionId
  * @param {Object} params
