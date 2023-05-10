@@ -9,14 +9,13 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @async
  * @param {object} params
  * @param {string} params.userId
- * @param {object} params.devices
  * @return {Promise<ApiResponse}
 */
 
 module.exports = serializeAxiosResponse(
-  ({ userId, devices }) => API.post(
+  ({ userId, params }) => API.post(
     'useruiconfig',
-    `users/${userId}/uiconfig`,
-    { devices, ...DEFAULT_REQ_OPTS}, // ?? to do check
+    `users/${userId}/uiconfig`, // to do check path
+    { body: params, ...DEFAULT_REQ_OPTS },
   ),
 )
