@@ -1,4 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
+
 const serializeAxiosResponse = require('../../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 
@@ -13,9 +14,9 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 */
 
 module.exports = serializeAxiosResponse(
-  ({ userId, params }) => API.post(
-    'useruiconfig',
-    `users/${userId}/uiconfig`, // to do check path
+  (userId, params) => API.post(
+    'uiconfig',
+    `users/${userId}/uiconfig`,
     { body: params, ...DEFAULT_REQ_OPTS },
   ),
 )
