@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/event/index.js</title>
+  <title>Source: src/uIConfig/userUIConfig/post.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,20 +26,31 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/event/index.js</h1>
+            <h1>Source: src/uIConfig/userUIConfig/post.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const remove &#x3D; require(&#x27;./remove&#x27;)
-const device &#x3D; require(&#x27;./device&#x27;)
+            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
+
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
 
 /**
- * @namespace nexus.event
- */
+ * @desc returns a UI config for a user
+ * @memberof nexus.uIConfig.userUIConfig
+ * @function post
+ * @async
+ * @param {object} params
+ * @param {string} params.userId
+ * @returns {Promise&amp;lt;ApiResponse&gt;}
+*/
 
-module.exports &#x3D; {
-  remove,
-  device,
-}
+module.exports &#x3D; serializeAxiosResponse(
+  (userId, params) &#x3D;&gt; API.post(
+    &#x27;uiconfig&#x27;,
+    &#x60;users/${userId}/uiconfig&#x60;,
+    { body: params, ...DEFAULT_REQ_OPTS },
+  ),
+)
 </code></pre>
           </article>
         </div>
