@@ -10,7 +10,7 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @async
  * @param {object} params
  * @param {string} params.userId
- * @return {Promise<ApiResponse}
+ * @return {Promise<ApiResponse>}
 */
 
 module.exports = serializeAxiosResponse(
