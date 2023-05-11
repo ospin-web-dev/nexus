@@ -171,6 +171,9 @@ describe('nexus', () => {
         put: 'function',
         get: 'function',
       },
+      userUIConfig: {
+        post: 'function',
+      },
     },
     user: {
       notifications: {
