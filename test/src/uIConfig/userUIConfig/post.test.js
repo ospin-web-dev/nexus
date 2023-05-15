@@ -12,7 +12,7 @@ describe('post', () => {
     userId: faker.datatype.uuid(),
   }
 
-  it('calls amplify\'s API.get method', async () => {
+  it('calls amplify\'s API.post method', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
     await post(params.userId, params)
