@@ -8,8 +8,8 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @memberof nexus.uIConfig.userUIConfig
  * @function post
  * @async
- * @param {object} params
- * @param {string} params2
+ * @param {string} userId
+ * @param {object} payload
  * @returns {Promise<ApiResponse>}
 */
 
