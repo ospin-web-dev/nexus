@@ -9,7 +9,7 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  * @function post
  * @async
  * @param {object} params
- * @param {string} params.userId
+ * @param {string} params2
  * @returns {Promise<ApiResponse>}
 */
 
