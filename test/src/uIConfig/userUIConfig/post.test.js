@@ -20,7 +20,7 @@ describe('post', () => {
     expect(API.post).toHaveBeenCalledTimes(1)
     expect(API.post).toHaveBeenCalledWith(
       'uiconfig',
-      `users/${params.userId}/uiconfig`,
+      `users/${params.userId}`,
       { body: params, ...DEFAULT_REQ_OPTS },
     )
 
