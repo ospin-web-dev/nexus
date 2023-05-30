@@ -62,6 +62,7 @@ describe('nexus', () => {
       },
       create: 'function',
       createHeidolphCoreGateway: 'function',
+      deletePendingInvitation: 'function',
       functionality: {
         calibration: {
           remove: 'function',
