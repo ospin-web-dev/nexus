@@ -9,6 +9,7 @@ const get = require('./get')
 const getUserInvitations = require('./getUserInvitations')
 const list = require('./list')
 const remove = require('./remove')
+const deletePendingInvitation = require('./deletePendingInvitation')
 const transferOwnership = require('./transferOwnership')
 const update = require('./update')
 const manufacturer = require('./manufacturer')
@@ -29,6 +30,7 @@ module.exports = {
   getUserInvitations,
   list,
   remove,
+  deletePendingInvitation,
   transferOwnership,
   update,
   manufacturer,
