@@ -46,7 +46,6 @@ const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
-//some test
 module.exports &#x3D; serializeAxiosResponse(
   ({ deviceId, invitationId }) &#x3D;&gt; API
     .del(&#x27;device&#x27;, &#x60;${deviceId}/user-invitation/${invitationId}&#x60;, { ...DEFAULT_REQ_OPTS }),
