@@ -107,6 +107,9 @@ describe('nexus', () => {
         remove: 'function',
         update: 'function',
       },
+      functionalityDefinition: {
+        list: 'function',
+      },
     },
     event: {
       device: {
