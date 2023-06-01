@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/event/device/removeAll.js</title>
+  <title>Source: src/deviceDescription/functionalityDefinition/index.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,27 +26,18 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/event/device/removeAll.js</h1>
+            <h1>Source: src/deviceDescription/functionalityDefinition/index.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
-
-const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
+            <pre class="prettyprint linenums"><code>const list &#x3D; require(&#x27;./list&#x27;)
 
 /**
- * @desc removes all events of a device
- * @memberof nexus.event.device
- * @function removeAll
- * @async
- * @param {Object} params
- * @param {string} params.deviceId
- * @returns {Promise&amp;lt;ApiResponse&gt;}
+ * @namespace nexus.deviceDescription.functionalityDefinition
  */
 
-module.exports &#x3D; serializeAxiosResponse(
-  ({ deviceId }) &#x3D;&gt; API.del(&#x27;event&#x27;, &#x60;devices/${deviceId}&#x60;, { ...DEFAULT_REQ_OPTS }),
-)
+module.exports &#x3D; {
+  list,
+}
 </code></pre>
           </article>
         </div>
