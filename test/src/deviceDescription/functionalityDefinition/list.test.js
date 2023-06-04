@@ -7,4 +7,6 @@ testHTTPEndpoint({
   httpVerb: 'get',
   serviceName: 'device-description',
   expectedURLSegment: 'functionality-definitions',
+  params: [{ subTypes: ['subTypeA'] }],
+  expectedPayload: { queryStringParameters: { subTypes: ['subTypeA'] } },
 })
