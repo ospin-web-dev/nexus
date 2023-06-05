@@ -33,17 +33,26 @@
 
 const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
 const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
+const { removeUndefinedKeys } &#x3D; require(&#x27;../../utils/objUtils&#x27;)
 
 /**
  * @desc fetches a list of functionality definitions
  * @memberof nexus.deviceDescription.functionalityDefinition
  * @function list
+ * @param {Object} queryStringParameters
  * @async
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  () &#x3D;&gt; API.get(&#x27;device-description&#x27;, &#x27;functionality-definitions&#x27;, DEFAULT_REQ_OPTS),
+  (queryStringParameters &#x3D; {}) &#x3D;&gt; API.get(
+    &#x27;device-description&#x27;,
+    &#x27;functionality-definitions&#x27;,
+    {
+      queryStringParameters: removeUndefinedKeys(queryStringParameters),
+      ...DEFAULT_REQ_OPTS,
+    },
+  ),
 )
 </code></pre>
           </article>
