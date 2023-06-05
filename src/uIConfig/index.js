@@ -1,4 +1,5 @@
 const userFctGraphUIConfig = require('./userFctGraphUIConfig')
+const userUIConfig = require('./userUIConfig')
 
 /**
  * @namespace nexus.uIConfig
@@ -6,4 +7,5 @@ const userFctGraphUIConfig = require('./userFctGraphUIConfig')
 
 module.exports = {
   userFctGraphUIConfig,
+  userUIConfig,
 }
