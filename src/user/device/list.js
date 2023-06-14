@@ -14,5 +14,5 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  */
 
 module.exports = serializeAxiosResponse(
-  ({ userId }) => API.get('user', `${userId}/devices`, DEFAULT_REQ_OPTS),
+  ({ userId, queryStringParameters }) => API.get('user', `${userId}/devices`, { queryStringParameters, ...DEFAULT_REQ_OPTS }),
 )
