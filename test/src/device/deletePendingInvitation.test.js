@@ -20,8 +20,8 @@ describe('deletePendingInvitation', () => {
     await deletePendingInvitation(params)
     expect(API.del).toHaveBeenCalledWith(
       'device',
-      `${params.deviceId}/user-invitation/${params.invitationId}`,
-      { ...DEFAULT_REQ_OPTS },
+      `${params.deviceId}/user-invitations/${params.invitationId}`,
+      DEFAULT_REQ_OPTS,
     )
   })
 

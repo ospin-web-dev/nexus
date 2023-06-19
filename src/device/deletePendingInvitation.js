@@ -10,12 +10,15 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
  * @async
  * @param {Object} params
  * @param {string} params.deviceId
- * @param {Object} params
  * @param {string} params.invitationId
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
   ({ deviceId, invitationId }) => API
-    .del('device', `${deviceId}/user-invitations/${invitationId}`, { ...DEFAULT_REQ_OPTS }),
+    .del(
+      'device',
+      `${deviceId}/user-invitations/${invitationId}`,
+      DEFAULT_REQ_OPTS,
+    ),
 )
