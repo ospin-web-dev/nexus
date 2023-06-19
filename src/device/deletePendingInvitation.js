@@ -4,9 +4,9 @@ const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 /**
- * @desc retract user pending invitation
+ * @desc retract pending user invitation
  * @memberof nexus.device
- * @function retract
+ * @function deletePendingInvitation
  * @async
  * @param {Object} params
  * @param {string} params.deviceId
@@ -17,5 +17,5 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 module.exports = serializeAxiosResponse(
   ({ deviceId, invitationId }) => API
-    .del('device', `${deviceId}/user-invitation/${invitationId}`, { ...DEFAULT_REQ_OPTS }),
+    .del('device', `${deviceId}/user-invitations/${invitationId}`, { ...DEFAULT_REQ_OPTS }),
 )
