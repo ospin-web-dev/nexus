@@ -108,6 +108,9 @@ describe('nexus', () => {
         remove: 'function',
         update: 'function',
       },
+      functionalityDefinition: {
+        list: 'function',
+      },
     },
     event: {
       device: {
@@ -171,6 +174,9 @@ describe('nexus', () => {
       userFctGraphUIConfig: {
         put: 'function',
         get: 'function',
+      },
+      userUIConfig: {
+        post: 'function',
       },
     },
     user: {
