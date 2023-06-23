@@ -206,6 +206,7 @@ describe('nexus', () => {
       update: 'function',
       pusher: {
         subscriptions: {
+          authorizeMany: 'function',
           device: {
             authorizeMany: 'function',
             process: {
