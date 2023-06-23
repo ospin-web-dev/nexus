@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/dataPoints/downloadRequest/list.js</title>
+  <title>Source: src/user/pusher/subscriptions/authorizeMany.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,25 +26,28 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/dataPoints/downloadRequest/list.js</h1>
+            <h1>Source: src/user/pusher/subscriptions/authorizeMany.js</h1>
           </header>
           <article>
             <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
 
-const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
+const serializeAxiosResponse &#x3D; require(&#x27;../../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../../utils/defaultReqOpts&#x27;)
 
 /**
- * @desc list all download request for a process
- * @memberof nexus.dataPoints.downloadRequest
- * @function list
+ * @desc authorizes a user for user pusher channels
+ * @memberof nexus.user.pusher.subscriptions
+ * @function authorizeMany
  * @async
- * @param {string} processId
+ * @param {string} userId
+ * @param {Object} params
+ * @param {string} params.socketId
+ * @param {Array&amp;lt;string&gt;} params.channelNames
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  processId &#x3D;&gt; API.get(&#x27;datapoints&#x27;, &#x60;processes/${processId}/downloadrequests&#x60;, { ...DEFAULT_REQ_OPTS }),
+  (id, params) &#x3D;&gt; API.post(&#x27;user&#x27;, &#x60;${id}/subscriptions&#x60;, { body: params, ...DEFAULT_REQ_OPTS }),
 )
 </code></pre>
           </article>
