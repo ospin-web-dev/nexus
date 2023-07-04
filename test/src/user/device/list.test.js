@@ -9,6 +9,9 @@ describe('list', () => {
 
   const params = {
     userId: faker.datatype.uuid(),
+    queryStringParameters: {
+      skip: 5,
+    },
   }
 
   afterAll(() => { jest.restoreAllMocks() })
@@ -20,7 +23,7 @@ describe('list', () => {
     expect(API.get).toHaveBeenCalledWith(
       'user',
       `${params.userId}/devices`,
-      DEFAULT_REQ_OPTS,
+      { queryStringParameters: { skip: 5 }, ...DEFAULT_REQ_OPTS },
     )
   })
 

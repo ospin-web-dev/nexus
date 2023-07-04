@@ -62,6 +62,7 @@ describe('nexus', () => {
       },
       create: 'function',
       createHeidolphCoreGateway: 'function',
+      deletePendingInvitation: 'function',
       functionality: {
         calibration: {
           remove: 'function',
@@ -106,6 +107,9 @@ describe('nexus', () => {
         list: 'function',
         remove: 'function',
         update: 'function',
+      },
+      functionalityDefinition: {
+        list: 'function',
       },
     },
     event: {
@@ -171,6 +175,9 @@ describe('nexus', () => {
         put: 'function',
         get: 'function',
       },
+      userUIConfig: {
+        post: 'function',
+      },
     },
     user: {
       notifications: {
@@ -199,6 +206,7 @@ describe('nexus', () => {
       update: 'function',
       pusher: {
         subscriptions: {
+          authorizeMany: 'function',
           device: {
             authorizeMany: 'function',
             process: {
