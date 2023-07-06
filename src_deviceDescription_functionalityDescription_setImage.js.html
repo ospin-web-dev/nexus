@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/command/device/process/updateRunning.js</title>
+  <title>Source: src/deviceDescription/functionalityDescription/setImage.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,32 +26,29 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/command/device/process/updateRunning.js</h1>
+            <h1>Source: src/deviceDescription/functionalityDescription/setImage.js</h1>
           </header>
           <article>
             <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
 
-const serializeAxiosResponse &#x3D; require(&#x27;../../../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../../utils/defaultReqOpts&#x27;)
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
 
 /**
- * @desc dispatches a command to update a running process on the device
- * @memberof nexus.command.device.process
- * @function updateRunning
+ * @desc adds or replaces a functionality description image
+ * @memberof nexus.deviceDescription.functionaltiyDescription
+ * @function create
  * @async
- * @param {string} deviceId
- * @param {string} processId
- * @param {Object} params
- * @param {number} params.entryPhaseId
- * @param {number} params.elapsedTime
+ * @param {string} functionaltiyDescriptionId
+ * @param {Object} body
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  (deviceId, processId, params) &#x3D;&gt; API.post(
-    &#x27;command&#x27;,
-    &#x60;devices/${deviceId}/processes/${processId}/update-running-process&#x60;,
-    { body: params, ...DEFAULT_REQ_OPTS },
+  (fctDescriptionId, body) &#x3D;&gt; API.post(
+    &#x27;device-description&#x27;,
+    &#x60;functionality-descriptions/${fctDescriptionId}/image&#x60;,
+    { body, ...DEFAULT_REQ_OPTS },
   ),
 )
 </code></pre>
