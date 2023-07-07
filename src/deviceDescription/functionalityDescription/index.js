@@ -1,5 +1,5 @@
 const create = require('./create')
-const setImage = require('./setImage')
+const putImage = require('./putImage')
 const list = require('./list')
 const update = require('./update')
 const remove = require('./remove')
@@ -10,7 +10,7 @@ const remove = require('./remove')
 
 module.exports = {
   create,
-  setImage,
+  putImage,
   list,
   update,
   remove,

@@ -104,7 +104,7 @@ describe('nexus', () => {
       },
       functionalityDescription: {
         create: 'function',
-        setImage: 'function',
+        putImage: 'function',
         list: 'function',
         remove: 'function',
         update: 'function',

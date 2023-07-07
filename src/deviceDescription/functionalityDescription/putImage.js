@@ -14,7 +14,7 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
  */
 
 module.exports = serializeAxiosResponse(
-  (fctDescriptionId, body) => API.post(
+  (fctDescriptionId, body) => API.put(
     'device-description',
     `functionality-descriptions/${fctDescriptionId}/image`,
     { body, ...DEFAULT_REQ_OPTS },
