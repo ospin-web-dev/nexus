@@ -26,7 +26,7 @@
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">namespace</span>&nbsp;<span class="label label-static">static</span></div>
             <h1><small><a href="nexus.html">nexus</a>.<wbr>deviceDescription.<wbr></small><span class="symbol-name">template</span></h1>
-            <p class="source-link">Source: <a href="src_deviceDescription_template_index.js.html#source-line-6">src/<wbr>deviceDescription/<wbr>template/<wbr>index.<wbr>js:6</a></p>
+            <p class="source-link">Source: <a href="src_deviceDescription_template_index.js.html#source-line-7">src/<wbr>deviceDescription/<wbr>template/<wbr>index.<wbr>js:7</a></p>
             <div class="symbol-description">
             </div>
             <dl class="dl-compact">
@@ -41,22 +41,27 @@
                     <dt><a href="nexus.deviceDescription.template.html#.create">create(params)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="nexus.deviceDescription.template.html#.list">list([params])</a></dt>
+                    <dt><a href="nexus.deviceDescription.template.html#.get">get([params])</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="nexus.deviceDescription.template.html#.remove">remove(templateId)</a></dt>
+                    <dt><a href="nexus.deviceDescription.template.html#.list">list([params])</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="nexus.deviceDescription.template.html#.update">update(templateId, body)</a></dt>
+                    <dt><a href="nexus.deviceDescription.template.html#.remove">remove(templateId)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="nexus.deviceDescription.template.html#.update">update(templateId, body)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
                 </div>
               </div>
             </div>
@@ -169,6 +174,69 @@
                             <tr>
                               <td>
                                 <p>template.imageURL</p>
+                              </td>
+                              <td>
+                                <p>string</p>
+                              </td>
+                              <td>
+                                <p>Yes</p>
+                              </td>
+                              <td>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Promise containing ApiResponse</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-async">async</span>&nbsp;<span class="label label-static">static</span></div>
+              <h3 id=".get"><span class="symbol-name">get</span><span class="signature"><span class="signature-params">([params])</span>&nbsp;&rarr; <span class="signature-returns"> Promise containing ApiResponse</span></span></h3>
+              <p>fetches a template</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>Values in <code>params</code> have the following properties:</p>
+                        <table class="jsdoc-details-table">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Type</th>
+                              <th>Optional</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <p>deviceId</p>
                               </td>
                               <td>
                                 <p>string</p>
