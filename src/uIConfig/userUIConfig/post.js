@@ -14,9 +14,9 @@ const { DEFAULT_REQ_OPTS } = require('../../utils/defaultReqOpts')
 */
 
 module.exports = serializeAxiosResponse(
-  (userId, params) => API.post(
+  (userId, body) => API.post(
     'uiconfig',
     `users/${userId}`,
-    { body: params, ...DEFAULT_REQ_OPTS },
+    { body, ...DEFAULT_REQ_OPTS },
   ),
 )
