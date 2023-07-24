@@ -133,6 +133,7 @@ describe('nexus', () => {
         deleteMany: 'function',
       },
       list: 'function',
+      listSubjects: 'function',
     },
     process: {
       access: {
