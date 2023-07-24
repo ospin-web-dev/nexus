@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/log/listSubjects.js</title>
+  <title>Source: src/deviceDescription/template/get.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,24 +26,30 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/log/listSubjects.js</h1>
+            <h1>Source: src/deviceDescription/template/get.js</h1>
           </header>
           <article>
             <pre class="prettyprint linenums"><code>const { default: API } &#x3D; require(&#x27;@aws-amplify/api-rest&#x27;)
 
-const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
-const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
+const serializeAxiosResponse &#x3D; require(&#x27;../../utils/serializeAxiosResponse&#x27;)
+const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../../utils/defaultReqOpts&#x27;)
+const { removeUndefinedKeys } &#x3D; require(&#x27;../../utils/objUtils&#x27;)
 
 /**
- * @desc queries the logs of a device
- * @memberof nexus.log
- * @function listSubjects
+ * @desc fetches a template
+ * @memberof nexus.deviceDescription.template
+ * @function get
  * @async
+ * @param {object} [params]
+ * @param {string} [params.deviceId]
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  () &#x3D;&gt; API.get(&#x27;log&#x27;, &#x27;subjects&#x27;, { ...DEFAULT_REQ_OPTS }),
+  (templateId, { deviceId }) &#x3D;&gt; API.get(&#x27;device-description&#x27;, &#x60;templates/${templateId}&#x60;, {
+    queryStringParameters: removeUndefinedKeys({ deviceId }),
+    ...DEFAULT_REQ_OPTS,
+  }),
 )
 </code></pre>
           </article>
