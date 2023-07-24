@@ -1,6 +1,5 @@
 const device = require('./device')
 const list = require('./list')
-const listSubjects = require('./listSubjects')
 
 /**
  * @namespace nexus.log
@@ -9,5 +8,4 @@ const listSubjects = require('./listSubjects')
 module.exports = {
   device,
   list,
-  listSubjects,
 }
