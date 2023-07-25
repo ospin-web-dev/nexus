@@ -8,23 +8,25 @@ const { DEFAULT_REQ_OPTS } = require('../../../../src/utils/defaultReqOpts')
 describe('post', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
-  const params = {
-    userId: faker.datatype.uuid(),
+  const userId = faker.datatype.uuid()
+  const body = {
+    devices: {},
+    devicesTab: {},
   }
 
   it('calls amplify\'s API.post method', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
-    await post(params.userId, params)
+    await post(userId, body)
 
     expect(API.post).toHaveBeenCalledTimes(1)
     expect(API.post).toHaveBeenCalledWith(
       'uiconfig',
-      `users/${params.userId}`,
-      { body: params, ...DEFAULT_REQ_OPTS },
+      `users/${userId}`,
+      { body, ...DEFAULT_REQ_OPTS },
     )
 
   })
 
-  testDefaultHTTPResponses(post, 'post', [ params ])
+  testDefaultHTTPResponses(post, 'post', [ body ])
 })
