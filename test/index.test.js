@@ -223,6 +223,7 @@ describe('nexus', () => {
     utils: {
       logClientError: 'function',
       getDocumentation: 'function',
+      getMetrics: 'function',
     },
   }
 
