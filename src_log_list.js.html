@@ -46,12 +46,14 @@ const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
  * @param {string} params.processId
  * @param {number} params.limit
  * @param {number} params.startTime
- * @param {number} params.endTime
+ * @param {string} params.level
+ * @param {string} params.subject
+ * @param {number} params.skip
  * @returns {Promise&amp;lt;ApiResponse&gt;}
  */
 
 module.exports &#x3D; serializeAxiosResponse(
-  ({ limit, processId, startTime, endTime, deviceId, userId }) &#x3D;&gt; (
+  ({ limit, processId, startTime, endTime, deviceId, userId, level, subject, skip }) &#x3D;&gt; (
     API.get(&#x27;log&#x27;, &#x27;&#x27;, {
       queryStringParameters: removeUndefinedKeys({
         limit,
@@ -60,6 +62,9 @@ module.exports &#x3D; serializeAxiosResponse(
         endTime,
         deviceId,
         userId,
+        level,
+        subject,
+        skip,
       }),
       ...DEFAULT_REQ_OPTS,
     })
