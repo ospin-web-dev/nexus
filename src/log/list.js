@@ -15,12 +15,14 @@ const { removeUndefinedKeys } = require('../utils/objUtils')
  * @param {string} params.processId
  * @param {number} params.limit
  * @param {number} params.startTime
- * @param {number} params.endTime
+ * @param {string} params.level
+ * @param {string} params.subject
+ * @param {number} params.skip
  * @returns {Promise<ApiResponse>}
  */
 
 module.exports = serializeAxiosResponse(
-  ({ limit, processId, startTime, endTime, deviceId, userId }) => (
+  ({ limit, processId, startTime, endTime, deviceId, userId, level, subject, skip }) => (
     API.get('log', '', {
       queryStringParameters: removeUndefinedKeys({
         limit,
@@ -29,6 +31,9 @@ module.exports = serializeAxiosResponse(
         endTime,
         deviceId,
         userId,
+        level,
+        subject,
+        skip,
       }),
       ...DEFAULT_REQ_OPTS,
     })

@@ -16,6 +16,9 @@ describe('list', () => {
     endTime: undefined,
     deviceId: faker.datatype.uuid(),
     userId: faker.datatype.uuid(),
+    level: 'information',
+    subject: 'device/operation',
+    skip: 1,
   }
 
   it('calls amplify\'s API.get method', async () => {
