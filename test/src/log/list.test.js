@@ -18,7 +18,7 @@ describe('list', () => {
     userId: faker.datatype.uuid(),
     level: 'information',
     subject: 'device/operation',
-    skip: 1,
+    skip: 2,
   }
 
   it('calls amplify\'s API.get method', async () => {
