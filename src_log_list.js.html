@@ -33,7 +33,6 @@
 
 const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
 const { DEFAULT_REQ_OPTS } &#x3D; require(&#x27;../utils/defaultReqOpts&#x27;)
-const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
 
 /**
  * @desc queries the logs of a device
@@ -54,7 +53,7 @@ const { removeUndefinedKeys } &#x3D; require(&#x27;../utils/objUtils&#x27;)
 
 module.exports &#x3D; serializeAxiosResponse(
   (queryStringParameters &#x3D; {}) &#x3D;&gt; API.get(&#x27;log&#x27;, &#x27;&#x27;, {
-    queryStringParameters: removeUndefinedKeys(queryStringParameters),
+    queryStringParameters,
     ...DEFAULT_REQ_OPTS,
   }),
 )
