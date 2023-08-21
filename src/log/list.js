@@ -22,20 +22,8 @@ const { removeUndefinedKeys } = require('../utils/objUtils')
  */
 
 module.exports = serializeAxiosResponse(
-  ({ limit, processId, startTime, endTime, deviceId, userId, level, subject, skip }) => (
-    API.get('log', '', {
-      queryStringParameters: removeUndefinedKeys({
-        limit,
-        processId,
-        startTime,
-        endTime,
-        deviceId,
-        userId,
-        level,
-        subject,
-        skip,
-      }),
-      ...DEFAULT_REQ_OPTS,
-    })
-  ),
+  (queryStringParameters = {}) => API.get('log', '', {
+    queryStringParameters: removeUndefinedKeys(queryStringParameters),
+    ...DEFAULT_REQ_OPTS,
+  }),
 )
