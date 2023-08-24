@@ -9,7 +9,7 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
  * @function list
  * @async
  * @param {Object} params
- * @param {Object} params.queryStringParameters
+ * @param {Object} queryStringParameters, an object of query string parameters
  * @returns {Promise<ApiResponse>}
  */
 
