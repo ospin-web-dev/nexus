@@ -9,14 +9,7 @@ const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
  * @function list
  * @async
  * @param {Object} params
- * @param {string} params.deviceId
- * @param {string} params.userId
- * @param {string} params.processId
- * @param {number} params.limit
- * @param {number} params.startTime
- * @param {string} params.level
- * @param {string} params.subject
- * @param {number} params.skip
+ * @param {Object} params.queryStringParameters
  * @returns {Promise<ApiResponse>}
  */
 
