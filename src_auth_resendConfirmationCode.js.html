@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 3.6.11">
   <meta charset="utf-8">
-  <title>Source: src/dataPoints/downloadRequest/index.js</title>
+  <title>Source: src/auth/resendConfirmationCode.js</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -26,22 +26,28 @@
         </div>
         <div id="jsdoc-main" role="main">
           <header class="page-header">
-            <h1>Source: src/dataPoints/downloadRequest/index.js</h1>
+            <h1>Source: src/auth/resendConfirmationCode.js</h1>
           </header>
           <article>
-            <pre class="prettyprint linenums"><code>const createForProcess &#x3D; require(&#x27;./createForProcess&#x27;)
-const createForReporter &#x3D; require(&#x27;./createForReporter&#x27;)
-const list &#x3D; require(&#x27;./list&#x27;)
+            <pre class="prettyprint linenums"><code>const { default: Auth } &#x3D; require(&#x27;@aws-amplify/auth&#x27;)
+
+const serializeAxiosResponse &#x3D; require(&#x27;../utils/serializeAxiosResponse&#x27;)
 
 /**
- * @namespace nexus.dataPoints.downloadRequest
+ * @desc re-requests the sign up code to be delivered to the users email
+ * @memberof nexus.auth
+ * @function resendConfirmationCode
+ * @param {Object} params
+ * @param {string} params.username the username for the confirmation code
+ * @async
+ * @returns {Promise&amp;lt;AuthApiResponse&gt;}
  */
 
-module.exports &#x3D; {
-  createForProcess,
-  createForReporter,
-  list,
-}
+module.exports &#x3D; serializeAxiosResponse(
+  async ({ username }) &#x3D;&gt; (
+    Auth.resendSignUp(username)
+  ),
+)
 </code></pre>
           </article>
         </div>
