@@ -18,19 +18,16 @@ describe('resendConfirmationCode', () => {
 
 
   describe('on Auth.resendConfirmationCode success', () => {
-    const res = { data: { angelo: 'merks' }, status: 200 }
+    const cognitoRes = { data: { angelo: 'merks' }, status: 200 }
 
     beforeAll(() => {
-      jest.spyOn(Auth, 'resendSignUp').mockImplementation(() => res)
+      jest.spyOn(Auth, 'resendSignUp').mockImplementation(() => cognitoRes)
     })
 
     it('returns the serialized result', async () => {
       const resp = await resendConfirmationCode(params)
 
-      expect(resp).toStrictEqual(expect.objectContaining({
-        data: res.data,
-        status: 200,
-      }))
+      expect(resp).toStrictEqual(cognitoRes)
     })
   })
 
