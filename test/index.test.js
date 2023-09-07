@@ -21,6 +21,7 @@ describe('nexus', () => {
       confirmSignUp: 'function',
       forgotPassword: 'function',
       forgotPasswordSubmit: 'function',
+      resendConfirmationCode: 'function',
       getCurrentSession: 'function',
       signIn: 'function',
       signOut: 'function',
