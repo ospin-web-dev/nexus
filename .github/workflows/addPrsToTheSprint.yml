@@ -75,7 +75,7 @@ jobs:
       with:
         NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
-        REVIEWER_NAMES: 'FelixMZ2018,lev-leontyev-ospin'
+        REVIEWER_NAMES: 'FelixMZ2018'
 
     - name: Look for issue
       id: lookupIssue
