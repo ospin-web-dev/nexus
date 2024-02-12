@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const modifyAccess = require('process/access/modify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
@@ -7,8 +7,8 @@ const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPRe
 
 describe('modifyAccess', () => {
   const params = {
-    processId: faker.datatype.uuid(),
-    userId: faker.datatype.uuid(),
+    processId: faker.string.uuid(),
+    userId: faker.string.uuid(),
     newGroup: 'viewers',
   }
 

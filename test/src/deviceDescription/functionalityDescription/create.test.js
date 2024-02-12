@@ -1,10 +1,10 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const create = require('deviceDescription/functionalityDescription/create')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
 const params = {
-  subType: faker.name.findName(),
+  subType: faker.lorem.word(),
   imageURL: faker.internet.url(),
 }
 

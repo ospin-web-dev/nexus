@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const post = require('uIConfig/userUIConfig/post')
@@ -9,7 +9,7 @@ describe('post', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const params = {
-    userId: faker.datatype.uuid(),
+    userId: faker.string.uuid(),
   }
 
   it('calls amplify\'s API.post method', async () => {

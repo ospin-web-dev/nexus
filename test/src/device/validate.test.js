@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const validate = require('device/validate')
@@ -7,7 +7,7 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 
 describe('validate', () => {
 
-  const deviceId = faker.datatype.uuid()
+  const deviceId = faker.string.uuid()
 
   afterAll(() => { jest.restoreAllMocks() })
 

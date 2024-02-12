@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 const remove = require('device/functionality/calibration/remove')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -9,9 +9,9 @@ describe('remove calibration', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const deviceId = faker.datatype.uuid()
-  const fctGraphId = faker.datatype.uuid()
-  const fctId = faker.datatype.uuid()
+  const deviceId = faker.string.uuid()
+  const fctGraphId = faker.string.uuid()
+  const fctId = faker.string.uuid()
   const body = {
     slotName: 'notebook',
   }

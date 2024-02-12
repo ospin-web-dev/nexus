@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const remove = require('event/remove')
@@ -7,7 +7,7 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 
 describe('remove event', () => {
 
-  const params = { eventId: faker.datatype.uuid() }
+  const params = { eventId: faker.string.uuid() }
 
   afterAll(() => { jest.restoreAllMocks() })
 

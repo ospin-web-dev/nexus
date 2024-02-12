@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const putUserFctGraphUIConfig = require('uIConfig/userFctGraphUIConfig/put')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -11,8 +11,8 @@ describe('put', () => {
 
   it('calls amplify\'s API.put method', async () => {
     jest.spyOn(API, 'put').mockImplementation(args => args)
-    const userId = faker.datatype.uuid()
-    const fctGraphId = faker.datatype.uuid()
+    const userId = faker.string.uuid()
+    const fctGraphId = faker.string.uuid()
     const params = { processBuilder: {} }
 
     await putUserFctGraphUIConfig(userId, fctGraphId, params)

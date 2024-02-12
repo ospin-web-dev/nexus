@@ -1,11 +1,11 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const update = require('deviceDescription/template/update')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const templateId = faker.datatype.uuid()
+const templateId = faker.string.uuid()
 const params = {
-  name: faker.name.findName(),
+  name: faker.lorem.word(),
   imageURL: faker.internet.url(),
   connections: [],
   functionalities: [],

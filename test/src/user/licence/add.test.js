@@ -1,9 +1,9 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const add = require('user/licence/add')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const userId = faker.datatype.uuid()
-const params = { key: faker.datatype.uuid(), deviceId: faker.datatype.uuid() }
+const userId = faker.string.uuid()
+const params = { key: faker.string.uuid(), deviceId: faker.string.uuid() }
 
 testHTTPEndpoint({
   name: 'add',

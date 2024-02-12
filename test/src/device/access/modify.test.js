@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 const modifyAccess = require('device/access/modify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -10,7 +10,7 @@ describe('modifyAccess device', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const params = {
-    deviceId: faker.datatype.uuid(),
+    deviceId: faker.string.uuid(),
     params: [],
   }
 

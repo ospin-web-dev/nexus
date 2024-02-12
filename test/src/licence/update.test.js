@@ -1,10 +1,10 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const update = require('licence/update')
 const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
 const requestParams = {
-  licenceId: faker.datatype.uuid(),
+  licenceId: faker.string.uuid(),
   params: {
     invoiceId: 'ABCD-EFGH-2022',
   },

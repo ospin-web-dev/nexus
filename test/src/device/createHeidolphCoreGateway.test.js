@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const createHeidolphCoreGateway = require('device/createHeidolphCoreGateway')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -13,7 +13,7 @@ describe('createHeidolphCoreGateway device', () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
 
     const body = {
-      ownerId: faker.datatype.uuid(),
+      ownerId: faker.string.uuid(),
       name: 'knuckles',
       isVirtual: false,
     }

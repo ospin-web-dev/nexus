@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const create = require('process/functionality/image/create')
 const { default: API } = require('@aws-amplify/api-rest')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -8,9 +8,9 @@ describe('create Process Functionality Image', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const processId = faker.datatype.uuid()
-  const functionalityId = faker.datatype.uuid()
-  const deviceId = faker.datatype.uuid()
+  const processId = faker.string.uuid()
+  const functionalityId = faker.string.uuid()
+  const deviceId = faker.string.uuid()
   const imageCreatedAt = Date.now(faker.date.recent())
   const body = {
     imageDataUri: 'data:image/jpeg;base64,THENUMBERSWHATDOTHEYMEAN',

@@ -1,5 +1,5 @@
 const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const get = require('dataPoints/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -9,8 +9,8 @@ describe('get', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const processId = faker.datatype.uuid()
-  const reporterFctId = faker.datatype.uuid()
+  const processId = faker.string.uuid()
+  const reporterFctId = faker.string.uuid()
   const params = {
     numberOfPoints: 1000,
     start: Date.now(),

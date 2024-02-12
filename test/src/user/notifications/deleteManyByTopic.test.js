@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const deleteManyByTopic = require('user/notifications/deleteManyByTopic')
@@ -8,8 +8,8 @@ const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPRe
 describe('deleteManyByTopic user notifications', () => {
 
   const params = {
-    userId: faker.datatype.uuid(),
-    topic: faker.company.bs(),
+    userId: faker.string.uuid(),
+    topic: faker.company.buzzPhrase(),
   }
 
   afterAll(() => { jest.restoreAllMocks() })

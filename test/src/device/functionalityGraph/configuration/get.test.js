@@ -1,11 +1,11 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const get = require('device/functionalityGraph/configuration/get')
 const testHTTPEndpoint = require('../../../../testHelpers/testHTTPEndpoint')
 
 describe('device.functionalityGraph.configuration.get', () => {
 
-  const params = { deviceId: faker.datatype.uuid(), fctGraphId: faker.datatype.uuid() }
+  const params = { deviceId: faker.string.uuid(), fctGraphId: faker.string.uuid() }
 
   testHTTPEndpoint({
     name: 'get configuration',

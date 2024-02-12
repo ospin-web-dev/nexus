@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 const transferOwnership = require('device/transferOwnership')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -10,7 +10,7 @@ describe('transferOwnership device', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const params = {
-    deviceId: faker.datatype.uuid(),
+    deviceId: faker.string.uuid(),
     params: [],
   }
 

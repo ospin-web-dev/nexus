@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const updateRunningProcess = require('command/device/process/updateRunning')
 const { default: API } = require('@aws-amplify/api-rest')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -8,11 +8,11 @@ describe('updateRunningProcess', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const processId = faker.datatype.uuid()
-  const deviceId = faker.datatype.uuid()
+  const processId = faker.string.uuid()
+  const deviceId = faker.string.uuid()
   const defaultBody = {
-    elapsedTime: faker.datatype.number(),
-    entryPhaseId: faker.datatype.number(),
+    elapsedTime: faker.number.int(),
+    entryPhaseId: faker.number.int(),
   }
 
   it('calls amplifys API.post with the expected args', async () => {

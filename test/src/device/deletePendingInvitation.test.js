@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const deletePendingInvitation = require('device/deletePendingInvitation')
@@ -10,8 +10,8 @@ describe('deletePendingInvitation', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const params = {
-    deviceId: faker.datatype.uuid(),
-    invitationId: faker.datatype.uuid(),
+    deviceId: faker.string.uuid(),
+    invitationId: faker.string.uuid(),
   }
 
   it('calls amplify\'s API.del method', async () => {

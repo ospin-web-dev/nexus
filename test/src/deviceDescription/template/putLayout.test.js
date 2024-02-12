@@ -1,9 +1,9 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const putLayout = require('deviceDescription/template/putLayout')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const id = faker.datatype.uuid()
+const id = faker.string.uuid()
 const params = {
   layout: {
     1: { x: 5, y: 78 },

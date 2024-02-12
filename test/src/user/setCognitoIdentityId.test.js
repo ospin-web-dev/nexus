@@ -1,4 +1,4 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const { default: API } = require('@aws-amplify/api-rest')
 
 const setCognitoIdentityId = require('user/setCognitoIdentityId')
@@ -7,7 +7,7 @@ const testDefaultHTTPResponses = require('../../testHelpers/testDefaultHTTPRespo
 
 describe('setCognitoIdentityId', () => {
 
-  const params = { userId: faker.datatype.uuid() }
+  const params = { userId: faker.string.uuid() }
 
   it('calls amplify\'s API.put method', async () => {
     jest.spyOn(API, 'put').mockImplementation(args => args)
