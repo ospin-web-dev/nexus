@@ -1,6 +1,6 @@
 const { faker } = require('@faker-js/faker')
 const openSsh = require('command/device/openSsh')
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 

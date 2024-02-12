@@ -1,4 +1,4 @@
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 
 const logClientError = require('utilsService/logClientError')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')

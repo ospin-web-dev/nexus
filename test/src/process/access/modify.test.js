@@ -1,4 +1,4 @@
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 const { faker } = require('@faker-js/faker')
 const modifyAccess = require('process/access/modify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')

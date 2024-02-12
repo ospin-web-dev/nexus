@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker')
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 
 const post = require('uIConfig/userUIConfig/post')
 const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')

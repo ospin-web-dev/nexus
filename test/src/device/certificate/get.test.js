@@ -1,4 +1,4 @@
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 
 const get = require('device/certificate/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')

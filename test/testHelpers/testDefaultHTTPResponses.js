@@ -1,4 +1,4 @@
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 
 // eslint-disable-next-line
 module.exports = (fn, httpVerb, fnParams = []) => {

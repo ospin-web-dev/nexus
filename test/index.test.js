@@ -1,4 +1,5 @@
-const { default: Amplify } = require('@aws-amplify/core')
+const { Amplify } = require('aws-amplify')
+
 const configGenerator = require('../src/amplify/configGenerator')
 
 const injectMerkelIntoArgObjectAndReturn = args => ({

@@ -1,4 +1,6 @@
-const { default: Auth } = require('@aws-amplify/auth')
+const { Auth } = require('aws-amplify')
+
+
 
 /**
  * @desc signs out a user by invalidating their access token; when the global flag is set,
