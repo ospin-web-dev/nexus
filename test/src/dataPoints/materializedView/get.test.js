@@ -1,10 +1,10 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const get = require('dataPoints/materializedView/get')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const processId = faker.datatype.uuid()
-const reporterFctId = faker.datatype.uuid()
+const processId = faker.string.uuid()
+const reporterFctId = faker.string.uuid()
 
 testHTTPEndpoint({
   name: 'get',

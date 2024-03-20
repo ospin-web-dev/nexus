@@ -1,9 +1,9 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const remove = require('deviceDescription/functionalityDescription/remove')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const id = faker.datatype.uuid()
+const id = faker.string.uuid()
 
 testHTTPEndpoint({
   name: 'delete',

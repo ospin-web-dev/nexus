@@ -1,5 +1,5 @@
-const faker = require('faker')
-const { default: API } = require('@aws-amplify/api-rest')
+const { faker } = require('@faker-js/faker')
+const { API } = require('aws-amplify')
 
 const get = require('uIConfig/userFctGraphUIConfig/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -10,8 +10,8 @@ describe('get', () => {
   afterAll(() => { jest.restoreAllMocks() })
 
   const params = {
-    userId: faker.datatype.uuid(),
-    fctGraphId: faker.datatype.uuid(),
+    userId: faker.string.uuid(),
+    fctGraphId: faker.string.uuid(),
   }
 
   it('calls amplify\'s API.get method', async () => {

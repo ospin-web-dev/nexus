@@ -1,4 +1,5 @@
-const { default: Amplify } = require('@aws-amplify/core')
+const { Amplify } = require('aws-amplify')
+
 const auth = require('./src/auth')
 const user = require('./src/user')
 const command = require('./src/command')

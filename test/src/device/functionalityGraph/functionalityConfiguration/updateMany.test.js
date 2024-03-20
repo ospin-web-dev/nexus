@@ -1,5 +1,5 @@
-const faker = require('faker')
-const { default: API } = require('@aws-amplify/api-rest')
+const { faker } = require('@faker-js/faker')
+const { API } = require('aws-amplify')
 
 const updateMany = require('device/functionalityGraph/functionalityConfiguration/updateMany')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -8,8 +8,8 @@ const testDefaultHTTPResponses = require('../../../../testHelpers/testDefaultHTT
 describe('updateMany', () => {
 
   const params = {
-    deviceId: faker.datatype.uuid(),
-    fctGraphId: faker.datatype.uuid(),
+    deviceId: faker.string.uuid(),
+    fctGraphId: faker.string.uuid(),
     updates: [],
   }
 

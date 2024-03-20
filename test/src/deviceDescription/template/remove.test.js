@@ -1,9 +1,9 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const remove = require('deviceDescription/template/remove')
 const testHTTPEndpoint = require('../../../testHelpers/testHTTPEndpoint')
 
-const templateId = faker.datatype.uuid()
+const templateId = faker.string.uuid()
 
 testHTTPEndpoint({
   name: 'list',

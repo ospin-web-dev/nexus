@@ -1,12 +1,12 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const updatePorts = require('device/functionalityGraph/ports/update')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testHTTPEndpoint = require('../../../../testHelpers/testHTTPEndpoint')
 
 const params = {
-  deviceId: faker.datatype.uuid(),
-  fctGraphId: faker.datatype.uuid(),
+  deviceId: faker.string.uuid(),
+  fctGraphId: faker.string.uuid(),
   body: {},
 }
 

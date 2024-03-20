@@ -1,10 +1,10 @@
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 
 const serializeAxiosResponse = require('../utils/serializeAxiosResponse')
 const { DEFAULT_REQ_OPTS } = require('../utils/defaultReqOpts')
 
 /**
- * @desc returns limited device data 
+ * @desc returns limited device data
  * @memberof nexus.device
  * @function validate
  * @async

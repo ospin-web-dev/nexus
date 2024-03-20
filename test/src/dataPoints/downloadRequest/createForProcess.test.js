@@ -1,5 +1,5 @@
-const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { API } = require('aws-amplify')
+const { faker } = require('@faker-js/faker')
 
 const createForProcess = require('dataPoints/downloadRequest/createForProcess')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -9,8 +9,8 @@ describe('createForProcess', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const processId = faker.datatype.uuid()
-  const body = { reporterFctIds: [faker.datatype.uuid()] }
+  const processId = faker.string.uuid()
+  const body = { reporterFctIds: [faker.string.uuid()] }
 
   it('calls amplify\'s API.post method', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)

@@ -1,5 +1,5 @@
-const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { API } = require('aws-amplify')
+const { faker } = require('@faker-js/faker')
 
 const update = require('user/update')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -9,7 +9,7 @@ describe('update', () => {
 
   it('calls amplify\'s API.patch method', async () => {
     jest.spyOn(API, 'patch').mockImplementation(args => args)
-    const userId = faker.datatype.uuid()
+    const userId = faker.string.uuid()
     const payload = { userName: 'the old man is back again. neo stalinism is here' }
 
     await update(userId, payload)

@@ -1,9 +1,9 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const create = require('licence/create')
 const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
-const params = { typeId: faker.datatype.uuid() }
+const params = { typeId: faker.string.uuid() }
 
 testHTTPEndpoint({
   name: 'create',

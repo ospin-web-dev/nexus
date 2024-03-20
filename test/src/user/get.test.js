@@ -1,5 +1,5 @@
-const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { API } = require('aws-amplify')
+const { faker } = require('@faker-js/faker')
 
 const get = require('user/get')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -11,7 +11,7 @@ describe('get', () => {
 
   it('calls amplify\'s API.get', async () => {
     jest.spyOn(API, 'get').mockImplementation(args => args)
-    const userId = faker.datatype.uuid()
+    const userId = faker.string.uuid()
 
     await get(userId)
     expect(API.get).toHaveBeenCalledWith('user', userId, { ...DEFAULT_REQ_OPTS })

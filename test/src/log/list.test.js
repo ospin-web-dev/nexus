@@ -1,5 +1,5 @@
-const faker = require('faker')
-const { default: API } = require('@aws-amplify/api-rest')
+const { faker } = require('@faker-js/faker')
+const { API } = require('aws-amplify')
 const list = require('log/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 
@@ -11,11 +11,11 @@ describe('list', () => {
 
   const params = {
     limit: 100,
-    processId: faker.datatype.uuid(),
+    processId: faker.string.uuid(),
     startTime: Date.now() - 10000,
     endTime: undefined,
-    deviceId: faker.datatype.uuid(),
-    userId: faker.datatype.uuid(),
+    deviceId: faker.string.uuid(),
+    userId: faker.string.uuid(),
     level: 'information',
     subject: 'device/operation',
     skip: 2,

@@ -1,5 +1,5 @@
-const faker = require('faker')
-const { default: API } = require('@aws-amplify/api-rest')
+const { faker } = require('@faker-js/faker')
+const { API } = require('aws-amplify')
 
 const list = require('user/device/list')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -8,7 +8,7 @@ const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPRe
 describe('list', () => {
 
   const params = {
-    userId: faker.datatype.uuid(),
+    userId: faker.string.uuid(),
     queryStringParameters: {
       skip: 5,
     },

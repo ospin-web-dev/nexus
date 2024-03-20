@@ -1,5 +1,5 @@
-const { default: API } = require('@aws-amplify/api-rest')
-const faker = require('faker')
+const { API } = require('aws-amplify')
+const { faker } = require('@faker-js/faker')
 
 const createDeletionRequest = require('user/createDeletionRequest')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
@@ -11,7 +11,7 @@ describe('createDeletionRequest', () => {
 
   it('calls amplify\'s API.del', async () => {
     jest.spyOn(API, 'post').mockImplementation(args => args)
-    const userId = faker.datatype.uuid()
+    const userId = faker.string.uuid()
 
     await createDeletionRequest(userId)
     expect(API.post).toHaveBeenCalledWith('user', `${userId}/deletion-requests`, { body: {}, ...DEFAULT_REQ_OPTS })

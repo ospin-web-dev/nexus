@@ -1,6 +1,6 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 const create = require('process/annotation/create')
-const { default: API } = require('@aws-amplify/api-rest')
+const { API } = require('aws-amplify')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testDefaultHTTPResponses = require('../../../testHelpers/testDefaultHTTPResponses')
 
@@ -8,7 +8,7 @@ describe('create Process Annotation', () => {
 
   afterAll(() => { jest.restoreAllMocks() })
 
-  const processId = faker.datatype.uuid()
+  const processId = faker.string.uuid()
   const text = 'My coworker spilled his hot aspargus sauce over my cells'
   const userTimestamp = Date.now(faker.date.recent())
   const data = {

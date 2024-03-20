@@ -1,10 +1,10 @@
-const faker = require('faker')
+const { faker } = require('@faker-js/faker')
 
 const preAssign = require('licence/preAssign')
 const { DEFAULT_REQ_OPTS } = require('utils/defaultReqOpts')
 const testHTTPEndpoint = require('../../testHelpers/testHTTPEndpoint')
 
-const body = {deviceId: faker.datatype.uuid(), key: faker.datatype.uuid()}
+const body = {deviceId: faker.string.uuid(), key: faker.string.uuid()}
 
 testHTTPEndpoint({
   name: 'pre-assign licence',
